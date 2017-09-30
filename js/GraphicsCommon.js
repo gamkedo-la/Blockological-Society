@@ -10,3 +10,11 @@ function drawText(text, x, y, font, color)
     context.fillStyle = color;
     context.fillText(text, x, y);
 }
+
+function drawBitmapCenteredWithRotation(useBitmap, atX,atY, withAng) {
+	context.save();
+	context.translate(atX, atY);
+	context.rotate(withAng);
+	context.drawImage(useBitmap, -useBitmap.width/2, -useBitmap.height/2);
+	context.restore();
+}

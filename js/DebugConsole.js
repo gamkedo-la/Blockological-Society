@@ -155,12 +155,12 @@ function panelKeyCapture(panel, evt)
     }
 }
 
-function drawText(text, x, y, font, color)
-{
-    canvasContext.font = font;
-    canvasContext.fillStyle = color;
-    canvasContext.fillText(text, x, y);
-}
+// function drawText(text, x, y, font, color)
+// {
+//     canvasContext.font = font;
+//     canvasContext.fillStyle = color;
+//     canvasContext.fillText(text, x, y);
+// }
 
 function makePtr(varName) {
     return "(function(_val) {\n" +

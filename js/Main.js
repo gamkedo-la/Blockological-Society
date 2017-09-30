@@ -40,10 +40,11 @@ const TILE_EMPTY = 1;
 const CURSOR_START = 2;
 const BLOCK_BASIC = 3;
 
-const BOARD_X = 60;
-const BOARD_Y = 45;
-const BOARD_COLS = 20;
-const BOARD_ROWS = 15;
+const BOARD_OFFSET = 10;
+const BOARD_X = 366 + BOARD_OFFSET;
+const BOARD_Y = BOARD_OFFSET;
+const BOARD_COLS = 12;
+const BOARD_ROWS = 12;
 const TILE_SIZE = 34;
 const BOARD_COLOR = '#2980b9';
 const TILE_COLOR = '#3498db';
@@ -53,14 +54,14 @@ var blocks = [];
 const MOVE_DELAY = .30;
 var moveTimer = 0;
 
+var cursorPic = document.createElement("img");
 var cursor = { // block manipulation widget
 	x: undefined,
 	y: undefined,
     targetX: undefined,
     targetY: undefined,
     speed: TILE_SIZE/8,
-	width: 16,
-	height: 16,
+	size: 16,
 	color: CURSOR_COLOR,
 
     init: function(x, y)
@@ -135,6 +136,7 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
+	cursorPic.src = "img/cube.png";
 	setInterval(function()
 	{
 		update();
@@ -189,7 +191,8 @@ function update()
 
     if (mouseButtonHeld && !mouseButtonWasHeld)
 	{
-		var tileIndex = calculateTileIndexAtCoord(mouseX, mouseY);
+		var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+		var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 		if (tileIndex != undefined)
 			grid.layout[tileIndex].active = !grid.layout[tileIndex].active;
 	}
@@ -202,6 +205,7 @@ function draw()
 	colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
 
 	// draw board grid
+	var isoX, isoY, result;
 	var x = grid.x;
 	var y = grid.y;
 	for (var row = 0; row < BOARD_ROWS; row++)
@@ -210,21 +214,40 @@ function draw()
 		{
 			var tileIndex = rowColToArrayIndex(col, row);
 			if (grid.layout[tileIndex].active)
-				colorRect(x, y, TILE_SIZE-grid.gap, TILE_SIZE-grid.gap, grid.color);
+			{
+				var iso = twoDToIso(x, y);
+				drawIsoRhombusFilled(TILE_COLOR, iso.x, iso.y, TILE_SIZE-grid.gap);
+			}
 			x += TILE_SIZE;
 		}
 		x = grid.x;
 		y += TILE_SIZE;
 	}
 
-    for (var i = 0; i < blocks.length; i++)
-    {
-        var block = blocks[i];
-        colorRect(block.x, block.y, block.size, block.size, block.color);
-    }
+	for (var row = 0; row < BOARD_ROWS; row++)
+	{
+		for (var col = 0; col < BOARD_COLS; col++)
+		{
+			var tileIndex = rowColToArrayIndex(col, row);
+			if (grid.layout[tileIndex].block != undefined)
+			{
+				var block = grid.layout[tileIndex].block;
+				var iso = twoDToIso(block.x, block.y);
+				drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+			}
+		}
+	}
+
+	if (grid.layout[tileIndex].block != undefined)
+	{
+		var block = grid.layout[tileIndex].block;
+		var iso = twoDToIso(block.x, block.y);
+		drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+	}
 
 	// draw block manipulation widget
-	colorRect(cursor.x+8, cursor.y+8, cursor.width, cursor.height, cursor.color);
+	var iso = twoDToIso(cursor.x+16, cursor.y);
+	drawIsoRhombusFilled(cursor.color, iso.x, iso.y, cursor.size);
 }
 
 function keyPressed(evt)
@@ -302,6 +325,9 @@ function boxCollisionDetected(box1, box2)
 
 function calculateTileIndexAtCoord(x, y)
 {
+	// var result = twoDToIso(x, y);
+	// var isoX = result.x;
+	// var isoY = result.y;
 	var col = Math.floor((x-grid.x) / TILE_SIZE);
 	var row = Math.floor((y-grid.y) / TILE_SIZE);
 	var tileIndex = rowColToArrayIndex(col, row);

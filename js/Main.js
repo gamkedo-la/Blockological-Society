@@ -1,13 +1,3 @@
-/*
-	TODO:
-	x Movement animation
-    x Load level data
-	Pushable blocks
-	Grabbable blocks
-	Tile brush editor
-	Panel with block types for brush
-*/
-
 var canvas, canvasContext;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
@@ -49,12 +39,13 @@ const TILE_SIZE = 34;
 const BOARD_COLOR = '#2980b9';
 const TILE_COLOR = '#3498db';
 const CURSOR_COLOR = '#2c3e50';
+
 var blocks = [];
+var blockPic = document.createElement("img");
 
 const MOVE_DELAY = .30;
 var moveTimer = 0;
 
-var cursorPic = document.createElement("img");
 var cursor = { // block manipulation widget
 	x: undefined,
 	y: undefined,
@@ -136,7 +127,7 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
-	cursorPic.src = "img/cube.png";
+	blockPic.src = "img/cube.png";
 	setInterval(function()
 	{
 		update();
@@ -224,27 +215,24 @@ function draw()
 		y += TILE_SIZE;
 	}
 
+	var drawCounter = 0;
 	for (var row = 0; row < BOARD_ROWS; row++)
 	{
 		for (var col = 0; col < BOARD_COLS; col++)
 		{
-			var tileIndex = rowColToArrayIndex(col, row);
-			if (grid.layout[tileIndex].block != undefined)
+			var tileIndex = rowColToArrayIndex(row, col);
+			if (grid.layout[tileIndex] != undefined &&
+				grid.layout[tileIndex].block != undefined)
 			{
 				var block = grid.layout[tileIndex].block;
 				var iso = twoDToIso(block.x, block.y);
-				drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+				drawBitmapCenteredWithRotation(blockPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+				drawCounter++;
 			}
 		}
 	}
 
-	if (grid.layout[tileIndex].block != undefined)
-	{
-		var block = grid.layout[tileIndex].block;
-		var iso = twoDToIso(block.x, block.y);
-		drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
-	}
-
+	console.log(drawCounter + " blocks drawn");
 	// draw block manipulation widget
 	var iso = twoDToIso(cursor.x+16, cursor.y);
 	drawIsoRhombusFilled(cursor.color, iso.x, iso.y, cursor.size);
@@ -253,7 +241,6 @@ function draw()
 function keyPressed(evt)
 {
 	keyEventHandler(evt.keyCode, true);
-	panelKeyCapture(debugPanel, evt);
 }
 
 function keyReleased(evt)
@@ -325,9 +312,6 @@ function boxCollisionDetected(box1, box2)
 
 function calculateTileIndexAtCoord(x, y)
 {
-	// var result = twoDToIso(x, y);
-	// var isoX = result.x;
-	// var isoY = result.y;
 	var col = Math.floor((x-grid.x) / TILE_SIZE);
 	var row = Math.floor((y-grid.y) / TILE_SIZE);
 	var tileIndex = rowColToArrayIndex(col, row);

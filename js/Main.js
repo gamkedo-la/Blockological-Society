@@ -1,3 +1,4 @@
+var _DEBUG_MAGNETS = false;
 var canvas, canvasContext;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
@@ -186,20 +187,25 @@ function update()
     }
 
 	// Broken logic for magnets
-	// if (!cursorIsMoving())
-	// {
-	// 	for (var i = 0; i < blocks.length; i++)
-	// 	{
-	// 		if (blocks[i] == cursor)
-	// 		{
-	// 			break;
-	// 		}
-	// 		pushBlock(blocks[i].x, blocks[i].y, 0, -TILE_SIZE);
-	// 		pushBlock(blocks[i].x, blocks[i].y, 0, TILE_SIZE);
-	// 		pushBlock(blocks[i].x, blocks[i].y, -TILE_SIZE, 0);
-	// 		pushBlock(blocks[i].x, blocks[i].y, TILE_SIZE, 0);
-	// 	}
-	// }
+	for (var i = 0; i < blocks.length; i++)
+	{
+		if (!_DEBUG_MAGNETS)
+		{
+			break;
+		}
+		if (blocks[i] == cursor)
+		{
+			continue;
+		}
+		if (blocks[i].x == blocks[i].targetX &&
+			blocks[i].y == blocks[i].targetY)
+		{
+			pushBlock(blocks[i].x, blocks[i].y, 0, -TILE_SIZE);
+			pushBlock(blocks[i].x, blocks[i].y, 0, TILE_SIZE);
+			pushBlock(blocks[i].x, blocks[i].y, -TILE_SIZE, 0);
+			pushBlock(blocks[i].x, blocks[i].y, TILE_SIZE, 0);
+		}
+	}
 
     if (mouseButtonHeld && !mouseButtonWasHeld)
 	{
@@ -267,6 +273,10 @@ function draw()
 function keyPressed(evt)
 {
 	keyEventHandler(evt.keyCode, true);
+	if (evt.keyCode == KEY_SPACEBAR)
+	{
+		_DEBUG_MAGNETS = !_DEBUG_MAGNETS;
+	}
 }
 
 function keyReleased(evt)
@@ -279,7 +289,6 @@ function keyEventHandler(key, state)
 	switch (key)
 	{
 		case KEY_SPACEBAR:
-			jumpKeyHeld = state;
 			break;
 		case KEY_ARROW_LEFT:
 			leftKeyHeld = state;

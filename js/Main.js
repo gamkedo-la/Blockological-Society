@@ -30,8 +30,8 @@ const TILE_EMPTY = 1;
 const CURSOR_START = 2;
 const BLOCK_BASIC = 3;
 
-const BOARD_OFFSET = 10;
-const BOARD_X = 366 + BOARD_OFFSET;
+const BOARD_OFFSET = -24;
+const BOARD_X = 368 + BOARD_OFFSET;
 const BOARD_Y = BOARD_OFFSET;
 const BOARD_COLS = 12;
 const BOARD_ROWS = 12;
@@ -92,6 +92,7 @@ for (var i = 0; i < layout.length; i++)
             blocks.push(layout[i].block);
             break;
 		default:
+			layout[i].active = true;
 			break;
 	}
 }
@@ -110,6 +111,7 @@ function createBlockObject(x, y, color)
 	return {
 		x: x,
 		y: y,
+		yLevel: -999999,
         speed: TILE_SIZE/8,
 		size: 32,
 		color: color,
@@ -215,24 +217,23 @@ function draw()
 		y += TILE_SIZE;
 	}
 
-	var drawCounter = 0;
-	for (var row = 0; row < BOARD_ROWS; row++)
+
+	for (var i = 0; i < blocks.length; i++)
 	{
-		for (var col = 0; col < BOARD_COLS; col++)
-		{
-			var tileIndex = rowColToArrayIndex(row, col);
-			if (grid.layout[tileIndex] != undefined &&
-				grid.layout[tileIndex].block != undefined)
-			{
-				var block = grid.layout[tileIndex].block;
-				var iso = twoDToIso(block.x, block.y);
-				drawBitmapCenteredWithRotation(blockPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
-				drawCounter++;
-			}
-		}
+		var block = blocks[i];
+		var iso = twoDToIso(block.x, block.y);
+		block.yLevel = iso.y;
 	}
 
-	console.log(drawCounter + " blocks drawn");
+	blocks = yLevelQuickSort(blocks);
+
+	for (var i = 0; i < blocks.length; i++)
+	{
+		var block = blocks[i];
+		var iso = twoDToIso(block.x, block.y);
+		drawBitmapCenteredWithRotation(blockPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+	}
+
 	// draw block manipulation widget
 	var iso = twoDToIso(cursor.x+16, cursor.y);
 	drawIsoRhombusFilled(cursor.color, iso.x, iso.y, cursor.size);
@@ -399,4 +400,38 @@ function moveTowardsTarget(object)
     {
         object.y = object.targetY;
     }
+}
+
+function yLevelQuickSort(array)
+{
+	var pivotIndex, pivot, result;
+	var beforeList = [];
+	var afterList = [];
+
+	pivotIndex = Math.floor(Math.random() + array.length-1);
+	pivot = array[pivotIndex];
+	array.splice(pivotIndex, 1);
+
+	for (var i = 0; i < array.length; i++)
+	{
+		if (array[i].yLevel < pivot.yLevel)
+		{
+			beforeList.push(array[i]);
+		}
+		else
+		{
+			afterList.push(array[i]);
+		}
+	}
+	if (beforeList.length > 1)
+	{
+		beforeList = yLevelQuickSort(beforeList);
+	}
+	if (afterList.length > 1)
+	{
+		afterList = yLevelQuickSort(afterList);
+	}
+	beforeList.push(pivot);
+	result = beforeList.concat(afterList);
+	return result;
 }

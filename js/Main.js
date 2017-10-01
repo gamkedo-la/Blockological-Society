@@ -28,7 +28,8 @@ var downKeyHeld = false;
 const TILE_OFF = 0;
 const TILE_EMPTY = 1;
 const CURSOR_START = 2;
-const BLOCK_BASIC = 3;
+const BLOCK_MAGNET = 3;
+const CURSOR = 4;
 
 const BOARD_OFFSET = -24;
 const BOARD_X = 368 + BOARD_OFFSET;
@@ -42,9 +43,11 @@ const CURSOR_COLOR = '#2c3e50';
 
 var blocks = [];
 var blockPic = document.createElement("img");
+var cursorPic = document.createElement("img");
 
 const MOVE_DELAY = .30;
 var moveTimer = 0;
+var moves = [];
 
 var cursor = { // block manipulation widget
 	x: undefined,
@@ -52,7 +55,6 @@ var cursor = { // block manipulation widget
     targetX: undefined,
     targetY: undefined,
     speed: TILE_SIZE/8,
-	size: 16,
 	color: CURSOR_COLOR,
 
     init: function(x, y)
@@ -83,16 +85,17 @@ for (var i = 0; i < layout.length; i++)
 		case CURSOR_START:
 			var result = calculateCoordAtTileIndex(i);
             cursor.init(result.x, result.y);
-			layout[i].active = true;
+            layout[i].active = true;
+            blocks.push(cursor);
             break;
-        case BLOCK_BASIC:
+        case BLOCK_MAGNET:
             var result = calculateCoordAtTileIndex(i);
             layout[i].block = createBlockObject(result.x, result.y, '#f1c40f');
             layout[i].active = true;
             blocks.push(layout[i].block);
             break;
 		default:
-			layout[i].active = true;
+			// layout[i].active = true;
 			break;
 	}
 }
@@ -129,7 +132,9 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
-	blockPic.src = "img/cube.png";
+	blockPic.src = "img/cube_magnet.png";
+	cursorPic.src = "img/cursor.png";
+
 	setInterval(function()
 	{
 		update();
@@ -175,12 +180,26 @@ function update()
         }
     }
 
-    moveTowardsTarget(cursor);
-
     for (var i = 0; i < blocks.length; i++)
     {
         moveTowardsTarget(blocks[i]);
     }
+
+	// Broken logic for magnets
+	// if (!cursorIsMoving())
+	// {
+	// 	for (var i = 0; i < blocks.length; i++)
+	// 	{
+	// 		if (blocks[i] == cursor)
+	// 		{
+	// 			break;
+	// 		}
+	// 		pushBlock(blocks[i].x, blocks[i].y, 0, -TILE_SIZE);
+	// 		pushBlock(blocks[i].x, blocks[i].y, 0, TILE_SIZE);
+	// 		pushBlock(blocks[i].x, blocks[i].y, -TILE_SIZE, 0);
+	// 		pushBlock(blocks[i].x, blocks[i].y, TILE_SIZE, 0);
+	// 	}
+	// }
 
     if (mouseButtonHeld && !mouseButtonWasHeld)
 	{
@@ -217,26 +236,32 @@ function draw()
 		y += TILE_SIZE;
 	}
 
+	if (cursorIsMoving())
+	{
+		for (var i = 0; i < blocks.length; i++)
+		{
+			var block = blocks[i];
+			var iso = twoDToIso(block.x, block.y);
+			block.yLevel = iso.y;
+		}
+
+		blocks = yLevelQuickSort(blocks);
+	}
 
 	for (var i = 0; i < blocks.length; i++)
 	{
-		var block = blocks[i];
-		var iso = twoDToIso(block.x, block.y);
-		block.yLevel = iso.y;
+		if (blocks[i] == cursor)
+		{
+			var iso = twoDToIso(cursor.x, cursor.y);
+			drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+		}
+		else
+		{
+			var block = blocks[i];
+			var iso = twoDToIso(block.x, block.y);
+			drawBitmapCenteredWithRotation(blockPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+		}
 	}
-
-	blocks = yLevelQuickSort(blocks);
-
-	for (var i = 0; i < blocks.length; i++)
-	{
-		var block = blocks[i];
-		var iso = twoDToIso(block.x, block.y);
-		drawBitmapCenteredWithRotation(blockPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
-	}
-
-	// draw block manipulation widget
-	var iso = twoDToIso(cursor.x+16, cursor.y);
-	drawIsoRhombusFilled(cursor.color, iso.x, iso.y, cursor.size);
 }
 
 function keyPressed(evt)
@@ -295,11 +320,12 @@ function calculateMousePos(evt)
   var rect = canvas.getBoundingClientRect(), root = document.documentElement;
 
   // account for the margins, canvas position on page, scroll amount, etc.
+  var screenToCanvasRatio = (canvas.width/canvas.clientWidth)
   var mouseX = evt.clientX - rect.left - root.scrollLeft;
   var mouseY = evt.clientY - rect.top - root.scrollTop;
   return {
-	x: mouseX,
-	y: mouseY
+	x: mouseX * screenToCanvasRatio,
+	y: mouseY * screenToCanvasRatio
   };
 }
 
@@ -366,7 +392,8 @@ function pushBlock(x, y, offsetX, offsetY)
             return true; // can move
         }
     }
-    else if (tile.active)
+    else if (tile != undefined && tile.active &&
+			 (nextX != cursor.x || nextY != cursor.y))
     {
         return true;
     }
@@ -434,4 +461,10 @@ function yLevelQuickSort(array)
 	beforeList.push(pivot);
 	result = beforeList.concat(afterList);
 	return result;
+}
+
+function cursorIsMoving()
+{
+	return (cursor.x != cursor.targetX ||
+	 		cursor.y != cursor.targetY);
 }

@@ -1,4 +1,4 @@
-var _DEBUG_MAGNETS = false;
+var _DEBUG_MAGNETS = true;
 var canvas, canvasContext;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
@@ -115,6 +115,8 @@ function createBlockObject(x, y, color)
 	return {
 		x: x,
 		y: y,
+		targetX: x,
+		targetY: y,
 		yLevel: -999999,
         speed: TILE_SIZE/8,
 		size: 32,
@@ -187,25 +189,25 @@ function update()
     }
 
 	// Broken logic for magnets
-	for (var i = 0; i < blocks.length; i++)
+	if (!blocksMoving())
 	{
-		if (!_DEBUG_MAGNETS)
+		for (var i = 0; i < blocks.length; i++)
 		{
-			break;
-		}
-		if (blocks[i] == cursor)
-		{
-			continue;
-		}
-		if (blocks[i].x == blocks[i].targetX &&
-			blocks[i].y == blocks[i].targetY)
-		{
+			if (!_DEBUG_MAGNETS || isMoving(cursor))
+			{
+				break;
+			}
+			if (blocks[i] == cursor)
+			{
+				continue;
+			}
 			pushBlock(blocks[i].x, blocks[i].y, 0, -TILE_SIZE);
 			pushBlock(blocks[i].x, blocks[i].y, 0, TILE_SIZE);
 			pushBlock(blocks[i].x, blocks[i].y, -TILE_SIZE, 0);
 			pushBlock(blocks[i].x, blocks[i].y, TILE_SIZE, 0);
 		}
 	}
+
 
     if (mouseButtonHeld && !mouseButtonWasHeld)
 	{
@@ -242,7 +244,7 @@ function draw()
 		y += TILE_SIZE;
 	}
 
-	if (cursorIsMoving())
+	if (isMoving(cursor))
 	{
 		for (var i = 0; i < blocks.length; i++)
 		{
@@ -336,14 +338,6 @@ function calculateMousePos(evt)
 	x: mouseX * screenToCanvasRatio,
 	y: mouseY * screenToCanvasRatio
   };
-}
-
-function boxCollisionDetected(box1, box2)
-{
-	return ((box1.x > box2.x + box2.width  ||
-			 box1.x + box1.width < box2.x  ||
-			 box1.y > box2.y + box2.height ||
-			 box1.y + box1.height < box2.y) == false)
 }
 
 function calculateTileIndexAtCoord(x, y)
@@ -472,8 +466,24 @@ function yLevelQuickSort(array)
 	return result;
 }
 
-function cursorIsMoving()
+function isMoving(object)
 {
-	return (cursor.x != cursor.targetX ||
-	 		cursor.y != cursor.targetY);
+	return (object.x != object.targetX ||
+	 		object.y != object.targetY);
+}
+
+function blocksMoving()
+{
+	for (var i = 0; i < blocks.length; i++)
+	{
+		if (blocks[i] == cursor)
+		{
+			continue;
+		}
+		if (isMoving(blocks[i]))
+		{
+			return true;
+		}
+	}
+	return false;
 }

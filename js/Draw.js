@@ -1,47 +1,90 @@
-function drawIsoRhombusFilled(color, x, y, squareSize){
-    context.fillStyle = color;
-    context.beginPath();
-    context.moveTo(x, y + squareSize / 2);
-    context.lineTo(x + squareSize, y);
-    context.lineTo(x + 2 * squareSize, y + squareSize / 2);
-    context.lineTo(x + squareSize, y + squareSize);
-    context.closePath();
-    context.fill();
-}
-
-function drawIsoRhombusWire(fillColor, strokeColor, x, y, squareSize){
-    context.fillStyle = fillColor;
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(x, y + squareSize / 2);
-    context.lineTo(x + squareSize, y);
-    context.lineTo(x + 2 * squareSize, y + squareSize / 2);
-    context.lineTo(x + squareSize, y + squareSize);
-    context.closePath();
-    context.fill();
-    context.stroke();
-}
-
-function drawLine(strokeColor, startX, startY, endX, endY){
-    context.strokeStyle = strokeColor;
-    context.beginPath();
-    context.moveTo(startX, startY);
-    context.lineTo(endX, endY);
-    context.closePath();
-    context.stroke();
-}
-
-function twoDToIso(ptX, ptY){
-    var tempPt = {x:0,y:0};
-    tempPt.x = ptX - ptY;
-    tempPt.y = (ptX + ptY) / 2;
-    return tempPt;
-}
-
-function isoTotwoD(ptX, ptY)
+function drawBackground()
 {
-    return {
-        x: (2 * ptY + ptX) / 2,
-        y: (2 * ptY - ptX) / 2
+    colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
+}
+
+function drawBoard()
+{
+    var isoX, isoY, result;
+    var x = BOARD_X;
+    var y = BOARD_Y;
+    for (var row = 0; row < BOARD_ROWS; row++)
+    {
+        for (var col = 0; col < BOARD_COLS; col++)
+        {
+            var tileIndex = rowColToArrayIndex(col, row);
+            if (grid.layout[tileIndex].active)
+            {
+                var iso = twoDToIso(x, y);
+                drawIsoRhombusFilled(TILE_COLOR, iso.x, iso.y, TILE_SIZE-grid.gap);
+            }
+            x += TILE_SIZE;
+        }
+        x = grid.x;
+        y += TILE_SIZE;
     }
+}
+
+function drawSortedObjects()
+{
+	if (isMoving(cursor))
+	{
+		for (var i = 0; i < blocks.length; i++)
+		{
+			var block = blocks[i];
+			var iso = twoDToIso(block.x, block.y);
+			block.yLevel = iso.y;
+		}
+
+		blocks = yLevelQuickSort(blocks);
+	}
+
+	for (var i = 0; i < blocks.length; i++)
+	{
+		if (blocks[i] == cursor)
+		{
+			var iso = twoDToIso(cursor.x, cursor.y);
+			drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+		}
+		else
+		{
+			var block = blocks[i];
+			var iso = twoDToIso(block.x, block.y);
+			drawBitmapCenteredWithRotation(blockPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+		}
+	}
+}
+
+function yLevelQuickSort(array)
+{
+	var pivotIndex, pivot, result;
+	var beforeList = [];
+	var afterList = [];
+
+	pivotIndex = Math.floor(Math.random() + array.length-1);
+	pivot = array[pivotIndex];
+	array.splice(pivotIndex, 1);
+
+	for (var i = 0; i < array.length; i++)
+	{
+		if (array[i].yLevel < pivot.yLevel)
+		{
+			beforeList.push(array[i]);
+		}
+		else
+		{
+			afterList.push(array[i]);
+		}
+	}
+	if (beforeList.length > 1)
+	{
+		beforeList = yLevelQuickSort(beforeList);
+	}
+	if (afterList.length > 1)
+	{
+		afterList = yLevelQuickSort(afterList);
+	}
+	beforeList.push(pivot);
+	result = beforeList.concat(afterList);
+	return result;
 }

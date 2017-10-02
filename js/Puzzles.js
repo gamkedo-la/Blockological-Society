@@ -1,3 +1,8 @@
+const TILE_OFF = 0;
+const TILE_EMPTY = 1;
+const CURSOR_START = 2;
+const BLOCK_MAGNET = 3;
+
 var test = [
     00,00,00,00,00,00,00,00,00,00,00,00,
     00,00,00,00,00,00,00,00,00,00,00,00,

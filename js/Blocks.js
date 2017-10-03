@@ -4,6 +4,7 @@ var blocks = [];
 
 function createBlockObject(x, y, color, sprite){
     var ctrl = {
+        type: BLOCK_MAGNET,
         x: x,
         y: y,
         targetX: x,
@@ -36,6 +37,16 @@ function createBlockObject(x, y, color, sprite){
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;
+    }
+    ctrl.destroy = function(){
+        var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
+        var thisTile = grid.layout[thisTileIndex];
+        thisTile.block = undefined;
+        blocks
+        var foundHere = blocks.indexOf(ctrl);
+        if (foundHere > -1) {
+            blocks.splice(foundHere, 1);
+        }
     }
 
 	return ctrl;

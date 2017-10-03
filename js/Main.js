@@ -5,6 +5,7 @@ const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
 
 var blockPic = document.createElement("img");
 var blockIce = document.createElement("img");
+var blockFire = document.createElement("img");
 var cursorPic = document.createElement("img");
 
 window.onload = function()
@@ -20,6 +21,7 @@ window.onload = function()
 
 	blockPic.src = "img/cube_magnet.png";
 	blockIce.src = "img/cube_ice.png";
+	blockFire.src = "img/cube_fire_PLEASE_REPLACE.png";
 	cursorPic.src = "img/cursor.png";
 
 	initPlayer();

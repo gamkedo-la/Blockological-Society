@@ -1,5 +1,6 @@
 function createIceBlock(result) {
 	var block = createBlockObject(result.x, result.y, '#f1c40f', blockIce);
+	block.type = BLOCK_ICE;
 	block.queuePush = function(x, y){
         var nextX = block.x + x+ x;
         var nextY = block.y + y+ y;

@@ -1,3 +1,4 @@
+const CURSOR = 99;
 const TILE_OFF = 0;
 const TILE_EMPTY = 1;
 const CURSOR_START = 2;

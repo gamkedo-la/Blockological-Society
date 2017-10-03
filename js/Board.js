@@ -28,14 +28,14 @@ function loadLevel()
             layout[i].active = true;
             break;
             case CURSOR_START:
-            var result = calculateCoordAtTileIndex(i);
-            cursor.init(result.x, result.y);
-            layout[i].active = true;
-            blocks.push(cursor);
+                var result = calculateCoordAtTileIndex(i);
+                cursor.init(result.x, result.y);
+                layout[i].active = true;
+                blocks.push(cursor);
             break;
             case BLOCK_MAGNET:
-                var result = calculateCoordAtTileIndex(i);
-                layout[i].block = createBlockObject(result.x, result.y, '#f1c40f', blockPic);
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createMagnetBlock(location)
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;

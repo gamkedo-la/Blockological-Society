@@ -32,8 +32,8 @@ function createBlockObject(x, y, color, sprite){
     }
 
     ctrl.queuePush = function(x, y){
-        var nextX = ctrl.x + x;
-        var nextY = ctrl.y + y;
+        var nextX = ctrl.targetX + x;
+        var nextY = ctrl.targetY + y;
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;
@@ -60,7 +60,7 @@ function pushBlock(x, y, offsetX, offsetY)
 
     var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
     var tile = grid.layout[tileIndex];
-    if (tile != undefined && tile.block != undefined)
+    if (tile != undefined && tile.block != undefined && tile.block.type)
     {
         var block = tile.block;
         return block.tryPush(offsetX, offsetY)

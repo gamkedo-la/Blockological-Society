@@ -108,3 +108,30 @@ function updateTileEdit()
 	}
 	mouseButtonWasHeld = mouseButtonHeld;
 }
+
+function convertBoardToArray()
+{
+    var levelArray = [];
+
+    for (var i = 0; i < grid.layout[i].length; i++)
+    {
+        if (grid.layout[i].active)
+        {
+            levelArray[i] = TILE_EMPTY;
+        }
+        else
+        {
+            levelArray[i] = TILE_OFF;
+        }
+    }
+
+    for (var i = 0; i < blocks.length; i++)
+    {
+        var tileIndex = calculateTileIndexAtCoord(blocks[i].x, blocks[i].y);
+        levelArray[tileIndex] = blocks[i].type;
+    }
+
+    // TODO: add code to populate array with cursor start position
+
+    return levelArray;
+}

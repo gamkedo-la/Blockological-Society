@@ -27,17 +27,15 @@ function drawBoard()
 
 function drawSortedObjects()
 {
-	if (isMoving(cursor))
+	for (var i = 0; i < blocks.length; i++)
 	{
-		for (var i = 0; i < blocks.length; i++)
-		{
-			var block = blocks[i];
-			var iso = twoDToIso(block.x, block.y);
-			block.yLevel = iso.y;
-		}
-
-		blocks = yLevelQuickSort(blocks);
+		var block = blocks[i];
+		var iso = twoDToIso(block.x, block.y);
+		block.yLevel = iso.y;
 	}
+
+	blocks = yLevelQuickSort(blocks);
+
 
 	for (var i = 0; i < blocks.length; i++)
 	{

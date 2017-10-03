@@ -50,7 +50,7 @@ function drawSortedObjects()
 		{
 			var block = blocks[i];
 			var iso = twoDToIso(block.x, block.y);
-			drawBitmapCenteredWithRotation(blockPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
+			drawBitmapCenteredWithRotation(block.blockSprite, iso.x+TILE_SIZE-3, iso.y-3, 0);
 		}
 	}
 }

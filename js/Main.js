@@ -4,6 +4,7 @@ const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
 
 var blockPic = document.createElement("img");
+var blockIce = document.createElement("img");
 var cursorPic = document.createElement("img");
 
 window.onload = function()
@@ -18,6 +19,7 @@ window.onload = function()
 	document.addEventListener('mouseup', mouseReleased);
 
 	blockPic.src = "img/cube_magnet.png";
+	blockIce.src = "img/cube_ice.png";
 	cursorPic.src = "img/cursor.png";
 
 	initPlayer();
@@ -34,6 +36,7 @@ function update()
 {
 	updatePlayer();
 	updateBlocks();
+	applyBlockEffects();
 	updateMagnets(); // Broken logic for magnets
 
     if (mouseButtonHeld && !mouseButtonWasHeld)

@@ -34,11 +34,17 @@ function loadLevel()
             blocks.push(cursor);
             break;
             case BLOCK_MAGNET:
-            var result = calculateCoordAtTileIndex(i);
-            layout[i].block = createBlockObject(result.x, result.y, '#f1c40f');
-            layout[i].active = true;
-            blocks.push(layout[i].block);
-            break;
+                var result = calculateCoordAtTileIndex(i);
+                layout[i].block = createBlockObject(result.x, result.y, '#f1c40f', blockPic);
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
+            case BLOCK_ICE:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createIceBlock(location)
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
             default:
             // layout[i].active = true;
             break;

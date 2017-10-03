@@ -2,8 +2,9 @@ var _DEBUG_MAGNETS = false;
 
 var blocks = [];
 
-function createBlockObject(x, y, color)
+function createBlockObject(x, y, color, sprite)
 {
+
 	return {
 		x: x,
 		y: y,
@@ -13,6 +14,7 @@ function createBlockObject(x, y, color)
         speed: TILE_SIZE/8,
 		size: 32,
 		color: color,
+        blockSprite: sprite
 	};
 }
 
@@ -29,7 +31,7 @@ function pushBlock(x, y, offsetX, offsetY)
         var block = tile.block;
         nextX += offsetX;
         nextY += offsetY;
-
+        
         lastTile = tile;
         tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         tile = grid.layout[tileIndex];
@@ -111,6 +113,14 @@ function updateBlocks() {
     for (var i = 0; i < blocks.length; i++)
     {
         moveTowardsTarget(blocks[i]);
+    }
+}
+function applyBlockEffects(){
+    for (var i = 0; i < blocks.length; i++)
+    {
+        if(typeof blocks[i].logic === "function"){
+            blocks[i].logic()
+        }
     }
 }
 

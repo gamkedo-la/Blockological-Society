@@ -9,6 +9,7 @@ const BOARD_COLOR = '#2980b9';
 const TILE_COLOR = '#3498db';
 
 var grid;
+var levelData; // for exporting puzzles
 
 function loadLevel()
 {
@@ -27,7 +28,7 @@ function loadLevel()
             case TILE_EMPTY:
             layout[i].active = true;
             break;
-            case CURSOR_START:
+            case CURSOR:
                 var result = calculateCoordAtTileIndex(i);
                 cursor.init(result.x, result.y);
                 layout[i].active = true;
@@ -111,9 +112,9 @@ function updateTileEdit()
 
 function convertBoardToArray()
 {
-    var levelArray = [];
+    var levelArray = Array(BOARD_ROWS*BOARD_COLS);
 
-    for (var i = 0; i < grid.layout[i].length; i++)
+    for (var i = 0; i < grid.layout.length; i++)
     {
         if (grid.layout[i].active)
         {
@@ -130,8 +131,6 @@ function convertBoardToArray()
         var tileIndex = calculateTileIndexAtCoord(blocks[i].x, blocks[i].y);
         levelArray[tileIndex] = blocks[i].type;
     }
-
-    // TODO: add code to populate array with cursor start position
 
     return levelArray;
 }

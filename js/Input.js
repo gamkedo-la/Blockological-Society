@@ -9,6 +9,8 @@ const KEY_ESCAPE = 27;
 const KEY_SPACEBAR = 32;
 const KEY_TILDE = 192;
 
+const KEY_F5 = 116;
+
 var mouseX;
 var mouseY;
 var mouseButtonHeld = false;
@@ -26,6 +28,10 @@ function keyPressed(evt)
 	if (evt.keyCode == KEY_SPACEBAR)
 	{
 		_DEBUG_MAGNETS = !_DEBUG_MAGNETS;
+	}
+	if (evt.keyCode == KEY_F5)
+	{
+		exportPuzzle();
 	}
 }
 

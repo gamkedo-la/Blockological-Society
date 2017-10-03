@@ -7,6 +7,7 @@ var moveTimer = 0;
 function initPlayer()
 {
 	cursor = {
+		type: CURSOR,
 		x: undefined,
 		y: undefined,
 		targetX: undefined,

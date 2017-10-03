@@ -23,7 +23,7 @@ function createBlockObject(x, y, color, sprite){
         var thisTile = grid.layout[thisTileIndex];
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         var tile = grid.layout[tileIndex];
-        if (tile != undefined && tile.block == undefined && tile.active) {            
+        if (tile != undefined && tile.block == undefined && tile.active) {
             ctrl.queuePush(x, y);
             return true; // can move
         } else {
@@ -82,8 +82,8 @@ function pushBlock(x, y, offsetX, offsetY)
 function moveTowardsTarget(object)
 {
     var startPos = {
-        x: object.x, 
-        y: object.y 
+        x: object.x,
+        y: object.y
     }
     if (object.x < object.targetX)
     {
@@ -113,13 +113,13 @@ function moveTowardsTarget(object)
     if(object.x != startPos.x || object.y != startPos.y){
         var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
         var tile = grid.layout[tileIndex];
-        tile.block = undefined;    
+        tile.block = undefined;
 
         tileIndex = calculateTileIndexAtCoord(object.x, object.y);
         tile = grid.layout[tileIndex];
         tile.block = object;
     }
-    
+
 }
 
 function setMoveTarget(object, x, y)

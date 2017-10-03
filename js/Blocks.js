@@ -34,6 +34,12 @@ function createBlockObject(x, y, color, sprite){
     ctrl.queuePush = function(x, y){
         var nextX = ctrl.targetX + x;
         var nextY = ctrl.targetY + y;
+        if(nextX == cursor.x && nextY == cursor.y){
+            return;
+        }
+        if((ctrl.x - 4)  % TILE_SIZE != 0 || (ctrl.y - 10) % TILE_SIZE != 0){
+            return;
+        }
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;

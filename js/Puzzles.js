@@ -4,6 +4,7 @@ const TILE_EMPTY = 1;
 const BLOCK_MAGNET = 3;
 const BLOCK_ICE = 4;
 const BLOCK_FIRE = 5;
+const BLOCK_METAL = 6;
 
 var test = [
 	0,0,0,0,0,0,0,0,0,0,0,0,

@@ -1,5 +1,5 @@
 function createMagnetBlock(result) {
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockPic);
+	var block = createBlockObject(result.x, result.y, '#f1c40f', blockMagnetPic);
     block.type = BLOCK_MAGNET;
     block.logic = function(){
         block.exertForce( 0, -TILE_SIZE);

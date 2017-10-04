@@ -3,9 +3,11 @@ var canvas, canvasContext;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
 
-var blockPic = document.createElement("img");
-var blockIce = document.createElement("img");
-var blockFire = document.createElement("img");
+var tileOffPic = document.createElement("img");
+var tileEmptyPic = document.createElement("img");
+var blockMagnetPic = document.createElement("img");
+var blockIcePic = document.createElement("img");
+var blockFirePic = document.createElement("img");
 var cursorPic = document.createElement("img");
 
 window.onload = function()
@@ -19,12 +21,13 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
-	blockPic.src = "img/cube_magnet.png";
-	blockIce.src = "img/cube_ice.png";
-	blockFire.src = "img/cube_fire_PLEASE_REPLACE.png";
+	tileOffPic.src = "img/tile_off.png";
+	tileEmptyPic.src = "img/tile_empty.png";
+	blockMagnetPic.src = "img/cube_magnet.png";
+	blockIcePic.src = "img/cube_ice.png";
+	blockFirePic.src = "img/cube_fire_PLEASE_REPLACE.png";
 	cursorPic.src = "img/cursor.png";
 
-	initPlayer();
 	loadLevel();
 
 	setInterval(function()
@@ -36,19 +39,17 @@ window.onload = function()
 
 function update()
 {
+	if (_EDIT_MODE)
+	{
+		panelUpdate(puzzleEditor);
+		return;
+	}
+
 	updatePlayer();
 	updateBlocks();
 	applyBlockEffects();
 	updateMagnets(); // Broken logic for magnets
 
-    if (mouseButtonHeld && !mouseButtonWasHeld)
-	{
-		var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
-		var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-		if (tileIndex != undefined)
-			grid.layout[tileIndex].active = !grid.layout[tileIndex].active;
-	}
-	mouseButtonWasHeld = mouseButtonHeld;
 }
 
 function draw()
@@ -56,4 +57,9 @@ function draw()
 	drawBackground();
 	drawBoard();
 	drawSortedObjects();
+
+	if (_EDIT_MODE)
+	{
+		drawPanelWithButtons(puzzleEditor);
+	}
 }

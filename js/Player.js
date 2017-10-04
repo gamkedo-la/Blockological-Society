@@ -4,27 +4,26 @@ const CURSOR_COLOR = '#2c3e50';
 const MOVE_DELAY = .30;
 var moveTimer = 0;
 
-function initPlayer()
-{
-	cursor = {
-		type: CURSOR,
-		x: undefined,
-		y: undefined,
-		targetX: undefined,
-		targetY: undefined,
-		speed: TILE_SIZE/8,
-		color: CURSOR_COLOR,
 
-		init: function(x, y)
-		{
-			this.x = x;
-			this.y = y;
+cursor = {
+	type: CURSOR,
+	x: undefined,
+	y: undefined,
+	targetX: undefined,
+	targetY: undefined,
+	speed: TILE_SIZE/8,
+	color: CURSOR_COLOR,
 
-			this.targetX = x;
-			this.targetY = y;
-		}
+	init: function(x, y)
+	{
+		this.x = x;
+		this.y = y;
+
+		this.targetX = x;
+		this.targetY = y;
 	}
 }
+
 
 function updatePlayer()
 {

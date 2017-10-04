@@ -25,9 +25,9 @@ var downKeyHeld = false;
 function keyPressed(evt)
 {
 	keyEventHandler(evt.keyCode, true);
-	if (evt.keyCode == KEY_SPACEBAR)
+	if (evt.keyCode == KEY_TILDE)
 	{
-		_DEBUG_MAGNETS = !_DEBUG_MAGNETS;
+		_EDIT_MODE = !_EDIT_MODE;
 	}
 	if (evt.keyCode == KEY_F5)
 	{
@@ -44,7 +44,7 @@ function keyEventHandler(key, state)
 {
 	switch (key)
 	{
-		case KEY_SPACEBAR:
+		case KEY_TILDE:
 			break;
 		case KEY_ARROW_LEFT:
 			leftKeyHeld = state;

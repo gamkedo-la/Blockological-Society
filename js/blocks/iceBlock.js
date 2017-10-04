@@ -1,12 +1,12 @@
 function createIceBlock(result) {
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockIce);
+	var block = createBlockObject(result.x, result.y, '#f1c40f', blockIcePic);
 	block.type = BLOCK_ICE;
 	block.queuePush = function(x, y){
         var nextX = block.x + x+ x;
         var nextY = block.y + y+ y;
         var count = 0
         var tileIndex;
-        var tile; 
+        var tile;
         for(var isDone = false; isDone == false;  count++){
         	tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         	tile = grid.layout[tileIndex];
@@ -21,7 +21,7 @@ function createIceBlock(result) {
         	if(count > 1000){
         		break;
         	}
-        }        
+        }
         block.targetX = nextX;
         block.targetY = nextY;
     }

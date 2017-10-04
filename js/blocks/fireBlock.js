@@ -1,5 +1,5 @@
 function createFireBlock(result) {
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockFire);
+	var block = createBlockObject(result.x, result.y, '#f1c40f', blockFirePic);
     block.type = BLOCK_FIRE;
     block.logic = function(){
         block.destroyIfIce(0, -TILE_SIZE);

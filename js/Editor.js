@@ -5,16 +5,15 @@ puzzleEditor = {
 
 	buffer: "",
 	button: [
-		{ image: tileOffPic, value: createMagnetBlock },
-		{ image: tileEmptyPic, value: createMagnetBlock },
-		{ image: cursorPic, value: createMagnetBlock },
-		{ image: blockMagnetPic, value: createMagnetBlock },
-		{ image: blockIcePic, value: createIceBlock },
-		{ image: blockFirePic, value: createFireBlock },
+		{ image: tileOffPic, command: setInactiveTile },
+		{ image: tileEmptyPic, command: setActiveTile },
+		{ image: cursorPic, command: setCursor },
+		{ image: blockMagnetPic, command: setMagnetBlock },
+		{ image: blockIcePic, command: setIceBlock },
+		{ image: blockFirePic, command: setFireBlock },
 	],
 
 	selected: undefined,
-	highlighted: undefined,
 
 	x: 0,
 	y: 0,
@@ -88,25 +87,133 @@ function panelUpdate(panel)
 		}
 	}
 
-	if (mouseButtonHeld && !mouseButtonWasHeld)
+	if (mouseButtonHeld)
 	{
-		var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
-		var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-		if (tileIndex != undefined && puzzleEditor.selected != undefined)
+		var point = { x: mouseX, y: mouseY };
+		puzzleEditor.selected.command(point);
+	}
+	// mouseButtonWasHeld = mouseButtonHeld;
+}
+
+// NOTE(Cipherpunk): I realize that there is absolutely a way to refactor all of
+// these functions below. I do not currently understand how best to do that and I
+// decided to get a hacked solution working before I go back and try to make it better.
+// Thanks in advance for understanding, future reader and baffled programmer.
+
+function setActiveTile(point)
+{
+	var cart = isoTotwoD(point.x - TILE_SIZE, point.y);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined)
+	{
+		if (grid.layout[tileIndex].block)
 		{
-			if (grid.layout[tileIndex].block)
-			{
-				grid.layout[tileIndex].block.destroy();
-			}
-			var location = calculateCoordAtTileIndex(tileIndex);
-			if (cursor.x != location.x || cursor.y != location.y)
-			{
-				var tempBlock = puzzleEditor.selected.value(location)
-				grid.layout[tileIndex].active = true;
-				grid.layout[tileIndex].block = tempBlock;
-				blocks.push(tempBlock);
-			}
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			grid.layout[tileIndex].active = true;
 		}
 	}
-	mouseButtonWasHeld = mouseButtonHeld;
+}
+
+function setInactiveTile(point)
+{
+	var cart = isoTotwoD(point.x - TILE_SIZE, point.y);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			grid.layout[tileIndex].active = false;
+		}
+	}
+}
+
+function setMagnetBlock(point)
+{
+	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined && puzzleEditor.selected != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			var tempBlock = createMagnetBlock(location)
+			grid.layout[tileIndex].active = true;
+			grid.layout[tileIndex].block = tempBlock;
+			blocks.push(tempBlock);
+		}
+	}
+}
+
+function setIceBlock(point)
+{
+	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined && puzzleEditor.selected != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			var tempBlock = createIceBlock(location)
+			grid.layout[tileIndex].active = true;
+			grid.layout[tileIndex].block = tempBlock;
+			blocks.push(tempBlock);
+		}
+	}
+}
+
+function setFireBlock(point)
+{
+	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined && puzzleEditor.selected != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			var tempBlock = createFireBlock(location)
+			grid.layout[tileIndex].active = true;
+			grid.layout[tileIndex].block = tempBlock;
+			blocks.push(tempBlock);
+		}
+	}
+}
+
+function setCursor(point)
+{
+	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined && puzzleEditor.selected != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			cursor.init(location.x, location.y);
+			grid.layout[tileIndex].active = true;
+		}
+	}
 }

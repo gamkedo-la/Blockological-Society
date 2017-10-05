@@ -1,27 +1,33 @@
-function createMagnetBlock(result) {
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockMagnetPic);
-    block.type = BLOCK_MAGNET;
+function createMetalBlock(result) {
+	var block = createBlockObject(result.x, result.y, '#f1c40f', blockMetalPic);
+    block.type = BLOCK_METAL;
+    block.charged = false;
     block.groupId = Math.random() * 1000000000 //basically quantum color
     block.group = block.groupId
+
     block.logic = function(){
-        block.exertForce( 0, -TILE_SIZE);
-        block.exertForce( 0, TILE_SIZE);
-        block.exertForce( -TILE_SIZE, 0);
-        block.exertForce( TILE_SIZE, 0);
+        if(block.charged){
+            block.exertCharge( 0, -TILE_SIZE); //exert your groupID upon other blocks
+            block.exertCharge( 0, TILE_SIZE);
+            block.exertCharge( -TILE_SIZE, 0);
+            block.exertCharge( TILE_SIZE, 0);
+            block.blockSprite = blockYellowPic
+        } else {
+            block.blockSprite = blockMetalPic
+            block.group = block.groupId
+        }
     }
 
-    block.exertForce = function(x, y){
+    block.exertCharge = function(x, y){
         tileIndex = calculateTileIndexAtCoord(block.x + x, block.y + y);
         tile = grid.layout[tileIndex];
         if(tile && tile.block && tile.block.type){
             if(tile.block.type == BLOCK_MAGNET){
-                tile.block.tryPush(x, y);
+                tile.block.group = block.group //instead of pushing, set that shit to our groupID
             } else if (tile.block.type == BLOCK_METAL){
-                tile.block.group = block.groupId
-                tile.block.charged = true
+                tile.block.group = block.group
             }
         }
-
     }
 
     block.tryPush = function(x, y){
@@ -65,6 +71,5 @@ function createMagnetBlock(result) {
             return false
         }
     }
-
 	return block;
 }

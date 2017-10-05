@@ -44,7 +44,7 @@ function createBlockObject(x, y, color, sprite){
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;
     }
-    
+
     ctrl.destroy = function(){
         var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
         var thisTile = grid.layout[thisTileIndex];
@@ -111,15 +111,20 @@ function moveTowardsTarget(object)
     {
         object.y = object.targetY;
     }
+    var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
+    var tile = grid.layout[tileIndex];
+
     if(object.x != startPos.x || object.y != startPos.y){
-        var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
-        var tile = grid.layout[tileIndex];
         tile.block = undefined;
 
         tileIndex = calculateTileIndexAtCoord(object.x, object.y);
         tile = grid.layout[tileIndex];
         tile.block = object;
     }
+    if(tile.block && tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is. 
+        tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
+    }
+
 
 }
 

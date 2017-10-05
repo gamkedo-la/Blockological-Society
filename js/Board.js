@@ -58,6 +58,12 @@ function loadLevel()
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;
+            case BLOCK_METAL:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createMetalBlock(location)
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
             default:
             // layout[i].active = true;
             break;

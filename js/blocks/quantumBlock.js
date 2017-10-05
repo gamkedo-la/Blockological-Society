@@ -3,16 +3,8 @@ function createQuantumBlock(result, color) {
 	var block = createBlockObject(result.x, result.y, '#f1c40f', blockQuantumPic);
     block.type = BLOCK_QUANTUM;
     block.color = color? color : '#f1c40f';
-    block.logic = function(){
-        
-    }
-
-
-
-
 
     block.tryPush = function(x, y){
-
         var quantumBrothers = []
         var canMove = true
         for(var i in blocks){ //check all dem other blocks. 
@@ -26,9 +18,7 @@ function createQuantumBlock(result, color) {
                 } else {
                     quantumBrothers.push(blocks[i]) //build a book of quantum blocks that match. so next step wont' ahve to go through all of em again.
                 }
-            }
-
-            
+            }            
         }
 
         //at this point the function would of exited if there where any blocks that could not move

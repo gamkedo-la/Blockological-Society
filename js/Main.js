@@ -9,6 +9,8 @@ var blockMagnetPic = document.createElement("img");
 var blockIcePic = document.createElement("img");
 var blockFirePic = document.createElement("img");
 var blockQuantumPic = document.createElement("img");
+var blockMetalPic = document.createElement("img");
+var blockYellowPic = document.createElement("img");
 var cursorPic = document.createElement("img");
 
 window.onload = function()
@@ -27,6 +29,8 @@ window.onload = function()
 	blockMagnetPic.src = "img/cube_magnet.png";
 	blockIcePic.src = "img/cube_ice.png";
 	blockQuantumPic.src = "img/cube_quantum.png";
+	blockMetalPic.src = "img/cube_metal.png";
+	blockYellowPic.src = "img/cube_yellow.png";
 	blockFirePic.src = "img/cube_fire_PLEASE_REPLACE.png";
 	cursorPic.src = "img/cursor.png";
 

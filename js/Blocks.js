@@ -44,6 +44,7 @@ function createBlockObject(x, y, color, sprite){
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;
     }
+    
     ctrl.destroy = function(){
         var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
         var thisTile = grid.layout[thisTileIndex];
@@ -162,28 +163,6 @@ function applyBlockEffects(){
     {
         if(typeof blocks[i].logic === "function"){
             blocks[i].logic()
-        }
-    }
-}
-
-function updateMagnets()
-{
-    if (!blocksMoving())
-    {
-        for (var i = 0; i < blocks.length; i++)
-        {
-            if (!_DEBUG_MAGNETS || isMoving(cursor))
-            {
-                break;
-            }
-            if (blocks[i] == cursor)
-            {
-                continue;
-            }
-            pushBlock(blocks[i].x, blocks[i].y, 0, -TILE_SIZE);
-            pushBlock(blocks[i].x, blocks[i].y, 0, TILE_SIZE);
-            pushBlock(blocks[i].x, blocks[i].y, -TILE_SIZE, 0);
-            pushBlock(blocks[i].x, blocks[i].y, TILE_SIZE, 0);
         }
     }
 }

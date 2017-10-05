@@ -11,6 +11,7 @@ puzzleEditor = {
 		{ image: blockMagnetPic, command: setMagnetBlock },
 		{ image: blockIcePic, command: setIceBlock },
 		{ image: blockFirePic, command: setFireBlock },
+		{ image: blockQuantumPic, command: setQuantumBlock },
 	],
 
 	selected: undefined,
@@ -192,6 +193,27 @@ function setFireBlock(point)
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			var tempBlock = createFireBlock(location)
+			grid.layout[tileIndex].active = true;
+			grid.layout[tileIndex].block = tempBlock;
+			blocks.push(tempBlock);
+		}
+	}
+}
+
+function setQuantumBlock(point)
+{
+	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined && puzzleEditor.selected != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			var tempBlock = createQuantumBlock(location)
 			grid.layout[tileIndex].active = true;
 			grid.layout[tileIndex].block = tempBlock;
 			blocks.push(tempBlock);

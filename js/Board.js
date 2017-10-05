@@ -52,6 +52,12 @@ function loadLevel()
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;
+            case BLOCK_QUANTUM:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createQuantumBlock(location)
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
             default:
             // layout[i].active = true;
             break;

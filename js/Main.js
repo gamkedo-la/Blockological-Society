@@ -8,6 +8,7 @@ var tileEmptyPic = document.createElement("img");
 var blockMagnetPic = document.createElement("img");
 var blockIcePic = document.createElement("img");
 var blockFirePic = document.createElement("img");
+var blockQuantumPic = document.createElement("img");
 var cursorPic = document.createElement("img");
 
 window.onload = function()
@@ -25,6 +26,7 @@ window.onload = function()
 	tileEmptyPic.src = "img/tile_empty.png";
 	blockMagnetPic.src = "img/cube_magnet.png";
 	blockIcePic.src = "img/cube_ice.png";
+	blockQuantumPic.src = "img/cube_quantum.png";
 	blockFirePic.src = "img/cube_fire_PLEASE_REPLACE.png";
 	cursorPic.src = "img/cursor.png";
 
@@ -47,8 +49,7 @@ function update()
 
 	updatePlayer();
 	updateBlocks();
-	applyBlockEffects();
-	updateMagnets(); // Broken logic for magnets
+	applyBlockEffects();	
 
 }
 

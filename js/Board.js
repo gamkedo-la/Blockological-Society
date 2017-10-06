@@ -7,6 +7,7 @@ const TILE_SIZE = 34;
 
 const BOARD_COLOR = '#2980b9';
 const TILE_COLOR = '#3498db';
+const GOAL_COLOR = '#44db34';
 
 var grid;
 var levelData; // for exporting puzzles
@@ -27,6 +28,10 @@ function loadLevel()
         {
             case TILE_EMPTY:
             layout[i].active = true;
+            break;
+            case TILE_GOAL:
+            layout[i].active = true;
+            layout[i].isGoal = true;
             break;
             case CURSOR:
                 var result = calculateCoordAtTileIndex(i);

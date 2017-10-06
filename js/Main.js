@@ -53,7 +53,8 @@ function update()
 
 	updatePlayer();
 	updateBlocks();
-	applyBlockEffects();	
+	applyBlockEffects();
+	checkForTriggers();	
 
 }
 

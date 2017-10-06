@@ -16,7 +16,10 @@ function drawBoard()
             if (grid.layout[tileIndex].active)
             {
                 var iso = twoDToIso(x, y);
-                drawIsoRhombusFilled(TILE_COLOR, iso.x, iso.y, TILE_SIZE-grid.gap);
+
+				var currentColor = grid.layout[tileIndex].isGoal ? GOAL_COLOR : TILE_COLOR;
+				drawIsoRhombusFilled(currentColor, iso.x, iso.y, TILE_SIZE-grid.gap);
+                
             }
             x += TILE_SIZE;
         }

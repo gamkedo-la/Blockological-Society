@@ -60,6 +60,16 @@ function drawPanelWithButtons(panel)
 			x += panel.width;
 		}
 	}
+
+	if (panel.selected != undefined)
+	{
+		var tileIndex = calculateTileIndexAtCoord(mouseX, mouseY);
+		if (grid.layout[tileIndex] != undefined)
+		{
+			var point = calculateCoordAtTileIndex(tileIndex);
+			drawBitmapCenteredWithRotation(panel.selected.image, point.x-16, point.y-17.5, 0);
+		}
+	}
 }
 
 function panelUpdate(panel)
@@ -93,7 +103,6 @@ function panelUpdate(panel)
 		var point = { x: mouseX, y: mouseY };
 		puzzleEditor.selected.command(point);
 	}
-	// mouseButtonWasHeld = mouseButtonHeld;
 }
 
 // NOTE(Cipherpunk): I realize that there is absolutely a way to refactor all of

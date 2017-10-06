@@ -6,7 +6,7 @@ function checkForTriggers() {
     {
         checkForGoal();
     }
-    
+
 }
 
 function checkForGoal () {
@@ -21,6 +21,7 @@ function checkForGoal () {
             if (grid.layout[tileIndex].isGoal && grid.layout[tileIndex].block == undefined)
             {
                 goalTilesCovered = false;
+                break;
             }
         }
     }

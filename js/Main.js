@@ -13,6 +13,16 @@ var blockMetalPic = document.createElement("img");
 var blockYellowPic = document.createElement("img");
 var cursorPic = document.createElement("img");
 
+var editorTileOffPic = document.createElement("img");
+var editorTileEmptyPic = document.createElement("img");
+var editorBlockMagnetPic = document.createElement("img");
+var editorBlockIcePic = document.createElement("img");
+var editorBlockFirePic = document.createElement("img");
+var editorBlockQuantumPic = document.createElement("img");
+var editorBlockMetalPic = document.createElement("img");
+var editorBlockYellowPic = document.createElement("img");
+var editorCursorPic = document.createElement("img");
+
 window.onload = function()
 {
 	canvas = document.getElementById('gameCanvas');
@@ -34,6 +44,15 @@ window.onload = function()
 	blockFirePic.src = "img/cube_fire_PLEASE_REPLACE.png";
 	cursorPic.src = "img/cursor.png";
 
+	editorTileOffPic.src = "img/editor/edit_tile_off.png";
+	editorTileEmptyPic.src = "img/editor/edit_tile_empty.png";
+	editorBlockMagnetPic.src = "img/editor/edit_cube_magnet.png";
+	editorBlockIcePic.src = "img/editor/edit_cube_ice.png";
+	editorBlockQuantumPic.src = "img/editor/edit_cube_quantum.png";
+	editorBlockMetalPic.src = "img/editor/edit_cube_metal.png";
+	editorBlockFirePic.src = "img/editor/edit_cube_fire_PLEASE_REPLACE.png";
+	editorCursorPic.src = "img/editor/edit_cursor.png";
+
 	loadLevel();
 
 	setInterval(function()
@@ -54,7 +73,7 @@ function update()
 	updatePlayer();
 	updateBlocks();
 	applyBlockEffects();
-	checkForTriggers();	
+	checkForTriggers();
 
 }
 

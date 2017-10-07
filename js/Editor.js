@@ -5,25 +5,25 @@ puzzleEditor = {
 
 	buffer: "",
 	button: [
-		{ image: tileOffPic, command: setInactiveTile },
-		{ image: tileEmptyPic, command: setActiveTile },
-		{ image: cursorPic, command: setCursor },
-		{ image: blockMagnetPic, command: setMagnetBlock },
-		{ image: blockIcePic, command: setIceBlock },
-		{ image: blockFirePic, command: setFireBlock },
-		{ image: blockQuantumPic, command: setQuantumBlock },
+		{ image: editorTileOffPic, preview: tileOffPic, command: setInactiveTile },
+		{ image: editorTileEmptyPic, preview: tileEmptyPic, command: setActiveTile },
+		{ image: editorCursorPic, preview: cursorPic, command: setCursor },
+		{ image: editorBlockMagnetPic, preview: blockMagnetPic, command: setMagnetBlock },
+		{ image: editorBlockIcePic, preview: blockIcePic, command: setIceBlock },
+		{ image: editorBlockFirePic, preview: blockFirePic, command: setFireBlock },
+		{ image: editorBlockQuantumPic, preview: blockQuantumPic, command: setQuantumBlock },
 	],
 
 	selected: undefined,
 
 	x: 0,
 	y: 0,
-	offsetY: 71,
-	width: 65,
-	height: 142,
+	offsetY: 36,
+	width: 33,
+	height: 96,
 
-	color: 'lime',
-	highlightColor: 'yellow',
+	color: 'dimGrey',
+	highlightColor: 'lightGrey',
 };
 
 
@@ -51,8 +51,8 @@ function drawPanelWithButtons(panel)
 
 	function drawButton(image, color)
 	{
-		colorRect(x, y, 64, 70, color);
-		drawBitmapCenteredWithRotation(image, x+32, y+35, 0);
+		colorRect(x, y, 32, 35, color);
+		drawBitmapCenteredWithRotation(image, x+16, y+17.5, 0);
 		y += panel.offsetY;
 		if (y > panel.y + panel.height)
 		{
@@ -63,11 +63,13 @@ function drawPanelWithButtons(panel)
 
 	if (panel.selected != undefined)
 	{
-		var tileIndex = calculateTileIndexAtCoord(mouseX, mouseY);
-		if (grid.layout[tileIndex] != undefined)
+		var cart = isoTotwoD(mouseX-TILE_SIZE, mouseY);
+		var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+		if (tileIndex != undefined)
 		{
-			var point = calculateCoordAtTileIndex(tileIndex);
-			drawBitmapCenteredWithRotation(panel.selected.image, point.x-16, point.y-17.5, 0);
+			var cart = calculateCoordAtTileIndex(tileIndex);
+			var point = twoDToIso(cart.x, cart.y);
+			drawBitmapCenteredWithRotation(panel.selected.preview, point.x+32, point.y-3, 0);
 		}
 	}
 }

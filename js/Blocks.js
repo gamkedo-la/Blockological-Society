@@ -122,8 +122,6 @@ function moveTowardsTarget(object)
     if(tile.block && tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
         tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
     }
-
-
 }
 
 function setMoveTarget(object, x, y)

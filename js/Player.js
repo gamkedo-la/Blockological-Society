@@ -23,7 +23,6 @@ cursor = {
 	}
 }
 
-
 function updatePlayer()
 {
     moveTimer -= TIME_PER_TICK;
@@ -63,22 +62,4 @@ function updatePlayer()
 			moveTimer = MOVE_DELAY/2;
 		}
     }
-}
-
-function saveBoard()
-{
-	var boardState = convertBoardToArray();
-	boardHistory.push(boardState);
-}
-
-function undoMove()
-{
-	if (boardHistory < 1)
-	{
-		return false;
-	}
-	blocks = [];
-	loadLevel(boardHistory[boardHistory.length-1]);
-	boardHistory.splice(-1, 1);
-	return true;
 }

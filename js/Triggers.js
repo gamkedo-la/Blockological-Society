@@ -34,4 +34,8 @@ function checkForGoal () {
         alert("You won!!!");
         //TODO: trigger opening up next puzzle
     }
+    else
+    {
+        isGoalMet = false;
+    }
 }

@@ -33,7 +33,7 @@ function createMetalBlock(result) {
     block.tryPush = function(x, y){
         var magnetBros = []
         var canMove = true
-        for(var i in blocks){ //check all dem other blocks. 
+        for(var i in blocks){ //check all dem other blocks.
             if(blocks[i].group && blocks[i].group == block.group && typeof blocks[i].canPush === "function"){ //gotta be a quantum of the saaame color
                 canMove = blocks[i].canPush(x, y); //this is the original tryPush, moved into it's own function so quantum stuff can happen first
                 //also to keep quantum block stuff seperate from normal block stuff
@@ -41,15 +41,14 @@ function createMetalBlock(result) {
                 if(canMove){
                     magnetBros.push(blocks[i]) //build a book of quantum blocks that match. so next step wont' ahve to go through all of em again.
                 }
-            }            
+            }
         }
 
-        
         for(var i in magnetBros){
             magnetBros[i].queuePush(x, y);
         }
         return block.canPush();
-         
+
     }
 
     block.canPush = function(x, y){
@@ -60,7 +59,7 @@ function createMetalBlock(result) {
         var thisTile = grid.layout[thisTileIndex];
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         var tile = grid.layout[tileIndex];
-        if (tile != undefined && tile.block == undefined && tile.active) {    
+        if (tile != undefined && tile.block == undefined && tile.active) {
             //ctrl.queuePush(x, y); //normally we would queue up here
             //but since this push can't happen until all blocks can be pushed
             //it just returns wheter or not it can be pushed.

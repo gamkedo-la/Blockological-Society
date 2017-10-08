@@ -23,7 +23,7 @@ var test = [
 	0,0,0,0,0,0,0,0,0,0,0,0,
 ];
 
-// hotkey is tilde
+// hotkey is F5
 function exportPuzzle()
 {
     var levelData, exportString;

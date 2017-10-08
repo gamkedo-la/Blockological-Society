@@ -156,3 +156,21 @@ function convertBoardToArray()
 
     return levelArray;
 }
+
+function saveBoard()
+{
+	var boardState = convertBoardToArray();
+	boardHistory.push(boardState);
+}
+
+function undoMove()
+{
+	if (boardHistory < 1)
+	{
+		return false;
+	}
+	blocks = [];
+	loadLevel(boardHistory[boardHistory.length-1]);
+	boardHistory.splice(-1, 1);
+	return true;
+}

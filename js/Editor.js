@@ -119,7 +119,7 @@ function setActiveTile(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -127,6 +127,7 @@ function setActiveTile(point)
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			grid.layout[tileIndex].active = true;
+			grid.layout[tileIndex].isGoal = false;
 		}
 	}
 }
@@ -137,7 +138,7 @@ function setInactiveTile(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -145,6 +146,7 @@ function setInactiveTile(point)
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			grid.layout[tileIndex].active = false;
+			grid.layout[tileIndex].isGoal = false;
 		}
 	}
 }
@@ -155,7 +157,7 @@ function setGoalTile(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -173,7 +175,7 @@ function setMetalBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -194,7 +196,7 @@ function setMagnetBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -215,7 +217,7 @@ function setIceBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -236,7 +238,7 @@ function setFireBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -257,7 +259,7 @@ function setQuantumBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
@@ -278,13 +280,18 @@ function setCursor(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block)
+		if (grid.layout[tileIndex].block != undefined)
 		{
 			grid.layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
+			lastTileIndex = calculateTileIndexAtCoord(cursor.x, cursor.y);
+			if (grid.layout[lastTileIndex].block != undefined)
+			{
+				grid.layout[lastTileIndex].block.destroy();
+			}
 			cursor.init(location.x, location.y);
 			grid.layout[tileIndex].active = true;
 		}

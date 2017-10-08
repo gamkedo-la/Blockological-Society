@@ -1,5 +1,3 @@
-var _DEBUG_MAGNETS = false;
-
 var blocks = [];
 
 function createBlockObject(x, y, color, sprite){
@@ -121,7 +119,7 @@ function moveTowardsTarget(object)
         tile = grid.layout[tileIndex];
         tile.block = object;
     }
-    if(tile.block && tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is. 
+    if(tile.block && tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
         tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
     }
 

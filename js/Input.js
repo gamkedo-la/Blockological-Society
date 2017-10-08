@@ -44,7 +44,8 @@ function keyEventHandler(key, state)
 {
 	switch (key)
 	{
-		case KEY_TILDE:
+		case KEY_ESCAPE:
+			undoKeyHeld = state;
 			break;
 		case KEY_ARROW_LEFT:
 			leftKeyHeld = state;

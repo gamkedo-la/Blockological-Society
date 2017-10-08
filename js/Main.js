@@ -57,7 +57,7 @@ window.onload = function()
 	editorBlockFirePic.src = "img/editor/edit_cube_fire_PLEASE_REPLACE.png";
 	editorCursorPic.src = "img/editor/edit_cursor.png";
 
-	loadLevel();
+	loadLevel(test);
 
 	setInterval(function()
 	{

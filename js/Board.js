@@ -10,21 +10,20 @@ const TILE_COLOR = '#3498db';
 const GOAL_COLOR = '#44db34';
 
 var grid;
-var levelData; // for exporting puzzles
+var boardHistory = [];
 
-function loadLevel()
+function loadLevel(level)
 {
     var tile = {
         active: false,
         block: undefined
     }
 
-    var testLevel = test; // in Puzzles.js
     var layout = Array(BOARD_ROWS*BOARD_COLS);
     for (var i = 0; i < layout.length; i++)
     {
         layout[i] = {...tile}; // copies tile object data into array index
-        switch (testLevel[i])
+        switch (level[i])
         {
             case TILE_EMPTY:
             layout[i].active = true;
@@ -70,8 +69,7 @@ function loadLevel()
                 blocks.push(layout[i].block);
                 break;
             default:
-            // layout[i].active = true;
-            break;
+                break;
         }
     }
 

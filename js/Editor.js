@@ -3,12 +3,12 @@ var puzzleEditor;
 
 puzzleEditor = {
 
-	buffer: "",
 	button: [
 		{ image: editorTileOffPic, preview: tileOffPic, command: setInactiveTile },
 		{ image: editorTileEmptyPic, preview: tileEmptyPic, command: setActiveTile },
 		{ image: editorTileGoalPic, preview: tileGoalPic, command: setGoalTile },
 		{ image: editorCursorPic, preview: cursorPic, command: setCursor },
+		{ image: editorBlockMetalPic, preview: blockMetalPic, command: setMetalBlock },
 		{ image: editorBlockMagnetPic, preview: blockMagnetPic, command: setMagnetBlock },
 		{ image: editorBlockIcePic, preview: blockIcePic, command: setIceBlock },
 		{ image: editorBlockFirePic, preview: blockFirePic, command: setFireBlock },
@@ -21,7 +21,7 @@ puzzleEditor = {
 	y: 0,
 	offsetY: 36,
 	width: 33,
-	height: 128,
+	height: 96,
 
 	color: 'dimGrey',
 	highlightColor: 'lightGrey',
@@ -163,6 +163,27 @@ function setGoalTile(point)
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			grid.layout[tileIndex].isGoal = true;
+		}
+	}
+}
+
+function setMetalBlock(point)
+{
+	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined && puzzleEditor.selected != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			var tempBlock = createMetalBlock(location)
+			grid.layout[tileIndex].active = true;
+			grid.layout[tileIndex].block = tempBlock;
+			blocks.push(tempBlock);
 		}
 	}
 }

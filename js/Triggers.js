@@ -1,15 +1,13 @@
 var isGoalMet = false;
 
-
 function checkForTriggers() {
     if (!isGoalMet)
     {
         checkForGoal();
     }
-
 }
 
-function checkForGoal () {
+function checkForGoal() {
     var goalTilesCovered = true;
 
     for (var row = 0; row < BOARD_ROWS; row++)
@@ -21,7 +19,6 @@ function checkForGoal () {
             if (grid.layout[tileIndex].isGoal && grid.layout[tileIndex].block == undefined)
             {
                 goalTilesCovered = false;
-                break;
             }
         }
     }
@@ -31,11 +28,6 @@ function checkForGoal () {
         isGoalMet = true;
         //TODO: add delay to allow for animation
         //TODO: replace alert with some sort of UI
-        alert("You won!!!");
         //TODO: trigger opening up next puzzle
-    }
-    else
-    {
-        isGoalMet = false;
     }
 }

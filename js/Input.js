@@ -11,6 +11,10 @@ const KEY_TILDE = 192;
 
 const KEY_F5 = 116;
 
+const KEY_NUM_0 = 96;
+const KEY_NUM_1 = 97;
+const KEY_NUM_2 = 98;
+
 var mouseX;
 var mouseY;
 var mouseButtonHeld = false;
@@ -25,13 +29,23 @@ var downKeyHeld = false;
 function keyPressed(evt)
 {
 	keyEventHandler(evt.keyCode, true);
-	if (evt.keyCode == KEY_TILDE)
+
+	switch(evt.keyCode)
 	{
-		_EDIT_MODE = !_EDIT_MODE;
-	}
-	if (evt.keyCode == KEY_F5)
-	{
-		exportPuzzle();
+		case KEY_TILDE:
+			_EDIT_MODE = !_EDIT_MODE;
+			break;
+		case KEY_F5:
+			exportPuzzle();
+			break;
+		case KEY_NUM_1:
+			loadLevel(testLevel);
+			break;
+		case KEY_NUM_2:
+			loadLevel(emptyLevel);
+			break;
+		default:
+			break;
 	}
 }
 

@@ -13,8 +13,8 @@ window.onload = function()
 	document.addEventListener('mousemove', mousePosHandler);
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
-	
-	loadLevel(test);
+
+	loadLevel(testLevel);
 
 	setInterval(function()
 	{
@@ -44,6 +44,10 @@ function draw()
 	drawBoard();
 	drawSortedObjects();
 
+	if (isGoalMet)
+	{
+        drawText("You won!!!", canvas.width*0.43, canvas.height*0.15, '24px Comic Sans MS', 'yellow');
+	}
 	if (_EDIT_MODE)
 	{
 		drawPanelWithButtons(puzzleEditor);

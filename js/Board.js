@@ -14,6 +14,8 @@ var boardHistory = [];
 
 function loadLevel(level)
 {
+    blocks = [];
+
     var tile = {
         active: false,
         block: undefined

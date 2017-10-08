@@ -7,6 +7,7 @@ puzzleEditor = {
 	button: [
 		{ image: editorTileOffPic, preview: tileOffPic, command: setInactiveTile },
 		{ image: editorTileEmptyPic, preview: tileEmptyPic, command: setActiveTile },
+		{ image: editorTileGoalPic, preview: tileGoalPic, command: setGoalTile },
 		{ image: editorCursorPic, preview: cursorPic, command: setCursor },
 		{ image: editorBlockMagnetPic, preview: blockMagnetPic, command: setMagnetBlock },
 		{ image: editorBlockIcePic, preview: blockIcePic, command: setIceBlock },
@@ -20,7 +21,7 @@ puzzleEditor = {
 	y: 0,
 	offsetY: 36,
 	width: 33,
-	height: 96,
+	height: 128,
 
 	color: 'dimGrey',
 	highlightColor: 'lightGrey',
@@ -144,6 +145,24 @@ function setInactiveTile(point)
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			grid.layout[tileIndex].active = false;
+		}
+	}
+}
+
+function setGoalTile(point)
+{
+	var cart = isoTotwoD(point.x - TILE_SIZE, point.y);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined)
+	{
+		if (grid.layout[tileIndex].block)
+		{
+			grid.layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			grid.layout[tileIndex].isGoal = true;
 		}
 	}
 }

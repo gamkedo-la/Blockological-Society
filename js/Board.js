@@ -135,7 +135,14 @@ function convertBoardToArray()
     {
         if (grid.layout[i].active)
         {
-            levelArray[i] = TILE_EMPTY;
+            if (grid.layout[i].isGoal)
+            {
+                levelArray[i] = TILE_GOAL;
+            }
+            else
+            {
+                levelArray[i] = TILE_EMPTY;
+            }
         }
         else
         {

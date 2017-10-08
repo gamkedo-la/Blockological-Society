@@ -3,6 +3,7 @@ var canvas, canvasContext;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
 
+var tileGoalPic = document.createElement("img");
 var tileOffPic = document.createElement("img");
 var tileEmptyPic = document.createElement("img");
 var blockMagnetPic = document.createElement("img");
@@ -13,6 +14,7 @@ var blockMetalPic = document.createElement("img");
 var blockYellowPic = document.createElement("img");
 var cursorPic = document.createElement("img");
 
+var editorTileGoalPic = document.createElement("img");
 var editorTileOffPic = document.createElement("img");
 var editorTileEmptyPic = document.createElement("img");
 var editorBlockMagnetPic = document.createElement("img");
@@ -34,6 +36,7 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
+	tileGoalPic.src = "img/tile_goal.png";
 	tileOffPic.src = "img/tile_off.png";
 	tileEmptyPic.src = "img/tile_empty.png";
 	blockMagnetPic.src = "img/cube_magnet.png";
@@ -44,6 +47,7 @@ window.onload = function()
 	blockFirePic.src = "img/cube_fire_PLEASE_REPLACE.png";
 	cursorPic.src = "img/cursor.png";
 
+	editorTileGoalPic.src = "img/editor/edit_tile_goal.png";
 	editorTileOffPic.src = "img/editor/edit_tile_off.png";
 	editorTileEmptyPic.src = "img/editor/edit_tile_empty.png";
 	editorBlockMagnetPic.src = "img/editor/edit_cube_magnet.png";

@@ -14,7 +14,7 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
-	loadLevel(testLevel);
+	loadLevel(emptyLevel);
 
 	setInterval(function()
 	{
@@ -43,7 +43,6 @@ function draw()
 	drawBackground();
 	drawBoard();
 	drawSortedObjects();
-
 	if (isGoalMet)
 	{
         drawText("You won!!!", canvas.width*0.43, canvas.height*0.15, '24px Comic Sans MS', 'yellow');

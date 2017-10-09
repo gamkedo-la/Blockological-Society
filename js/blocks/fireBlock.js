@@ -10,7 +10,7 @@ function createFireBlock(result) {
 
     block.destroyIfIce = function(x, y){
         tileIndex = calculateTileIndexAtCoord(block.x + x, block.y + y);
-        tile = grid.layout[tileIndex];
+        tile = layout[tileIndex];
         if(tile && tile.block && tile.block.type){
             if(tile.block.type == BLOCK_ICE){
                 tile.block.destroy();

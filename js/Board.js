@@ -1,6 +1,4 @@
-const BOARD_OFFSET = -24;
-const BOARD_X = 368 + BOARD_OFFSET;
-const BOARD_Y = BOARD_OFFSET;
+const BOARD_GAP = 2;
 const BOARD_COLS = 12;
 const BOARD_ROWS = 12;
 const TILE_SIZE = 34;
@@ -9,7 +7,7 @@ const BOARD_COLOR = '#2980b9';
 const TILE_COLOR = '#3498db';
 const GOAL_COLOR = '#44db34';
 
-var grid;
+var layout;
 var boardHistory = [];
 
 function loadLevel(level)
@@ -21,7 +19,7 @@ function loadLevel(level)
         block: undefined
     }
 
-    var layout = Array(BOARD_ROWS*BOARD_COLS);
+    layout = Array(BOARD_ROWS*BOARD_COLS);
     for (var i = 0; i < layout.length; i++)
     {
         layout[i] = {...tile}; // copies tile object data into array index
@@ -74,21 +72,28 @@ function loadLevel(level)
                 break;
         }
     }
+}
 
-    grid = {
-        gap: 2,
-        x: BOARD_X,
-        y: BOARD_Y,
-        color: TILE_COLOR,
+function rowColToArrayIndex(col, row)
+{
+	return col + BOARD_COLS * row;
+}
 
-        layout: layout
+function rowColAtTileIndex(tileIndex)
+{
+    var  col  =  tileIndex % BOARD_COLS;
+    var  row  =  Math.floor(tileIndex / BOARD_COLS);
+    return {
+        row: row,
+        col: col
     }
 }
 
 function calculateTileIndexAtCoord(x, y)
 {
-	var col = Math.floor((x-grid.x) / TILE_SIZE);
-	var row = Math.floor((y-grid.y) / TILE_SIZE);
+    // console.log("Y check ", BOARD_Y, BOARD_Y);
+	var col = Math.floor(x / TILE_SIZE);
+	var row = Math.floor(y / TILE_SIZE);
 	var tileIndex = rowColToArrayIndex(col, row);
 
 	if(col >= 0 && col < BOARD_COLS &&
@@ -100,20 +105,16 @@ function calculateTileIndexAtCoord(x, y)
 	return undefined;
 }
 
-function rowColToArrayIndex(col, row)
-{
-	return col + BOARD_COLS * row;
-}
-
 function calculateCoordAtTileIndex(tileIndex)
 {
-    var  col  =  tileIndex % BOARD_COLS
+    var  col  =  tileIndex % BOARD_COLS;
     var  row  =  Math.floor(tileIndex / BOARD_COLS);
     return {
-        x: TILE_SIZE * col + BOARD_X,
-        y: TILE_SIZE * row + BOARD_Y
-    }
+        x: TILE_SIZE * col,
+        y: TILE_SIZE * row
+    };
 }
+
 
 function updateTileEdit()
 {
@@ -122,7 +123,7 @@ function updateTileEdit()
 		var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
 		var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 		if (tileIndex != undefined)
-			grid.layout[tileIndex].active = !grid.layout[tileIndex].active;
+			layout[tileIndex].active = !layout[tileIndex].active;
 	}
 	mouseButtonWasHeld = mouseButtonHeld;
 }
@@ -131,11 +132,11 @@ function convertBoardToArray()
 {
     var levelArray = Array(BOARD_ROWS*BOARD_COLS);
 
-    for (var i = 0; i < grid.layout.length; i++)
+    for (var i = 0; i < layout.length; i++)
     {
-        if (grid.layout[i].active)
+        if (layout[i].active)
         {
-            if (grid.layout[i].isGoal)
+            if (layout[i].isGoal)
             {
                 levelArray[i] = TILE_GOAL;
             }

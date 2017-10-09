@@ -1,5 +1,8 @@
 var _EDIT_MODE = false;
 var puzzleEditor;
+var anchorRow = -1;
+var anchorCol = -1;
+var mouseButtonWasHeld = false;
 
 puzzleEditor = {
 
@@ -26,7 +29,6 @@ puzzleEditor = {
 	color: 'dimGrey',
 	highlightColor: 'lightGrey',
 };
-
 
 function drawPanelWithButtons(panel)
 {
@@ -64,12 +66,10 @@ function drawPanelWithButtons(panel)
 
 	if (panel.selected != undefined)
 	{
-		var cart = isoTotwoD(mouseX-TILE_SIZE, mouseY);
-		var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+		var tileIndex = calculateTileIndexAtCoord(mouseX, mouseY);
 		if (tileIndex != undefined)
 		{
-			var cart = calculateCoordAtTileIndex(tileIndex);
-			var point = twoDToIso(cart.x, cart.y);
+			var point = calculateCoordAtTileIndex(tileIndex);
 			drawBitmapCenteredWithRotation(panel.selected.preview, point.x+32, point.y-3, 0);
 		}
 	}
@@ -104,8 +104,12 @@ function panelUpdate(panel)
 	if (mouseButtonHeld)
 	{
 		var point = { x: mouseX, y: mouseY };
-		puzzleEditor.selected.command(point);
+		if (panel.selected != undefined)
+		{
+			puzzleEditor.selected.command(point);
+		}
 	}
+	mouseButtonWasHeld = mouseButtonHeld;
 }
 
 // NOTE(Cipherpunk): I realize that there is absolutely a way to refactor all of
@@ -119,15 +123,15 @@ function setActiveTile(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
-			grid.layout[tileIndex].active = true;
-			grid.layout[tileIndex].isGoal = false;
+			layout[tileIndex].active = true;
+			layout[tileIndex].isGoal = false;
 		}
 	}
 }
@@ -138,15 +142,15 @@ function setInactiveTile(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
-			grid.layout[tileIndex].active = false;
-			grid.layout[tileIndex].isGoal = false;
+			layout[tileIndex].active = false;
+			layout[tileIndex].isGoal = false;
 		}
 	}
 }
@@ -157,14 +161,15 @@ function setGoalTile(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
-			grid.layout[tileIndex].isGoal = true;
+			layout[tileIndex].active = true;
+			layout[tileIndex].isGoal = true;
 		}
 	}
 }
@@ -175,16 +180,16 @@ function setMetalBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			var tempBlock = createMetalBlock(location)
-			grid.layout[tileIndex].active = true;
-			grid.layout[tileIndex].block = tempBlock;
+			layout[tileIndex].active = true;
+			layout[tileIndex].block = tempBlock;
 			blocks.push(tempBlock);
 		}
 	}
@@ -196,16 +201,16 @@ function setMagnetBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			var tempBlock = createMagnetBlock(location)
-			grid.layout[tileIndex].active = true;
-			grid.layout[tileIndex].block = tempBlock;
+			layout[tileIndex].active = true;
+			layout[tileIndex].block = tempBlock;
 			blocks.push(tempBlock);
 		}
 	}
@@ -217,16 +222,16 @@ function setIceBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			var tempBlock = createIceBlock(location)
-			grid.layout[tileIndex].active = true;
-			grid.layout[tileIndex].block = tempBlock;
+			layout[tileIndex].active = true;
+			layout[tileIndex].block = tempBlock;
 			blocks.push(tempBlock);
 		}
 	}
@@ -238,16 +243,16 @@ function setFireBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			var tempBlock = createFireBlock(location)
-			grid.layout[tileIndex].active = true;
-			grid.layout[tileIndex].block = tempBlock;
+			layout[tileIndex].active = true;
+			layout[tileIndex].block = tempBlock;
 			blocks.push(tempBlock);
 		}
 	}
@@ -259,16 +264,16 @@ function setQuantumBlock(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			var tempBlock = createQuantumBlock(location)
-			grid.layout[tileIndex].active = true;
-			grid.layout[tileIndex].block = tempBlock;
+			layout[tileIndex].active = true;
+			layout[tileIndex].block = tempBlock;
 			blocks.push(tempBlock);
 		}
 	}
@@ -280,20 +285,20 @@ function setCursor(point)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
-		if (grid.layout[tileIndex].block != undefined)
+		if (layout[tileIndex].block != undefined)
 		{
-			grid.layout[tileIndex].block.destroy();
+			layout[tileIndex].block.destroy();
 		}
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
 			lastTileIndex = calculateTileIndexAtCoord(cursor.x, cursor.y);
-			if (grid.layout[lastTileIndex].block != undefined)
+			if (layout[lastTileIndex].block != undefined)
 			{
-				grid.layout[lastTileIndex].block.destroy();
+				layout[lastTileIndex].block.destroy();
 			}
 			cursor.init(location.x, location.y);
-			grid.layout[tileIndex].active = true;
+			layout[tileIndex].active = true;
 		}
 	}
 }

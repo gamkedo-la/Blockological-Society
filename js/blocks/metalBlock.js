@@ -20,7 +20,7 @@ function createMetalBlock(result) {
 
     block.exertCharge = function(x, y){
         tileIndex = calculateTileIndexAtCoord(block.x + x, block.y + y);
-        tile = grid.layout[tileIndex];
+        tile = layout[tileIndex];
         if(tile && tile.block && tile.block.type){
             if(tile.block.type == BLOCK_MAGNET){
                 tile.block.group = block.group //instead of pushing, set that shit to our groupID
@@ -56,9 +56,9 @@ function createMetalBlock(result) {
         var nextY = block.y + y;
 
         var thisTileIndex = calculateTileIndexAtCoord(block.x, block.y);
-        var thisTile = grid.layout[thisTileIndex];
+        var thisTile = layout[thisTileIndex];
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
-        var tile = grid.layout[tileIndex];
+        var tile = layout[tileIndex];
         if (tile != undefined && tile.block == undefined && tile.active) {
             //ctrl.queuePush(x, y); //normally we would queue up here
             //but since this push can't happen until all blocks can be pushed

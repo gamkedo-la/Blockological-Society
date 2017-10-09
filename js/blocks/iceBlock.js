@@ -9,7 +9,7 @@ function createIceBlock(result) {
         var tile;
         for(var isDone = false; isDone == false;  count++){
         	tileIndex = calculateTileIndexAtCoord(nextX, nextY);
-        	tile = grid.layout[tileIndex];
+        	tile = layout[tileIndex];
         	if (tile != undefined && tile.block == undefined && tile.active) {
         		nextX += x;
         		nextY += y;

@@ -18,9 +18,9 @@ function createBlockObject(x, y, color, sprite){
         var nextY = ctrl.y + y;
 
         var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
-        var thisTile = grid.layout[thisTileIndex];
+        var thisTile = layout[thisTileIndex];
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
-        var tile = grid.layout[tileIndex];
+        var tile = layout[tileIndex];
         if (tile != undefined && tile.block == undefined && tile.active) {
             ctrl.queuePush(x, y);
             return true; // can move
@@ -35,9 +35,13 @@ function createBlockObject(x, y, color, sprite){
         if(nextX == cursor.x && nextY == cursor.y){
             return;
         }
-        if((ctrl.x - 4)  % TILE_SIZE != 0 || (ctrl.y - 10) % TILE_SIZE != 0){
-            return;
-        }
+
+        /*
+            if((ctrl.x - 4)  % TILE_SIZE != 0 || (ctrl.y - 10) % TILE_SIZE != 0){
+                return;
+            } temporarily removed this because it was preventing blocks from moving
+        */
+
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;
@@ -45,7 +49,7 @@ function createBlockObject(x, y, color, sprite){
 
     ctrl.destroy = function(){
         var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
-        var thisTile = grid.layout[thisTileIndex];
+        var thisTile = layout[thisTileIndex];
         thisTile.block = undefined;
         blocks
         var foundHere = blocks.indexOf(ctrl);
@@ -64,7 +68,7 @@ function pushBlock(x, y, offsetX, offsetY)
     var block, tile, nextTile;
 
     var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
-    var tile = grid.layout[tileIndex];
+    var tile = layout[tileIndex];
     if (tile != undefined && tile.block != undefined && tile.block.type)
     {
         var block = tile.block;
@@ -110,13 +114,13 @@ function moveTowardsTarget(object)
         object.y = object.targetY;
     }
     var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
-    var tile = grid.layout[tileIndex];
+    var tile = layout[tileIndex];
 
     if(object.x != startPos.x || object.y != startPos.y){
         tile.block = undefined;
 
         tileIndex = calculateTileIndexAtCoord(object.x, object.y);
-        tile = grid.layout[tileIndex];
+        tile = layout[tileIndex];
         tile.block = object;
     }
     if(tile.block && tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.

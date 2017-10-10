@@ -36,11 +36,11 @@ function createBlockObject(x, y, color, sprite){
             return;
         }
 
-        /*
-            if((ctrl.x - 4)  % TILE_SIZE != 0 || (ctrl.y - 10) % TILE_SIZE != 0){
+
+        if((ctrl.x - 4)  % TILE_SIZE != 0 || (ctrl.y - 10) % TILE_SIZE != 0){
             return;
-            } temporarily removed this because it was preventing blocks from moving
-        */
+        }
+
 
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         ctrl.targetX = nextX;
@@ -123,9 +123,12 @@ function moveTowardsTarget(object)
         tile = layout[tileIndex];
         tile.block = object;
     }
-    if(tile.block && tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
-        tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
-    }
+    /*
+        if(tile != undefined && tile.block != undefined &&
+           tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
+            tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
+        }
+    */
 }
 
 function setMoveTarget(object, x, y)

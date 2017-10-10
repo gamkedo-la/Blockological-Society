@@ -97,8 +97,8 @@ function rowColAtTileIndex(tileIndex)
 
 function calculateTileIndexAtCoord(x, y)
 {
-	var col = Math.floor(x / TILE_SIZE);
-	var row = Math.floor(y / TILE_SIZE);
+	var col = Math.floor((x - BOARD_X) / TILE_SIZE);
+	var row = Math.floor((y) / TILE_SIZE);
 	var tileIndex = rowColToArrayIndex(col, row);
 
 	if(col >= 0 && col < BOARD_COLS &&
@@ -115,7 +115,7 @@ function calculateCoordAtTileIndex(tileIndex)
     var  col  =  tileIndex % BOARD_COLS;
     var  row  =  Math.floor(tileIndex / BOARD_COLS);
     return {
-        x: TILE_SIZE * col,
+        x: TILE_SIZE * col + BOARD_X,
         y: TILE_SIZE * row
     };
 }

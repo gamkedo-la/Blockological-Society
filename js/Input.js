@@ -85,6 +85,7 @@ function mousePosHandler(evt)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	var point = calculateCoordAtTileIndex(tileIndex);
 	isoMousePos = twoDToIso(point.x, point.y);
+	drawText(mousePos.x + " " + mousePos.y, mousePos.x, mousePos.y, '15px consolas', 'yellow');
 }
 
 function mousePressed(evt)

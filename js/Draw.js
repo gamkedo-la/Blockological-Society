@@ -31,7 +31,7 @@ function drawSortedObjects()
 	for (var i = 0; i < blocks.length; i++)
 	{
 		var block = blocks[i];
-		var iso = twoDToIso(block.x+BOARD_X, block.y);
+		var iso = twoDToIso(block.x, block.y);
 		block.yLevel = iso.y;
 	}
 
@@ -42,13 +42,13 @@ function drawSortedObjects()
 	{
 		if (blocks[i] == cursor)
 		{
-			var iso = twoDToIso(cursor.x+BOARD_X, cursor.y);
+			var iso = twoDToIso(cursor.x, cursor.y);
 			drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
 		}
 		else
 		{
 			var block = blocks[i];
-			var iso = twoDToIso(block.x+BOARD_X, block.y);
+			var iso = twoDToIso(block.x, block.y);
 			drawBitmapCenteredWithRotation(block.blockSprite, iso.x+TILE_SIZE-3, iso.y-3, 0);
 		}
 	}

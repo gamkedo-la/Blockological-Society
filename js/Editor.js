@@ -66,11 +66,9 @@ function drawPanelWithButtons(panel)
 
 	if (panel.selected != undefined)
 	{
-		var tileIndex = calculateTileIndexAtCoord(mouseX, mouseY);
-		if (tileIndex != undefined)
+		if (isoMousePos != undefined)
 		{
-			var point = calculateCoordAtTileIndex(tileIndex);
-			drawBitmapCenteredWithRotation(panel.selected.preview, point.x+32, point.y-3, 0);
+			drawBitmapCenteredWithRotation(panel.selected.preview, isoMousePos.x+32, isoMousePos.y-3, 0);
 		}
 	}
 }
@@ -85,8 +83,8 @@ function panelUpdate(panel)
 		var button = panel.button[i];
 		var color = panel.color;
 
-		if (mouseX > x && mouseX < x + panel.width &&
-			mouseY > y && mouseY < y + panel.offsetY)
+		if (mousePos.x > x && mousePos.x < x + panel.width &&
+			mousePos.y > y && mousePos.y < y + panel.offsetY)
 		{
 			if (mouseButtonHeld)
 			{
@@ -103,7 +101,7 @@ function panelUpdate(panel)
 
 	if (mouseButtonHeld)
 	{
-		var point = { x: mouseX, y: mouseY };
+		var point = { x: mousePos.x, y: mousePos.y };
 		if (panel.selected != undefined)
 		{
 			puzzleEditor.selected.command(point);
@@ -176,7 +174,7 @@ function setGoalTile(point)
 
 function setMetalBlock(point)
 {
-	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
@@ -197,7 +195,7 @@ function setMetalBlock(point)
 
 function setMagnetBlock(point)
 {
-	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
@@ -218,7 +216,7 @@ function setMagnetBlock(point)
 
 function setIceBlock(point)
 {
-	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
@@ -239,7 +237,7 @@ function setIceBlock(point)
 
 function setFireBlock(point)
 {
-	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
@@ -260,7 +258,7 @@ function setFireBlock(point)
 
 function setQuantumBlock(point)
 {
-	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
@@ -281,7 +279,7 @@ function setQuantumBlock(point)
 
 function setCursor(point)
 {
-	var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
+	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{

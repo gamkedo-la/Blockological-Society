@@ -38,7 +38,7 @@ function createBlockObject(x, y, color, sprite){
 
         /*
             if((ctrl.x - 4)  % TILE_SIZE != 0 || (ctrl.y - 10) % TILE_SIZE != 0){
-                return;
+            return;
             } temporarily removed this because it was preventing blocks from moving
         */
 

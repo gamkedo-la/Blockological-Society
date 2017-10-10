@@ -15,8 +15,8 @@ const KEY_NUM_0 = 96;
 const KEY_NUM_1 = 97;
 const KEY_NUM_2 = 98;
 
-var mouseX;
-var mouseY;
+var mousePos = -1;
+var isoMousePos = -1;
 var mouseButtonHeld = false;
 var mouseButtonWasHeld = false;
 var undoKeyHeld = false;
@@ -80,9 +80,11 @@ function keyEventHandler(key, state)
 
 function mousePosHandler(evt)
 {
-	var mousePos = calculateMousePos(evt);
-	mouseX = mousePos.x;
-	mouseY = mousePos.y;
+	mousePos = calculateMousePos(evt);
+	var cart = isoTotwoD(mousePos.x-TILE_SIZE, mousePos.y);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	var point = calculateCoordAtTileIndex(tileIndex);
+	isoMousePos = twoDToIso(point.x, point.y);
 }
 
 function mousePressed(evt)

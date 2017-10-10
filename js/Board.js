@@ -1,3 +1,4 @@
+const BOARD_X = 366;
 const BOARD_GAP = 2;
 const BOARD_COLS = 12;
 const BOARD_ROWS = 12;
@@ -20,18 +21,21 @@ function loadLevel(level)
     }
 
     layout = Array(BOARD_ROWS*BOARD_COLS);
+    var levelDataIndex = 0;
     for (var i = 0; i < layout.length; i++)
     {
         layout[i] = {...tile}; // copies tile object data into array index
-        switch (level[i])
+        switch (level[levelDataIndex])
         {
+            case TILE_OFF:
+                break;
             case TILE_EMPTY:
-            layout[i].active = true;
-            break;
+                layout[i].active = true;
+                break;
             case TILE_GOAL:
-            layout[i].active = true;
-            layout[i].isGoal = true;
-            break;
+                layout[i].active = true;
+                layout[i].isGoal = true;
+                break;
             case CURSOR:
                 var result = calculateCoordAtTileIndex(i);
                 cursor.init(result.x, result.y);
@@ -69,8 +73,10 @@ function loadLevel(level)
                 blocks.push(layout[i].block);
                 break;
             default:
+                i--;
                 break;
         }
+        levelDataIndex++;
     }
 }
 
@@ -91,7 +97,6 @@ function rowColAtTileIndex(tileIndex)
 
 function calculateTileIndexAtCoord(x, y)
 {
-    // console.log("Y check ", BOARD_Y, BOARD_Y);
 	var col = Math.floor(x / TILE_SIZE);
 	var row = Math.floor(y / TILE_SIZE);
 	var tileIndex = rowColToArrayIndex(col, row);
@@ -113,19 +118,6 @@ function calculateCoordAtTileIndex(tileIndex)
         x: TILE_SIZE * col,
         y: TILE_SIZE * row
     };
-}
-
-
-function updateTileEdit()
-{
-    if (mouseButtonHeld && !mouseButtonWasHeld)
-	{
-		var cart = isoTotwoD(mouseX - TILE_SIZE, mouseY);
-		var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-		if (tileIndex != undefined)
-			layout[tileIndex].active = !layout[tileIndex].active;
-	}
-	mouseButtonWasHeld = mouseButtonHeld;
 }
 
 function convertBoardToArray()

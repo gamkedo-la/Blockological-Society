@@ -1,5 +1,3 @@
-const OFFSET_X = 400-TILE_SIZE; // only used for isometric draws
-
 function drawBackground()
 {
     colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
@@ -7,7 +5,7 @@ function drawBackground()
 
 function drawBoard()
 {
-    var x = OFFSET_X;
+    var x = BOARD_X;
     var y = 0;
     for (var row = 0; row < BOARD_ROWS; row++)
     {
@@ -23,7 +21,7 @@ function drawBoard()
             }
             x += TILE_SIZE;
         }
-        x = OFFSET_X;
+        x = BOARD_X;
         y += TILE_SIZE;
     }
 }
@@ -33,7 +31,7 @@ function drawSortedObjects()
 	for (var i = 0; i < blocks.length; i++)
 	{
 		var block = blocks[i];
-		var iso = twoDToIso(block.x+OFFSET_X, block.y);
+		var iso = twoDToIso(block.x+BOARD_X, block.y);
 		block.yLevel = iso.y;
 	}
 
@@ -44,13 +42,13 @@ function drawSortedObjects()
 	{
 		if (blocks[i] == cursor)
 		{
-			var iso = twoDToIso(cursor.x+OFFSET_X, cursor.y);
+			var iso = twoDToIso(cursor.x+BOARD_X, cursor.y);
 			drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
 		}
 		else
 		{
 			var block = blocks[i];
-			var iso = twoDToIso(block.x+OFFSET_X, block.y);
+			var iso = twoDToIso(block.x+BOARD_X, block.y);
 			drawBitmapCenteredWithRotation(block.blockSprite, iso.x+TILE_SIZE-3, iso.y-3, 0);
 		}
 	}

@@ -17,7 +17,11 @@ function createMetalBlock(result) {
             block.group = block.groupId
         }
     }
-
+    block.charge = function(groupId){
+        block.group = groupId //groupId is artifact from quantum block. currently not used? 
+        block.charged = true
+        block.blockSprite = blockYellowPic
+    }
     block.exertCharge = function(x, y){
         tileIndex = calculateTileIndexAtCoord(block.x + x, block.y + y);
         tile = layout[tileIndex];
@@ -30,9 +34,25 @@ function createMetalBlock(result) {
         }
     }
 
-    block.tryPush = function(x, y){
+    block.tryPush = function(x, y, isMagnetPushing){
         var magnetBros = []
         var canMove = true
+        if(block.charged && !isMagnetPushing){
+            return false;
+        }
+
+        var thisTileIndex = calculateTileIndexAtCoord(block.x, block.y);
+        var thisTile = layout[thisTileIndex];
+        var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
+        var tile = layout[tileIndex];
+        if (tile != undefined && tile.block == undefined && tile.active) {
+            block.queuePush(x, y);
+            return true; // can move
+        } else {
+            return false
+        }
+        //old magnet behavior 
+        /*
         for(var i in blocks){ //check all dem other blocks.
             if(blocks[i].group && blocks[i].group == block.group && typeof blocks[i].canPush === "function"){ //gotta be a quantum of the saaame color
                 canMove = blocks[i].canPush(x, y); //this is the original tryPush, moved into it's own function so quantum stuff can happen first
@@ -48,7 +68,7 @@ function createMetalBlock(result) {
             magnetBros[i].queuePush(x, y);
         }
         return block.canPush();
-
+        */
     }
 
     block.canPush = function(x, y){

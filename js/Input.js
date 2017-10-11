@@ -14,6 +14,7 @@ const KEY_F5 = 116;
 const KEY_NUM_0 = 96;
 const KEY_NUM_1 = 97;
 const KEY_NUM_2 = 98;
+const KEY_NUM_3 = 99;
 
 var mousePos = -1;
 var isoMousePos = -1;
@@ -43,6 +44,9 @@ function keyPressed(evt)
 			break;
 		case KEY_NUM_2:
 			loadLevel(emptyLevel);
+			break;
+		case KEY_NUM_2:
+			loadLevel(magnetTestLevel);
 			break;
 		default:
 			break;

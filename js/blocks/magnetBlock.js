@@ -15,17 +15,38 @@ function createMagnetBlock(result) {
         tile = layout[tileIndex];
         if(tile && tile.block && tile.block.type){
             if(tile.block.type == BLOCK_MAGNET){
-                tile.block.tryPush(x, y);
+                tile.block.tryPush(x, y, "magnetBreaaaak");
             } else if (tile.block.type == BLOCK_METAL){
-                tile.block.group = block.groupId
-                tile.block.charged = true
+                
+                tile.block.charge(block.groupId)
+                block.charged = true;
             }
         }
     }
 
-    block.tryPush = function(x, y){
+    block.tryPush = function(x, y, isMagnetPushing){
         var magnetBros = []
         var canMove = true
+        var nextX = block.x + x;
+        var nextY = block.y + y;
+        //if charged, no moves
+        if(block.charged && !isMagnetPushing){
+            return false;
+        }
+
+        var thisTileIndex = calculateTileIndexAtCoord(block.x, block.y);
+        var thisTile = layout[thisTileIndex];
+        var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
+        var tile = layout[tileIndex];
+        if (tile != undefined && tile.block == undefined && tile.active) {
+            block.queuePush(x, y);
+            return true; // can move
+        } else {
+            return false
+        }
+
+        //This code is for the old magnet behavior
+        /*
         for(var i in blocks){ //check all dem other blocks.
             if(blocks[i].group && blocks[i].group == block.group && typeof blocks[i].canPush === "function"){ //gotta be a quantum of the saaame color
                 canMove = blocks[i].canPush(x, y); //this is the original tryPush, moved into it's own function so quantum stuff can happen first
@@ -42,9 +63,10 @@ function createMagnetBlock(result) {
             magnetBros[i].queuePush(x, y);
         }
         return block.canPush();
+        */
 
     }
-
+        
     block.canPush = function(x, y){
         var nextX = block.x + x;
         var nextY = block.y + y;

@@ -1,5 +1,5 @@
-function createMagnetBlock(result) {
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockMagnetPic);
+function createMagnetBlock(coords) {
+	var block = createBlockObject(coords.x, coords.y, '#f1c40f', blockMagnetPic);
     block.type = BLOCK_MAGNET;
     block.groupId = Math.random() * 1000000000 //basically quantum color
     block.group = block.groupId

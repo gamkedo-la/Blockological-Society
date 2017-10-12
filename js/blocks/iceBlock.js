@@ -1,5 +1,5 @@
-function createIceBlock(result) {
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockIcePic);
+function createIceBlock(coords) {
+	var block = createBlockObject(coords.x, coords.y, '#f1c40f', blockIcePic);
 	block.type = BLOCK_ICE;
 	block.queuePush = function(x, y){
         var nextX = block.x + x+ x;

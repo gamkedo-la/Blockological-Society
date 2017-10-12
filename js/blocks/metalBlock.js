@@ -1,5 +1,5 @@
-function createMetalBlock(result) {
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockMetalPic);
+function createMetalBlock(coords) {
+	var block = createBlockObject(coords.x, coords.y, '#f1c40f', blockMetalPic);
     block.type = BLOCK_METAL;
     block.charged = false;
     block.groupId = Math.random() * 1000000000 //basically quantum color

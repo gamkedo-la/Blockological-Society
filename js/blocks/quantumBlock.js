@@ -1,6 +1,6 @@
-function createQuantumBlock(result, color) {
+function createQuantumBlock(coords, color) {
     //I guess we're using the color field to tie these blocsk together.
-	var block = createBlockObject(result.x, result.y, '#f1c40f', blockQuantumPic);
+	var block = createBlockObject(coords.x, coords.y, '#f1c40f', blockQuantumPic);
     block.type = BLOCK_QUANTUM;
     block.color = color? color : '#f1c40f';
 

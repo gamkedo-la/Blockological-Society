@@ -172,9 +172,11 @@ function setGoalTile(point)
 	}
 }
 
-function setMetalBlock(point)
+
+
+function setBlockAt(point,blockFunction)
 {
-	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
+	var cart = isoTotwoD(point.x - TILE_SIZE, point.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	if (tileIndex != undefined && puzzleEditor.selected != undefined)
 	{
@@ -185,96 +187,37 @@ function setMetalBlock(point)
 		var location = calculateCoordAtTileIndex(tileIndex);
 		if (cursor.x != location.x || cursor.y != location.y)
 		{
-			var tempBlock = createMetalBlock(location)
+			var tempBlock = blockFunction(location);
 			layout[tileIndex].active = true;
 			layout[tileIndex].block = tempBlock;
 			blocks.push(tempBlock);
 		}
 	}
+}
+
+function setMetalBlock(point)
+{
+	setBlockAt(point, createMetalBlock);
 }
 
 function setMagnetBlock(point)
 {
-	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
-	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-	if (tileIndex != undefined && puzzleEditor.selected != undefined)
-	{
-		if (layout[tileIndex].block != undefined)
-		{
-			layout[tileIndex].block.destroy();
-		}
-		var location = calculateCoordAtTileIndex(tileIndex);
-		if (cursor.x != location.x || cursor.y != location.y)
-		{
-			var tempBlock = createMagnetBlock(location)
-			layout[tileIndex].active = true;
-			layout[tileIndex].block = tempBlock;
-			blocks.push(tempBlock);
-		}
-	}
+	setBlockAt(point, createMagnetBlock);
 }
 
 function setIceBlock(point)
 {
-	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
-	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-	if (tileIndex != undefined && puzzleEditor.selected != undefined)
-	{
-		if (layout[tileIndex].block != undefined)
-		{
-			layout[tileIndex].block.destroy();
-		}
-		var location = calculateCoordAtTileIndex(tileIndex);
-		if (cursor.x != location.x || cursor.y != location.y)
-		{
-			var tempBlock = createIceBlock(location)
-			layout[tileIndex].active = true;
-			layout[tileIndex].block = tempBlock;
-			blocks.push(tempBlock);
-		}
-	}
+	setBlockAt(point, createIceBlock);
 }
 
 function setFireBlock(point)
 {
-	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
-	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-	if (tileIndex != undefined && puzzleEditor.selected != undefined)
-	{
-		if (layout[tileIndex].block != undefined)
-		{
-			layout[tileIndex].block.destroy();
-		}
-		var location = calculateCoordAtTileIndex(tileIndex);
-		if (cursor.x != location.x || cursor.y != location.y)
-		{
-			var tempBlock = createFireBlock(location)
-			layout[tileIndex].active = true;
-			layout[tileIndex].block = tempBlock;
-			blocks.push(tempBlock);
-		}
-	}
+	setBlockAt(point, createFireBlock);
 }
 
 function setQuantumBlock(point)
 {
-	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
-	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-	if (tileIndex != undefined && puzzleEditor.selected != undefined)
-	{
-		if (layout[tileIndex].block != undefined)
-		{
-			layout[tileIndex].block.destroy();
-		}
-		var location = calculateCoordAtTileIndex(tileIndex);
-		if (cursor.x != location.x || cursor.y != location.y)
-		{
-			var tempBlock = createQuantumBlock(location)
-			layout[tileIndex].active = true;
-			layout[tileIndex].block = tempBlock;
-			blocks.push(tempBlock);
-		}
-	}
+	setBlockAt(point, createQuantumBlock);
 }
 
 function setCursor(point)

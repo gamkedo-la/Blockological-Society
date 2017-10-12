@@ -14,7 +14,7 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
-	loadLevel(magnetTestLevel);
+	loadLevel(quantumTunnel);
 
 	setInterval(function()
 	{

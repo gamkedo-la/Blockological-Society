@@ -61,5 +61,10 @@ function updatePlayer()
 			undoMove();
 			moveTimer = MOVE_DELAY/2;
 		}
+		else if (restartKeyHeld)
+		{
+			restart();
+			moveTimer = MOVE_DELAY/2;
+		}
     }
 }

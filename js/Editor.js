@@ -115,6 +115,32 @@ function panelUpdate(panel)
 	mouseButtonWasHeld = mouseButtonHeld;
 }
 
+function editorKeyHandler(evt)
+{
+	if (!_EDIT_MODE)
+	{
+		return false;
+	}
+
+	switch (evt.keyCode)
+	{
+		case KEY_P:
+			exportPuzzle();
+			break;
+		case KEY_NUM_1:
+			loadLevel(testLevel);
+			break;
+		case KEY_NUM_2:
+			loadLevel(emptyLevel);
+			break;
+		case KEY_NUM_2:
+			loadLevel(magnetTestLevel);
+			break;
+		default:
+			break;
+	}
+}
+
 // NOTE(Cipherpunk): I realize that there is absolutely a way to refactor all of
 // these functions below. I do not currently understand how best to do that and I
 // decided to get a hacked solution working before I go back and try to make it better.

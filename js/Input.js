@@ -10,6 +10,9 @@ const KEY_SPACEBAR = 32;
 const KEY_TILDE = 192;
 
 const KEY_P = 80;
+const KEY_R = 82;
+const KEY_Y = 89;
+const KEY_Z = 90;
 
 const KEY_NUM_0 = 96;
 const KEY_NUM_1 = 97;
@@ -21,6 +24,8 @@ var isoMousePos = -1;
 var mouseButtonHeld = false;
 var mouseButtonWasHeld = false;
 var undoKeyHeld = false;
+var redoKeyHeld = false;
+var restartKeyHeld = false;
 var jumpKeyHeld = false;
 var leftKeyHeld = false;
 var upKeyHeld = false;
@@ -36,21 +41,10 @@ function keyPressed(evt)
 		case KEY_TILDE:
 			_EDIT_MODE = !_EDIT_MODE;
 			break;
-		case KEY_P:
-			exportPuzzle();
-			break;
-		case KEY_NUM_1:
-			loadLevel(testLevel);
-			break;
-		case KEY_NUM_2:
-			loadLevel(emptyLevel);
-			break;
-		case KEY_NUM_2:
-			loadLevel(magnetTestLevel);
-			break;
 		default:
 			break;
 	}
+	editorKeyHandler(evt);
 	evt.preventDefault();
 }
 
@@ -63,8 +57,11 @@ function keyEventHandler(key, state)
 {
 	switch (key)
 	{
-		case KEY_ESCAPE:
+		case KEY_Z:
 			undoKeyHeld = state;
+			break;
+		case KEY_R:
+			restartKeyHeld = state;
 			break;
 		case KEY_ARROW_LEFT:
 			leftKeyHeld = state;

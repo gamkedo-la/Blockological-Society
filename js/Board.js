@@ -10,6 +10,7 @@ const GOAL_COLOR = '#44db34';
 
 var layout;
 var boardHistory = [];
+var currentIndex = 0;
 
 function loadLevel(level)
 {
@@ -154,6 +155,11 @@ function convertBoardToArray()
 
 function saveBoard()
 {
+    currentIndex++;
+    if (currentIndex != boardHistory.length - 1)
+    {
+        boardHistory = boardHistory.slice(0, currentIndex);
+    }
 	var boardState = convertBoardToArray();
 	boardHistory.push(boardState);
 }
@@ -165,7 +171,23 @@ function undoMove()
 		return false;
 	}
 	blocks = [];
-	loadLevel(boardHistory[boardHistory.length-1]);
-	boardHistory.splice(-1, 1);
+    if (currentIndex > 0)
+    {
+        currentIndex--;
+    }
+	loadLevel(boardHistory[currentIndex]);
+	// boardHistory.splice(-1, 1);
 	return true;
+}
+
+function redoMove()
+{
+    return null;
+}
+
+function restart()
+{
+    currentIndex++;
+    loadLevel(boardHistory[0]);
+    boardHistory.push(boardHistory[0]);
 }

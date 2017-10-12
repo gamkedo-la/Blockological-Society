@@ -46,31 +46,37 @@ function loadLevel(level)
             break;
             case BLOCK_MAGNET:
                 var location = calculateCoordAtTileIndex(i);
-                layout[i].block = createMagnetBlock(location)
+                layout[i].block = createMagnetBlock(location);
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;
             case BLOCK_ICE:
                 var location = calculateCoordAtTileIndex(i);
-                layout[i].block = createIceBlock(location)
+                layout[i].block = createIceBlock(location);
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;
             case BLOCK_FIRE:
                 var location = calculateCoordAtTileIndex(i);
-                layout[i].block = createFireBlock(location)
+                layout[i].block = createFireBlock(location);
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;
             case BLOCK_QUANTUM:
                 var location = calculateCoordAtTileIndex(i);
-                layout[i].block = createQuantumBlock(location)
+                layout[i].block = createQuantumBlock(location);
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;
             case BLOCK_METAL:
                 var location = calculateCoordAtTileIndex(i);
-                layout[i].block = createMetalBlock(location)
+                layout[i].block = createMetalBlock(location);
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
+            case BLOCK_FLUFFY:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createFluffyBlock(location);
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;

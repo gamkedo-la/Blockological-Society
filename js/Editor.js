@@ -16,6 +16,7 @@ puzzleEditor = {
 		{ image: editorBlockIcePic, preview: blockIcePic, command: setIceBlock },
 		{ image: editorBlockFirePic, preview: blockFirePic, command: setFireBlock },
 		{ image: editorBlockQuantumPic, preview: blockQuantumPic, command: setQuantumBlock },
+		{ image: editorBlockFluffyPic, preview: blockFluffyPic, command: setFluffyBlock },
 	],
 
 	selected: undefined,
@@ -148,11 +149,6 @@ function editorKeyHandler(evt)
 	}
 }
 
-// NOTE(Cipherpunk): I realize that there is absolutely a way to refactor all of
-// these functions below. I do not currently understand how best to do that and I
-// decided to get a hacked solution working before I go back and try to make it better.
-// Thanks in advance for understanding, future reader and baffled programmer.
-
 function setActiveTile(point)
 {
 	var cart = isoTotwoD(point.x - TILE_SIZE, point.y);
@@ -210,7 +206,29 @@ function setGoalTile(point)
 	}
 }
 
-
+function setCursor(point)
+{
+	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
+	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
+	if (tileIndex != undefined && puzzleEditor.selected != undefined)
+	{
+		if (layout[tileIndex].block != undefined)
+		{
+			layout[tileIndex].block.destroy();
+		}
+		var location = calculateCoordAtTileIndex(tileIndex);
+		if (cursor.x != location.x || cursor.y != location.y)
+		{
+			lastTileIndex = calculateTileIndexAtCoord(cursor.x, cursor.y);
+			if (layout[lastTileIndex].block != undefined)
+			{
+				layout[lastTileIndex].block.destroy();
+			}
+			cursor.init(location.x, location.y);
+			layout[tileIndex].active = true;
+		}
+	}
+}
 
 function setBlockAt(point,blockFunction)
 {
@@ -258,26 +276,7 @@ function setQuantumBlock(point)
 	setBlockAt(point, createQuantumBlock);
 }
 
-function setCursor(point)
+function setFluffyBlock(point)
 {
-	var cart = isoTotwoD(mousePos.x - TILE_SIZE, mousePos.y);
-	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
-	if (tileIndex != undefined && puzzleEditor.selected != undefined)
-	{
-		if (layout[tileIndex].block != undefined)
-		{
-			layout[tileIndex].block.destroy();
-		}
-		var location = calculateCoordAtTileIndex(tileIndex);
-		if (cursor.x != location.x || cursor.y != location.y)
-		{
-			lastTileIndex = calculateTileIndexAtCoord(cursor.x, cursor.y);
-			if (layout[lastTileIndex].block != undefined)
-			{
-				layout[lastTileIndex].block.destroy();
-			}
-			cursor.init(location.x, location.y);
-			layout[tileIndex].active = true;
-		}
-	}
+	setBlockAt(point, createFluffyBlock);
 }

@@ -4,9 +4,10 @@ const TILE_EMPTY = ".";
 const TILE_GOAL = "g";
 const BLOCK_MAGNET = "m";
 const BLOCK_ICE = "i";
-const BLOCK_FIRE = "f";
+const BLOCK_FIRE = "r";
 const BLOCK_METAL = "t";
 const BLOCK_QUANTUM = "q";
+const BLOCK_FLUFFY = "f";
 
 var emptyLevel =
 `
@@ -71,6 +72,22 @@ var quantumHard =
 ...........#
 .....#.....#
 ###....#..##
+`;
+
+var bedSpread =
+`
+############
+############
+############
+###.g.g.####
+###gfffg####
+###.f.f.####
+###gfffg####
+###.gpg.####
+############
+############
+############
+############
 `;
 
 // hotkey is F5

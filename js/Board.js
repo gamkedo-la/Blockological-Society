@@ -155,12 +155,24 @@ function convertBoardToArray()
 
 function saveBoard()
 {
+    var boardState = convertBoardToArray();
+
+    if (boardHistory.length > 0)
+    {
+        var boardString = convertLevelDataToString(boardState);
+        var lastBoardString = convertLevelDataToString(boardHistory[boardHistory.length-1]);
+
+        if (boardString == lastBoardString)
+        {
+            return false;
+        }
+    }
+
     currentIndex++;
     if (currentIndex != boardHistory.length - 1)
     {
         boardHistory = boardHistory.slice(0, currentIndex);
     }
-	var boardState = convertBoardToArray();
 	boardHistory.push(boardState);
 }
 
@@ -176,18 +188,16 @@ function undoMove()
         currentIndex--;
     }
 	loadLevel(boardHistory[currentIndex]);
-	// boardHistory.splice(-1, 1);
 	return true;
 }
 
 function redoMove()
 {
-    currentIndex++;
-    if (currentIndex >= boardHistory.length)
+    if (currentIndex + 1 >= boardHistory.length)
     {
-        currentIndex--;
         return false;
     }
+    currentIndex++;
     loadLevel(boardHistory[currentIndex]);
 }
 

@@ -76,17 +76,20 @@ var quantumHard =
 // hotkey is F5
 function exportPuzzle()
 {
-    var levelData, exportString;
-
-    levelData = convertBoardToArray();
-
-    exportString = "`\n";
-    for (var row = 0; row < BOARD_ROWS; row++)
-    {
-        exportString += levelData.slice(BOARD_COLS*row, BOARD_COLS*row+BOARD_COLS) + ",\n";
-    }
-	exportString = exportString.replace(/,/g, '');
-    exportString += "`;";
-
+    var levelData = convertBoardToArray();
+	var exportString = convertLevelDataToString(levelData);
     window.prompt("Copy to clipboard and paste into Puzzles.js", exportString);
+}
+
+function convertLevelDataToString(levelData)
+{
+	exportString = "`\n";
+	for (var row = 0; row < BOARD_ROWS; row++)
+	{
+		exportString += levelData.slice(BOARD_COLS*row, BOARD_COLS*row+BOARD_COLS) + ",\n";
+	}
+	exportString = exportString.replace(/,/g, '');
+	exportString += "`;";
+
+	return exportString;
 }

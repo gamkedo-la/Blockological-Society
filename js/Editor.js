@@ -99,13 +99,16 @@ function panelUpdate(panel)
 		}
 	}
 
-	if (undoKeyHeld)
+	moveTimer -= TIME_PER_TICK;
+	if (undoKeyHeld && moveTimer <=0)
 	{
 		undoMove();
+		moveTimer = MOVE_DELAY/2;
 	}
-	else if (redoKeyHeld)
+	else if (redoKeyHeld && moveTimer <=0)
 	{
 		redoMove();
+		moveTimer = MOVE_DELAY/2;
 	}
 	else if (mouseButtonHeld)
 	{

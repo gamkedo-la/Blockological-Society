@@ -2,7 +2,6 @@ var _EDIT_MODE = false;
 var puzzleEditor;
 var anchorRow = -1;
 var anchorCol = -1;
-var mouseButtonWasHeld = false;
 
 puzzleEditor = {
 
@@ -120,7 +119,6 @@ function panelUpdate(panel)
 			puzzleEditor.selected.command(point);
 		}
 	}
-	mouseButtonWasHeld = mouseButtonHeld;
 }
 
 function editorKeyHandler(evt)

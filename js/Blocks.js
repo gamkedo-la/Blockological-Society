@@ -18,8 +18,8 @@ function createBlockObject(x, y, color, sprite){
         var nextX = ctrl.x + x;
         var nextY = ctrl.y + y;
 
-        var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
-        var thisTile = layout[thisTileIndex];
+        // var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
+        // var thisTile = layout[thisTileIndex];
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         var tile = layout[tileIndex];
         if (tile != undefined && tile.block == undefined && tile.active) {
@@ -42,8 +42,11 @@ function createBlockObject(x, y, color, sprite){
             return;
         }
 
+        var tileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
+        var nextTileIndex = calculateTileIndexAtCoord(nextX, nextY);
+        layout[tileIndex].block = undefined;
+        layout[nextTileIndex].block = ctrl;
 
-        var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;
     }
@@ -52,7 +55,6 @@ function createBlockObject(x, y, color, sprite){
         var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
         var thisTile = layout[thisTileIndex];
         thisTile.block = undefined;
-        blocks
         var foundHere = blocks.indexOf(ctrl);
         if (foundHere > -1) {
             blocks.splice(foundHere, 1);
@@ -66,11 +68,10 @@ function pushBlock(x, y, offsetX, offsetY)
 {
     var nextX = x + offsetX;
     var nextY = y + offsetY;
-    var block, tile, nextTile;
 
     var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
     var tile = layout[tileIndex];
-    if (tile != undefined && tile.block != undefined && tile.block.type)
+    if (tile != undefined && tile.block != undefined)
     {
         var block = tile.block;
         return block.tryPush(offsetX, offsetY)
@@ -89,6 +90,7 @@ function moveTowardsTarget(object)
         x: object.x,
         y: object.y
     }
+
     if (object.x < object.targetX)
     {
         object.x += object.speed;
@@ -114,6 +116,7 @@ function moveTowardsTarget(object)
     {
         object.y = object.targetY;
     }
+
     var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
     var tile = layout[tileIndex];
 
@@ -124,12 +127,12 @@ function moveTowardsTarget(object)
         tile = layout[tileIndex];
         tile.block = object;
     }
-    
+
     if(tile != undefined && tile.block != undefined &&
        tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
         tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
     }
-    
+
 }
 
 function setMoveTarget(object, x, y)

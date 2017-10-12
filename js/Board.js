@@ -182,7 +182,13 @@ function undoMove()
 
 function redoMove()
 {
-    return null;
+    currentIndex++;
+    if (currentIndex >= boardHistory.length)
+    {
+        currentIndex--;
+        return false;
+    }
+    loadLevel(boardHistory[currentIndex]);
 }
 
 function restart()

@@ -103,6 +103,10 @@ function panelUpdate(panel)
 	{
 		undoMove();
 	}
+	else if (redoKeyHeld)
+	{
+		redoMove();
+	}
 	else if (mouseButtonHeld)
 	{
 		var point = { x: mousePos.x, y: mousePos.y };

@@ -63,6 +63,9 @@ function keyEventHandler(key, state)
 		case KEY_R:
 			restartKeyHeld = state;
 			break;
+		case KEY_Y:
+			redoKeyHeld = state;
+			break;
 		case KEY_ARROW_LEFT:
 			leftKeyHeld = state;
 			break;

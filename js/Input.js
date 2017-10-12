@@ -9,11 +9,11 @@ const KEY_ESCAPE = 27;
 const KEY_SPACEBAR = 32;
 const KEY_TILDE = 192;
 
-const KEY_O = 79;
-const KEY_P = 80;
-const KEY_R = 82;
-const KEY_Y = 89;
-const KEY_Z = 90;
+const KEY_O = 79; // activate editor
+const KEY_P = 80; // export puzzle string
+const KEY_R = 82; // restart puzzle
+const KEY_Y = 89; // redo command (edit mode only)
+const KEY_Z = 90; // undo command
 
 const KEY_NUM_0 = 96;
 const KEY_NUM_1 = 97;

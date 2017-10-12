@@ -14,6 +14,7 @@ var currentIndex = -1;
 
 function loadLevel(level)
 {
+    isGoalMet = false;
     blocks = [];
 
     var tile = {

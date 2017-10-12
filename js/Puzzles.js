@@ -57,7 +57,7 @@ q#..p....#.#
 
 `;
 
-var quantumHard = 
+var quantumHard =
 `
 .....g..####
 .....#....##
@@ -80,7 +80,7 @@ function exportPuzzle()
 
     levelData = convertBoardToArray();
 
-    exportString = "var puzzle = \n`\n"
+    exportString = "`\n";
     for (var row = 0; row < BOARD_ROWS; row++)
     {
         exportString += levelData.slice(BOARD_COLS*row, BOARD_COLS*row+BOARD_COLS) + ",\n";

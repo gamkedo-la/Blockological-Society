@@ -99,11 +99,16 @@ function panelUpdate(panel)
 		}
 	}
 
-	if (mouseButtonHeld)
+	if (undoKeyHeld)
+	{
+		undoMove();
+	}
+	else if (mouseButtonHeld)
 	{
 		var point = { x: mousePos.x, y: mousePos.y };
 		if (panel.selected != undefined)
 		{
+			saveBoard();
 			puzzleEditor.selected.command(point);
 		}
 	}

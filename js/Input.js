@@ -9,7 +9,7 @@ const KEY_ESCAPE = 27;
 const KEY_SPACEBAR = 32;
 const KEY_TILDE = 192;
 
-const KEY_F5 = 116;
+const KEY_P = 80;
 
 const KEY_NUM_0 = 96;
 const KEY_NUM_1 = 97;
@@ -36,7 +36,7 @@ function keyPressed(evt)
 		case KEY_TILDE:
 			_EDIT_MODE = !_EDIT_MODE;
 			break;
-		case KEY_F5:
+		case KEY_P:
 			exportPuzzle();
 			break;
 		case KEY_NUM_1:
@@ -51,6 +51,7 @@ function keyPressed(evt)
 		default:
 			break;
 	}
+	evt.preventDefault();
 }
 
 function keyReleased(evt)
@@ -89,7 +90,7 @@ function mousePosHandler(evt)
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	var point = calculateCoordAtTileIndex(tileIndex);
 	isoMousePos = twoDToIso(point.x, point.y);
-	drawText(mousePos.x + " " + mousePos.y, mousePos.x, mousePos.y, '15px consolas', 'yellow');
+	// drawText(mousePos.x + " " + mousePos.y, mousePos.x, mousePos.y, '15px consolas', 'yellow');
 }
 
 function mousePressed(evt)

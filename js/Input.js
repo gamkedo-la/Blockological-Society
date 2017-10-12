@@ -9,6 +9,7 @@ const KEY_ESCAPE = 27;
 const KEY_SPACEBAR = 32;
 const KEY_TILDE = 192;
 
+const KEY_O = 79;
 const KEY_P = 80;
 const KEY_R = 82;
 const KEY_Y = 89;
@@ -38,7 +39,7 @@ function keyPressed(evt)
 
 	switch(evt.keyCode)
 	{
-		case KEY_TILDE:
+		case KEY_O:
 			_EDIT_MODE = !_EDIT_MODE;
 			break;
 		default:
@@ -89,7 +90,14 @@ function mousePosHandler(evt)
 	var cart = isoTotwoD(mousePos.x-TILE_SIZE, mousePos.y);
 	var tileIndex = calculateTileIndexAtCoord(cart.x, cart.y);
 	var point = calculateCoordAtTileIndex(tileIndex);
-	isoMousePos = twoDToIso(point.x, point.y);
+	if (tileIndex == undefined)
+	{
+		isoMousePos = undefined;
+	}
+	else
+	{
+		isoMousePos = twoDToIso(point.x, point.y);
+	}
 	// drawText(mousePos.x + " " + mousePos.y, mousePos.x, mousePos.y, '15px consolas', 'yellow');
 }
 

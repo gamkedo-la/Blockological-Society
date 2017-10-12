@@ -35,7 +35,6 @@ function update()
 	updateBlocks();
 	applyBlockEffects();
 	checkForTriggers();
-
 }
 
 function draw()

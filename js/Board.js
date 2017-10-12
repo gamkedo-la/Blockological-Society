@@ -10,7 +10,7 @@ const GOAL_COLOR = '#44db34';
 
 var layout;
 var boardHistory = [];
-var currentIndex = 0;
+var currentIndex = -1;
 
 function loadLevel(level)
 {
@@ -155,12 +155,13 @@ function convertBoardToArray()
 
 function saveBoard()
 {
-    var boardState = convertBoardToArray();
+    boardHistory = boardHistory.slice(0, currentIndex + 1);
 
+    var boardState = convertBoardToArray();
     if (boardHistory.length > 0)
     {
         var boardString = convertLevelDataToString(boardState);
-        var lastBoardString = convertLevelDataToString(boardHistory[boardHistory.length-1]);
+        var lastBoardString = convertLevelDataToString(boardHistory[currentIndex]);
 
         if (boardString == lastBoardString)
         {
@@ -169,10 +170,7 @@ function saveBoard()
     }
 
     currentIndex++;
-    if (currentIndex != boardHistory.length - 1)
-    {
-        boardHistory = boardHistory.slice(0, currentIndex);
-    }
+
 	boardHistory.push(boardState);
 }
 
@@ -182,28 +180,27 @@ function undoMove()
 	{
 		return false;
 	}
-	blocks = [];
+	loadLevel(boardHistory[currentIndex]);
     if (currentIndex > 0)
     {
         currentIndex--;
     }
-	loadLevel(boardHistory[currentIndex]);
 	return true;
 }
 
 function redoMove()
 {
-    if (currentIndex + 1 >= boardHistory.length)
+    if (currentIndex >= boardHistory.length - 1)
     {
         return false;
     }
     currentIndex++;
     loadLevel(boardHistory[currentIndex]);
+    return true;
 }
 
 function restart()
 {
-    currentIndex++;
     loadLevel(boardHistory[0]);
-    boardHistory.push(boardHistory[0]);
+    saveBoard();
 }

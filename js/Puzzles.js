@@ -83,13 +83,13 @@ function exportPuzzle()
 
 function convertLevelDataToString(levelData)
 {
-	exportString = "`\n";
+	var string = "`\n";
 	for (var row = 0; row < BOARD_ROWS; row++)
 	{
-		exportString += levelData.slice(BOARD_COLS*row, BOARD_COLS*row+BOARD_COLS) + ",\n";
+		string += levelData.slice(BOARD_COLS*row, BOARD_COLS*row+BOARD_COLS) + ",\n";
 	}
-	exportString = exportString.replace(/,/g, '');
-	exportString += "`;";
+	string = string.replace(/,/g, '');
+	string += "`;";
 
-	return exportString;
+	return string;
 }

@@ -1,7 +1,7 @@
 var cursor; // block manipulation widget
 const CURSOR_COLOR = '#2c3e50';
 
-const MOVE_DELAY = .30;
+const MOVE_DELAY = .25;
 var moveTimer = 0;
 
 cursor = {
@@ -32,29 +32,37 @@ function updatePlayer()
         {
 			saveBoard();
             if(pushBlock(cursor.x, cursor.y, -TILE_SIZE, 0))
-            setMoveTarget(cursor, cursor.x - TILE_SIZE, cursor.y);
-            moveTimer = MOVE_DELAY;
+			{
+				setMoveTarget(cursor, cursor.x - TILE_SIZE, cursor.y);
+				moveTimer = MOVE_DELAY;
+			}
         }
         else if (rightKeyHeld)
         {
 			saveBoard();
             if(pushBlock(cursor.x, cursor.y, TILE_SIZE, 0))
-            setMoveTarget(cursor, cursor.x + TILE_SIZE, cursor.y);
-            moveTimer = MOVE_DELAY;
+			{
+				setMoveTarget(cursor, cursor.x + TILE_SIZE, cursor.y);
+				moveTimer = MOVE_DELAY;
+			}
         }
         else if (upKeyHeld)
         {
 			saveBoard();
             if(pushBlock(cursor.x, cursor.y, 0, -TILE_SIZE))
-            setMoveTarget(cursor, cursor.x, cursor.y - TILE_SIZE);
-            moveTimer = MOVE_DELAY;
+			{
+				setMoveTarget(cursor, cursor.x, cursor.y - TILE_SIZE);
+				moveTimer = MOVE_DELAY;
+			}
         }
         else if (downKeyHeld)
         {
 			saveBoard();
             if(pushBlock(cursor.x, cursor.y, 0, TILE_SIZE))
-            setMoveTarget(cursor, cursor.x, cursor.y + TILE_SIZE);
-            moveTimer = MOVE_DELAY;
+			{
+				setMoveTarget(cursor, cursor.x, cursor.y + TILE_SIZE);
+				moveTimer = MOVE_DELAY;
+			}
         }
 		else if (undoKeyHeld)
 		{

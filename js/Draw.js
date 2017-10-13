@@ -47,16 +47,22 @@ function drawSortedObjects()
 
 	for (var i = 0; i < blocks.length; i++)
 	{
-		if (blocks[i] == cursor)
-		{
-			var iso = twoDToIso(cursor.x, cursor.y);
-			drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
-		}
-		else
+		if (blocks[i] != cursor)
 		{
 			var block = blocks[i];
 			var iso = twoDToIso(block.x, block.y);
 			drawBitmapCenteredWithRotation(block.blockSprite, iso.x+TILE_SIZE-3, iso.y-3, 0);
+		}
+	}
+
+	drawGoalFrames();
+
+	for (var i = 0; i < blocks.length; i++)
+	{
+		if (blocks[i] == cursor)
+		{
+			var iso = twoDToIso(cursor.x, cursor.y);
+			drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
 		}
 	}
 }
@@ -93,4 +99,29 @@ function yLevelQuickSort(array)
 	beforeList.push(pivot);
 	result = beforeList.concat(afterList);
 	return result;
+}
+
+function drawGoalFrames()
+{
+    var x = BOARD_X;
+    var y = 0;
+    for (var row = 0; row < BOARD_ROWS; row++)
+    {
+        for (var col = 0; col < BOARD_COLS; col++)
+        {
+            var tileIndex = rowColToArrayIndex(col, row);
+            if (layout[tileIndex].active)
+            {
+				var iso = twoDToIso(x, y);
+				if (layout[tileIndex].isGoal)
+				{
+					drawIsoRhombusWire("rgba(0,0,0,0)",GOAL_COLOR, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
+				}
+				
+            }
+            x += TILE_SIZE;
+        }
+        x = BOARD_X;
+        y += TILE_SIZE;
+    }
 }

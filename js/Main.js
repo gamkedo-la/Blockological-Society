@@ -1,5 +1,6 @@
 var _DEBUG_MAGNETS = false;
 var canvas, canvasContext;
+var inMenu = true;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
 
@@ -25,29 +26,45 @@ window.onload = function()
 
 function update()
 {
-	if (_EDIT_MODE)
+	if (inMenu)
 	{
-		panelUpdate(puzzleEditor);
-		return;
+		updateMenu();
+	}
+	else 
+	{
+		if (_EDIT_MODE)
+		{
+			panelUpdate(puzzleEditor);
+			return;
+		}
+	
+		updatePlayer();
+		updateBlocks();
+		applyBlockEffects();
+		checkForTriggers();
 	}
 
-	updatePlayer();
-	updateBlocks();
-	applyBlockEffects();
-	checkForTriggers();
 }
 
 function draw()
 {
 	drawBackground();
-	drawBoard();
-	drawSortedObjects();
-	if (isGoalMet)
+	if (inMenu)
 	{
-        drawText("You won!!!", canvas.width*0.43, canvas.height*0.15, '24px Comic Sans MS', 'yellow');
+		drawMenu();
 	}
-	if (_EDIT_MODE)
+	else
 	{
-		drawPanelWithButtons(puzzleEditor);
+		drawBoard();
+		drawSortedObjects();
+		if (isGoalMet)
+		{
+			drawText("You won!!!", canvas.width*0.43, canvas.height*0.15, '24px Comic Sans MS', 'yellow');
+		}
+		if (_EDIT_MODE)
+		{
+			drawPanelWithButtons(puzzleEditor);
+		}
 	}
+
 }

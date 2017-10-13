@@ -3,6 +3,13 @@ function drawBackground()
     colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
 }
 
+function drawMenu()
+{
+	drawText("Blockological Society", canvas.width*0.25, canvas.height*0.15, '36px Consolas', 'yellow');
+
+	drawText("Press Enter to Play!", canvas.width*0.35, canvas.height*0.35, '24px Consolas', 'yellow');
+}
+
 function drawBoard()
 {
     var x = BOARD_X;

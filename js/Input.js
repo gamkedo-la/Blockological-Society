@@ -35,18 +35,26 @@ var downKeyHeld = false;
 
 function keyPressed(evt)
 {
-	keyEventHandler(evt.keyCode, true);
-
-	switch(evt.keyCode)
+	if (inMenu)
 	{
-		case KEY_O:
-			_EDIT_MODE = !_EDIT_MODE;
-			break;
-		default:
-			break;
+		menuEventHandler(evt)
 	}
-	editorKeyHandler(evt);
-	evt.preventDefault();
+	else
+	{
+		keyEventHandler(evt.keyCode, true);
+		
+			switch(evt.keyCode)
+			{
+				case KEY_O:
+					_EDIT_MODE = !_EDIT_MODE;
+					break;
+				default:
+					break;
+			}
+			editorKeyHandler(evt);
+			evt.preventDefault();
+	}
+
 }
 
 function keyReleased(evt)

@@ -90,6 +90,21 @@ var bedSpread =
 ############
 `;
 
+
+var testingPuzzle = `
+...rf.......
+f...........
+r.q.....iq..
+....g.g.....
+...g.ffgf...
+.....fff....
+...g...g..ff
+..q.g.g...#.
+.q.i......m.
+...p...#m...
+.........m.m
+.........m.#
+`;
 // hotkey is F5
 function exportPuzzle()
 {

@@ -41,15 +41,62 @@ function createBlockObject(x, y, color, sprite){
         if((ctrl.x - Xoffset)  % TILE_SIZE != 0 || (ctrl.y - 0) % TILE_SIZE != 0){
             return;
         }
-
-        var tileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
-        var nextTileIndex = calculateTileIndexAtCoord(nextX, nextY);
-        layout[tileIndex].block = undefined;
-        layout[nextTileIndex].block = ctrl;
-
+        
         ctrl.targetX = nextX;
         ctrl.targetY = nextY;
     }
+
+    ctrl.move = function(){
+        var startPos = {
+            x: ctrl.x,
+            y: ctrl.y
+        }
+
+        if (ctrl.x < ctrl.targetX)
+        {
+            ctrl.x += ctrl.speed;
+        }
+        else if (ctrl.x > ctrl.targetX)
+        {
+            ctrl.x -= ctrl.speed;
+        }
+
+        if (ctrl.y < ctrl.targetY)
+        {
+            ctrl.y += ctrl.speed;
+        }
+        else if (ctrl.y > ctrl.targetY)
+        {
+            ctrl.y -= ctrl.speed;
+        }
+        if (Math.abs(ctrl.x - ctrl.targetX) < 1)
+        {
+            ctrl.x = ctrl.targetX;
+        }
+        if (Math.abs(ctrl.y - ctrl.targetY) < 1)
+        {
+            ctrl.y = ctrl.targetY;
+        }
+
+        var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
+        var tile = layout[tileIndex];
+
+        if(ctrl.x != startPos.x || ctrl.y != startPos.y){
+            if(tile.block == ctrl){
+                tile.block = undefined;
+            }
+
+            tileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
+            tile = layout[tileIndex];
+            tile.block = ctrl;
+        }
+
+        if(tile != undefined && tile.block != undefined &&
+           tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
+            tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
+        }
+    }
+
 
     ctrl.destroy = function(){
         var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
@@ -84,56 +131,6 @@ function pushBlock(x, y, offsetX, offsetY)
     return false; // can move
 }
 
-function moveTowardsTarget(object)
-{
-    var startPos = {
-        x: object.x,
-        y: object.y
-    }
-
-    if (object.x < object.targetX)
-    {
-        object.x += object.speed;
-    }
-    else if (object.x > object.targetX)
-    {
-        object.x -= object.speed;
-    }
-
-    if (object.y < object.targetY)
-    {
-        object.y += object.speed;
-    }
-    else if (object.y > object.targetY)
-    {
-        object.y -= object.speed;
-    }
-    if (Math.abs(object.x - object.targetX) < 1)
-    {
-        object.x = object.targetX;
-    }
-    if (Math.abs(object.y - object.targetY) < 1)
-    {
-        object.y = object.targetY;
-    }
-
-    var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
-    var tile = layout[tileIndex];
-
-    if(object.x != startPos.x || object.y != startPos.y){
-        tile.block = undefined;
-
-        tileIndex = calculateTileIndexAtCoord(object.x, object.y);
-        tile = layout[tileIndex];
-        tile.block = object;
-    }
-
-    if(tile != undefined && tile.block != undefined &&
-       tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
-        tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
-    }
-
-}
 
 function setMoveTarget(object, x, y)
 {
@@ -167,7 +164,7 @@ function blocksMoving()
 function updateBlocks() {
     for (var i = 0; i < blocks.length; i++)
     {
-        moveTowardsTarget(blocks[i]);
+        blocks[i].move();
     }
 }
 function applyBlockEffects(){

@@ -20,7 +20,58 @@ cursor = {
 
 		this.targetX = x;
 		this.targetY = y;
-	}
+	}, 
+	move : function(){
+        var startPos = {
+            x: this.x,
+            y: this.y
+        }
+
+        if (this.x < this.targetX)
+        {
+            this.x += this.speed;
+        }
+        else if (this.x > this.targetX)
+        {
+            this.x -= this.speed;
+        }
+
+        if (this.y < this.targetY)
+        {
+            this.y += this.speed;
+        }
+        else if (this.y > this.targetY)
+        {
+            this.y -= this.speed;
+        }
+        if (Math.abs(this.x - this.targetX) < 1)
+        {
+            this.x = this.targetX;
+        }
+        if (Math.abs(this.y - this.targetY) < 1)
+        {
+            this.y = this.targetY;
+        }
+
+        var tileIndex = calculateTileIndexAtCoord(startPos.x, startPos.y);
+        var tile = layout[tileIndex];
+
+        if(this.x != startPos.x || this.y != startPos.y){
+            if(tile.block == this){
+                tile.block = undefined;
+            }
+
+            tileIndex = calculateTileIndexAtCoord(this.x, this.y);
+            tile = layout[tileIndex];
+            tile.block = this;
+        }
+
+        if(tile != undefined && tile.block != undefined &&
+           tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
+            tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
+        }
+    }
+
 }
 
 function updatePlayer()

@@ -12,7 +12,7 @@ function createBlockObject(x, y, color, sprite){
         speed: TILE_SIZE/8,
         size: 32,
         color: color,
-        blockSprite: sprite
+        sprite: sprite
     }
     ctrl.tryPush = function(x, y){
         var nextX = ctrl.x + x;

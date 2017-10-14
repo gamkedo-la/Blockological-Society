@@ -1,7 +1,7 @@
 var cursor; // block manipulation widget
 const CURSOR_COLOR = '#2c3e50';
 
-const MOVE_DELAY = .25;
+const MOVE_DELAY = 0.25;
 var moveTimer = 0;
 
 cursor = {
@@ -11,7 +11,8 @@ cursor = {
 	targetX: undefined,
 	targetY: undefined,
 	speed: TILE_SIZE/8,
-	color: CURSOR_COLOR,
+    color: CURSOR_COLOR,
+    sprite: cursorPic,
 
 	init: function(x, y)
 	{
@@ -66,8 +67,8 @@ cursor = {
             tile.block = this;
         }
 
-        if(tile != undefined && tile.block != undefined &&
-           tile.block.charged != undefined && tile.block.charged){ //this shouldn't be here, but it is.
+        if(tile !== undefined && tile.block !== undefined &&
+           tile.block.charged !== undefined && tile.block.charged){ //this shouldn't be here, but it is.
             tile.block.charged = false; //It's discharging metal blocks, maybe other blocks later
         }
     }

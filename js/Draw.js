@@ -44,27 +44,14 @@ function drawSortedObjects()
 
 	blocks = yLevelQuickSort(blocks);
 
-
 	for (var i = 0; i < blocks.length; i++)
 	{
-		if (blocks[i] != cursor)
-		{
 			var block = blocks[i];
 			var iso = twoDToIso(block.x, block.y);
-			drawBitmapCenteredWithRotation(block.blockSprite, iso.x+TILE_SIZE-3, iso.y-3, 0);
-		}
+			drawBitmapCenteredWithRotation(block.sprite, iso.x+TILE_SIZE-3, iso.y-3, 0);
 	}
 
 	drawGoalFrames();
-
-	for (var i = 0; i < blocks.length; i++)
-	{
-		if (blocks[i] == cursor)
-		{
-			var iso = twoDToIso(cursor.x, cursor.y);
-			drawBitmapCenteredWithRotation(cursorPic, iso.x+TILE_SIZE-3, iso.y-3, 0);
-		}
-	}
 }
 
 function yLevelQuickSort(array)

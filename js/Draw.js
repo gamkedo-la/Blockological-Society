@@ -102,7 +102,14 @@ function drawGoalFrames()
 				var iso = twoDToIso(x, y);
 				if (layout[tileIndex].isGoal)
 				{
-					drawIsoRhombusWire("rgba(0,0,0,0)",GOAL_COLOR, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
+					if (layout[tileIndex].block == undefined) // not covered by a block
+					{
+						drawIsoRhombusWire("rgba(0,0,0,0)",GOAL_COLOR_UNSOLVED, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
+					}
+					else // has a block: success
+					{
+						drawIsoRhombusWire("rgba(0,0,0,0)",GOAL_COLOR, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
+					}
 				}
 				
             }

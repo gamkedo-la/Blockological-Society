@@ -7,6 +7,7 @@ const TILE_SIZE = 34;
 const BOARD_COLOR = '#2980b9';
 const TILE_COLOR = '#3498db';
 const GOAL_COLOR = '#44db34';
+const GOAL_COLOR_UNSOLVED = '#ffff00';
 
 var layout;
 var boardHistory = [];

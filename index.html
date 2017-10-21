@@ -3,11 +3,18 @@
 <head>
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
+	<style>
+		body { margin:0; color:white; background:#2980b9; }
+		div { text-align:center; margin-top:40px; font-family:arial;  }
+		ul { text-align:left; width:200px; margin:auto; margin-top:40px; }
+	</style>
 </head>
 
 <body>
 
-<canvas id="gameCanvas" width="800" height="600"></canvas>
+<div>
+	<canvas id="gameCanvas" width="800" height="600"></canvas>
+</div>
 
 <audio id='music' loop="loop"><source src="sound/rooftops_by_mcfunkypants_lofi.mp3" type="audio/mpeg"></audio>
 
@@ -31,7 +38,7 @@
 <script src="js/Main.js"></script>
 <script src="js/Editor.js"></script>
 
-<br>
+<div>
 How to play
 <ul>
 	<li>Arrow keys to move</li>
@@ -41,5 +48,7 @@ How to play
 	<li>Z to undo</li>
 	<li>Y to redo</li>
 </ul>
+</div>
+
 </body>
 </html>

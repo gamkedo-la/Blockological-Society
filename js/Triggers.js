@@ -1,7 +1,7 @@
 var isGoalMet = false;
 
 function checkForTriggers() {
-    if (!isGoalMet)
+    if (!isGoalMet && undoKeyHeld == false)
     {
         checkForGoal();
     }

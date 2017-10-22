@@ -16,7 +16,8 @@ function checkForGoal() {
         {
             var tileIndex = rowColToArrayIndex(col, row);
             //If it's a goal tile, but there is no block, no win.
-            if (layout[tileIndex].isGoal && layout[tileIndex].block == undefined)
+            if (layout[tileIndex].isGoal &&
+                (layout[tileIndex].block == undefined || layout[tileIndex].block == cursor))
             {
                 goalTilesCovered = false;
             }

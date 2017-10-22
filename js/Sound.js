@@ -1,5 +1,7 @@
 var audioFormat;
 var musicTrack = new BackgroundMusicClass();
+var cursorMoveSound = new SoundBufferClass("sound/cursorMove");
+var goalTriggerSound = new SoundBufferClass("sound/goalTrigger");
 
 function setFormat()
 {

@@ -21,7 +21,7 @@ cursor = {
 
 		this.targetX = x;
 		this.targetY = y;
-	}, 
+	},
 	move : function(){
         var startPos = {
             x: this.x,
@@ -87,6 +87,7 @@ function updatePlayer()
 			{
 				setMoveTarget(cursor, cursor.x - TILE_SIZE, cursor.y);
 				moveTimer = MOVE_DELAY;
+				cursorMoveSound.play();
 			}
         }
         else if (rightKeyHeld)
@@ -96,6 +97,7 @@ function updatePlayer()
 			{
 				setMoveTarget(cursor, cursor.x + TILE_SIZE, cursor.y);
 				moveTimer = MOVE_DELAY;
+				cursorMoveSound.play();
 			}
         }
         else if (upKeyHeld)
@@ -105,6 +107,7 @@ function updatePlayer()
 			{
 				setMoveTarget(cursor, cursor.x, cursor.y - TILE_SIZE);
 				moveTimer = MOVE_DELAY;
+				cursorMoveSound.play();
 			}
         }
         else if (downKeyHeld)
@@ -114,6 +117,7 @@ function updatePlayer()
 			{
 				setMoveTarget(cursor, cursor.x, cursor.y + TILE_SIZE);
 				moveTimer = MOVE_DELAY;
+				cursorMoveSound.play();
 			}
         }
 		else if (undoKeyHeld)

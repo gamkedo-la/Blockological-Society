@@ -26,8 +26,6 @@ function checkForGoal() {
     if (goalTilesCovered)
     {
         isGoalMet = true;
-        //TODO: add delay to allow for animation
-        //TODO: replace alert with some sort of UI
-        //TODO: trigger opening up next puzzle
+        goalTriggerSound.play();
     }
 }

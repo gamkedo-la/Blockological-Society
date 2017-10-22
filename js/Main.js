@@ -16,7 +16,6 @@ window.onload = function()
 	document.addEventListener('mouseup', mouseReleased);
 
 	loadLevel(testingPuzzle);
-	musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
 
 	setInterval(function()
 	{

@@ -9,7 +9,6 @@ function menuEventHandler(evt)
     {
         inMenu = false;
 
-        document.getElementById('music').play();
-        
+        musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
     }
 }

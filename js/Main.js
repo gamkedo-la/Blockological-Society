@@ -16,6 +16,7 @@ window.onload = function()
 	document.addEventListener('mouseup', mouseReleased);
 
 	loadLevel(testingPuzzle);
+	musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
 
 	setInterval(function()
 	{
@@ -30,14 +31,14 @@ function update()
 	{
 		updateMenu();
 	}
-	else 
+	else
 	{
 		if (_EDIT_MODE)
 		{
 			panelUpdate(puzzleEditor);
 			return;
 		}
-	
+
 		updatePlayer();
 		updateBlocks();
 		applyBlockEffects();

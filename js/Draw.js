@@ -6,8 +6,8 @@ function drawBackground()
 function drawMenu()
 {
 	drawText("Blockological Society", canvas.width*0.25, canvas.height*0.15, '36px Consolas', 'yellow');
-
 	drawText("Press Enter to Play!", canvas.width*0.35, canvas.height*0.35, '24px Consolas', 'yellow');
+	drawMenuButtons();
 }
 
 function drawBoard()

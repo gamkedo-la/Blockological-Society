@@ -1,15 +1,20 @@
-var tileGoalPic = document.createElement("img");
-var tileOffPic = document.createElement("img");
-var tileEmptyPic = document.createElement("img");
-var blockMagnetPic = document.createElement("img");
-var blockIcePic = document.createElement("img");
-var blockFirePic = document.createElement("img");
-var blockQuantumPic = document.createElement("img");
-var blockMetalPic = document.createElement("img");
-var blockFluffyPic = document.createElement("img");
-var blockYellowPic = document.createElement("img");
-var cursorPic = document.createElement("img");
+//Menus
+var startButtonPic = document.createElement("img");
 
+//In-game objects
+var tileGoalPic     = document.createElement("img");
+var tileOffPic      = document.createElement("img");
+var tileEmptyPic    = document.createElement("img");
+var blockMagnetPic  = document.createElement("img");
+var blockIcePic     = document.createElement("img");
+var blockFirePic    = document.createElement("img");
+var blockQuantumPic = document.createElement("img");
+var blockMetalPic   = document.createElement("img");
+var blockFluffyPic  = document.createElement("img");
+var blockYellowPic  = document.createElement("img");
+var cursorPic       = document.createElement("img");
+
+//Puzzle Editor
 var editorTileGoalPic = document.createElement("img");
 var editorTileOffPic = document.createElement("img");
 var editorTileEmptyPic = document.createElement("img");
@@ -21,6 +26,46 @@ var editorBlockMetalPic = document.createElement("img");
 var editorBlockFluffyPic = document.createElement("img");
 var editorBlockYellowPic = document.createElement("img");
 var editorCursorPic = document.createElement("img");
+
+
+var picsToLoad = 0; //set automatically in loadImages()
+
+function loadImages() {
+    var imageList = [
+        { varName: startButtonPic, theFile: "img/menu/startButton.png"},
+
+        { varName: tileGoalPic, theFile: "img/tile_goal.png"},
+        { varName: tileOffPic, theFile: "img/tile_off.png"},
+        { varName: tileEmptyPic, theFile: "img/tile_empty.png"},
+        { varName: blockMagnetPic, theFile: "img/cube_magnet.png"},
+        { varName: blockIcePic, theFile: "img/cube_ice.png"},
+        { varName: blockFirePic, theFile: "img/cube_fire_PLEASE_REPLACE.png"},
+        { varName: blockQuantumPic, theFile: "img/cube_quantum.png"},
+        { varName: blockMetalPic, theFile: "img/cube_metal.png"},
+        { varName: blockFluffyPic, theFile: "img/cube_fluffy.png"},
+        { varName: blockYellowPic, theFile: "img/cube_yellow.png"},
+        { varName: cursorPic, theFile: "img/cursor.png"},
+
+        { varName: editorTileGoalPic, theFile: "img/editor/edit_tile_goal.png"},
+        { varName: editorTileOffPic, theFile: "img/editor/edit_tile_off.png"},
+        { varName: editorTileEmptyPic, theFile: "img/editor/edit_tile_empty.png"},
+        { varName: editorBlockMagnetPic, theFile: "img/editor/edit_cube_magnet.png"},
+        { varName: editorBlockIcePic, theFile: "img/editor/edit_cube_ice.png"},
+        { varName: editorBlockFirePic, theFile: "img/editor/edit_cube_fire_PLEASE_REPLACE.png"},
+        { varName: editorBlockQuantumPic, theFile: "img/editor/edit_cube_quantum.png"},
+        { varName: editorBlockMetalPic, theFile: "img/editor/edit_cube_metal.png"},
+        { varName: editorBlockFluffyPic, theFile: "img/editor/edit_cube_fluffy.png"},
+        { varName: editorCursorPic, theFile: "img/editor/edit_cursor.png"}
+    ]
+    picsToLoad = imageList.length; //This method avoids a race condition
+
+    for (var i = 0; i < imageList.length; i++) {
+        beginLoadingImage(imageList[i].varName, imageList[i].theFile);
+    }
+}
+
+/*
+startButtonPic.src = "img/menu/startButton.png";
 
 tileGoalPic.src = "img/tile_goal.png";
 tileOffPic.src = "img/tile_off.png";
@@ -44,3 +89,19 @@ editorBlockMetalPic.src = "img/editor/edit_cube_metal.png";
 editorBlockFluffyPic.src = "img/editor/edit_cube_fluffy.png";
 editorBlockFirePic.src = "img/editor/edit_cube_fire_PLEASE_REPLACE.png";
 editorCursorPic.src = "img/editor/edit_cursor.png";
+*/
+
+function countLoadedImagesAndLaunchIfReady() {
+    picsToLoad--;
+    //console.log(picsToLoad);
+    if (picsToLoad == 0) {
+        imageLoadingDoneSoStartGame();
+    }
+}
+
+function beginLoadingImage(imgVar, fileName) {
+    imgVar.onload = function (){
+        countLoadedImagesAndLaunchIfReady();
+    }
+    imgVar.src = fileName;
+}

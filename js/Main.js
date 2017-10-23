@@ -15,6 +15,12 @@ window.onload = function()
 	document.addEventListener('mousedown', mousePressed);
 	document.addEventListener('mouseup', mouseReleased);
 
+	loadImages();
+}
+
+function imageLoadingDoneSoStartGame(){
+
+	setupMenuButtons();
 	loadLevel(testingPuzzle);
 
 	setInterval(function()

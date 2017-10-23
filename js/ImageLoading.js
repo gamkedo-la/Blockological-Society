@@ -1,5 +1,6 @@
 //Menus
 var startButtonPic = document.createElement("img");
+var editorButtonPic = document.createElement("img");
 
 //In-game objects
 var tileGoalPic     = document.createElement("img");
@@ -33,6 +34,7 @@ var picsToLoad = 0; //set automatically in loadImages()
 function loadImages() {
     var imageList = [
         { varName: startButtonPic, theFile: "img/menu/startButton.png"},
+        { varName: editorButtonPic, theFile: "img/menu/editorButton.png"},
 
         { varName: tileGoalPic, theFile: "img/tile_goal.png"},
         { varName: tileOffPic, theFile: "img/tile_off.png"},

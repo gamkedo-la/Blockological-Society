@@ -117,7 +117,7 @@ function mousePosHandler(evt)
 	{
 		isoMousePos = twoDToIso(point.x, point.y);
 	}
-	// drawText(mousePos.x + " " + mousePos.y, mousePos.x, mousePos.y, '15px consolas', 'yellow');
+	drawText(mousePos.x + " " + mousePos.y, mousePos.x, mousePos.y, '15px consolas', 'yellow');
 }
 
 function mousePressed(evt)

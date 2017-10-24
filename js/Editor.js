@@ -280,7 +280,7 @@ function randomCoord() // unused! may be be buggy
 
 function randomIndex()
 {
-	return Math.round(Math.random()*layout.length-1);
+	return Math.floor(Math.random()*layout.length);
 }
 
 function erasePuzzle()

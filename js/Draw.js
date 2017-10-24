@@ -1,15 +1,35 @@
-function drawBackground()
-{
-    colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
-}
 
+//Main UI elements: buttons, slider, all that good stuff
 function drawMenu()
 {
 	drawText("Blockological Society", canvas.width*0.25, canvas.height*0.15, '36px Consolas', 'yellow');
 	//drawText("Press Enter to Play!", canvas.width*0.35, canvas.height*0.35, '24px Consolas', 'yellow');
 	drawMenuButtons();
 }
+function drawButton(button) {
+    var highlightSize = 5;
+    if (button.hasFocus) {
+        colorRect(button.x - button.width / 2 - highlightSize, button.y - button.height / 2 - highlightSize, button.width + highlightSize * 2, button.height + highlightSize * 2, "red");
+    }
+    if (typeof button.sprite == undefined) {
+        colorRect(button.x - button.width / 2, button.y - button.height / 2, button.width, button.height, "red");
+    }
+    else {
+        context.drawImage(button.sprite, button.x - button.width / 2, button.y - button.height / 2, button.width, button.height);
+    }
+}
+function drawMenuButtons() {
+    for (var i = 0; i < menuButtons.length; i++) {
+        drawButton(menuButtons[i]);
+    }
+}
 
+
+//Ingame elements
+function drawBackground()
+{
+    colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
+}
 function drawBoard()
 {
     var x = BOARD_X;

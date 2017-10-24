@@ -1,6 +1,9 @@
 //Menus
 var startButtonPic = document.createElement("img");
 var editorButtonPic = document.createElement("img");
+var optionsButtonPic = document.createElement("img");
+
+
 
 //In-game objects
 var tileGoalPic     = document.createElement("img");
@@ -14,6 +17,12 @@ var blockMetalPic   = document.createElement("img");
 var blockFluffyPic  = document.createElement("img");
 var blockYellowPic  = document.createElement("img");
 var cursorPic       = document.createElement("img");
+
+var menuBlockA  = document.createElement("img");
+//var menuBlockE  = document.createElement("img");
+var menuBlockR  = document.createElement("img");
+var menuBlockS  = document.createElement("img");
+var menuBlockT  = document.createElement("img");
 
 //Puzzle Editor
 var editorTileGoalPic = document.createElement("img");
@@ -35,6 +44,7 @@ function loadImages() {
     var imageList = [
         { varName: startButtonPic, theFile: "img/menu/startButton.png"},
         { varName: editorButtonPic, theFile: "img/menu/editorButton.png"},
+        { varName: optionsButtonPic, theFile: "img/menu/optionsButton.png"},
 
         { varName: tileGoalPic, theFile: "img/tile_goal.png"},
         { varName: tileOffPic, theFile: "img/tile_off.png"},
@@ -46,6 +56,10 @@ function loadImages() {
         { varName: blockMetalPic, theFile: "img/cube_metal.png"},
         { varName: blockFluffyPic, theFile: "img/cube_fluffy.png"},
         { varName: blockYellowPic, theFile: "img/cube_yellow.png"},
+        { varName: menuBlockA, theFile: "img/letterCubes/cube_A.png"},
+        { varName: menuBlockR, theFile: "img/letterCubes/cube_R.png"},
+        { varName: menuBlockS, theFile: "img/letterCubes/cube_S.png"},
+        { varName: menuBlockT, theFile: "img/letterCubes/cube_T.png"},
         { varName: cursorPic, theFile: "img/cursor.png"},
 
         { varName: editorTileGoalPic, theFile: "img/editor/edit_tile_goal.png"},

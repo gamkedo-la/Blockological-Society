@@ -10,20 +10,16 @@ function checkForTriggers() {
 function checkForGoal() {
     var goalTilesCovered = true;
 
-    for (var row = 0; row < BOARD_ROWS; row++)
-    {
-        for (var col = 0; col < BOARD_COLS; col++)
+    for (var i = 0; i < goalTiles.length; i++)
+    {   index = goalTiles[i];
+        //If it's a goal tile, but there is no block, no win.
+        if (layout[index].isGoal &&
+            (layout[index].block == undefined || layout[index].block == cursor))
         {
-            var tileIndex = rowColToArrayIndex(col, row);
-            //If it's a goal tile, but there is no block, no win.
-            if (layout[tileIndex].isGoal &&
-                (layout[tileIndex].block == undefined || layout[tileIndex].block == cursor))
-            {
-                goalTilesCovered = false;
-            }
+            goalTilesCovered = false;
         }
     }
-
+    
     if (goalTilesCovered)
     {
         isGoalMet = true;

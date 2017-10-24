@@ -21,7 +21,7 @@ window.onload = function()
 function imageLoadingDoneSoStartGame(){
 
 	setupMenuButtons();
-	//loadLevel(testingPuzzle);
+	//loadLevel(goalTest);
 	loadLevel(menuLevel);
 
 	setInterval(function()

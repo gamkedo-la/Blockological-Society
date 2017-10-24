@@ -12,6 +12,7 @@ var layout;
 var boardHistory = [];
 var currentIndex = -1;
 
+var goalTiles = []; //stored to not iterate over whole grid in checkGoal
 function loadLevel(level) {
     isGoalMet = false;
     blocks = [];
@@ -38,6 +39,7 @@ function loadLevel(level) {
                 break;
             case TILE_GOAL:
                 layout[i].isGoal = true;
+                goalTiles.push(i);
                 break;
             case CURSOR:
                 cursor.init(location.x, location.y);

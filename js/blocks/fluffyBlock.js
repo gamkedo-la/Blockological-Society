@@ -30,8 +30,7 @@ function createFluffyBlock(coords) {
         }
         else
         {
-
-            return false
+            return false;
         }
     }
 	return block;

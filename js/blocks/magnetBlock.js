@@ -16,17 +16,16 @@ function createMagnetBlock(coords) {
         if(tile && tile.block && tile.block.type){
             if(tile.block.type == BLOCK_MAGNET){
                 tile.block.tryPush(x, y, "magnetBreaaaak");
-            } else if (tile.block.type == BLOCK_METAL){
-                
-                tile.block.charge(block.groupId)
+            } else if (tile.block.type == BLOCK_METAL){                
+                tile.block.charge(block.groupId);
                 block.charged = true;
             }
         }
     }
 
     block.tryPush = function(x, y, isMagnetPushing){
-        var magnetBros = []
-        var canMove = true
+        var magnetBros = [];
+        var canMove = true;
         var nextX = block.x + x;
         var nextY = block.y + y;
         //if charged, no moves
@@ -42,7 +41,7 @@ function createMagnetBlock(coords) {
             block.queuePush(x, y);
             return true; // can move
         } else {
-            return false
+            return false;
         }
 
         //This code is for the old magnet behavior
@@ -83,7 +82,7 @@ function createMagnetBlock(coords) {
         } else if(tile != undefined && tile.active && tile.block && tile.block.group && tile.block.group == block.group){
             return true;
         } else {
-            return false
+            return false;
         }
     }
 

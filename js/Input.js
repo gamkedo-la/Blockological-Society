@@ -38,7 +38,7 @@ function keyPressed(evt)
 {
 	if (inMenu)
 	{
-		menuEventHandler(evt)
+		//menuEventHandler(evt)
 	}
 	else
 	{

@@ -26,7 +26,7 @@ function createBlockObject(x, y, color, sprite){
             ctrl.queuePush(x, y);
             return true; // can move
         } else {
-            return false
+            return false;
         }
     }
 
@@ -52,29 +52,25 @@ function createBlockObject(x, y, color, sprite){
             y: ctrl.y
         }
 
-        if (ctrl.x < ctrl.targetX)
-        {
+        //Clamp X speed
+        if (ctrl.x < ctrl.targetX){
             ctrl.x += ctrl.speed;
         }
-        else if (ctrl.x > ctrl.targetX)
-        {
+        else if (ctrl.x > ctrl.targetX){
             ctrl.x -= ctrl.speed;
         }
-
-        if (ctrl.y < ctrl.targetY)
-        {
+        //Clamp Y speed
+        if (ctrl.y < ctrl.targetY){
             ctrl.y += ctrl.speed;
         }
-        else if (ctrl.y > ctrl.targetY)
-        {
+        else if (ctrl.y > ctrl.targetY){
             ctrl.y -= ctrl.speed;
         }
-        if (Math.abs(ctrl.x - ctrl.targetX) < 1)
-        {
+
+        if (Math.abs(ctrl.x - ctrl.targetX) < 1){
             ctrl.x = ctrl.targetX;
         }
-        if (Math.abs(ctrl.y - ctrl.targetY) < 1)
-        {
+        if (Math.abs(ctrl.y - ctrl.targetY) < 1){
             ctrl.y = ctrl.targetY;
         }
 
@@ -102,7 +98,7 @@ function createBlockObject(x, y, color, sprite){
         var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y); // x and y can be undefined
         if (thisTileIndex==undefined)
         { 
-            console.log("warning: ctrl has an undefined tileIndex. ignoring."); 
+            console.log("Warning: ctrl has an undefined tileIndex! Ignoring."); 
         }
         else
         {
@@ -114,7 +110,6 @@ function createBlockObject(x, y, color, sprite){
             blocks.splice(foundHere, 1);
         }
     }
-
 	return ctrl;
 }
 
@@ -131,7 +126,7 @@ function pushBlock(x, y, offsetX, offsetY)
         return block.tryPush(offsetX, offsetY)
     }
     else if (tile != undefined && tile.active &&
-			 (nextX != cursor.x || nextY != cursor.y))
+			(nextX != cursor.x || nextY != cursor.y))
     {
         return true;
     }

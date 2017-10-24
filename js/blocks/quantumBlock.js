@@ -5,8 +5,8 @@ function createQuantumBlock(coords, color) {
     block.color = color? color : '#f1c40f';
 
     block.tryPush = function(x, y){
-        var quantumBrothers = []
-        var canMove = true
+        var quantumBrothers = [];
+        var canMove = true;
         for(var i in blocks){ //check all dem other blocks.
             if(blocks[i].type == BLOCK_QUANTUM && blocks[i].color && blocks[i].color == block.color){ //gotta be a quantum of the saaame color
                 canMove = blocks[i].canPush(x, y); //this is the original tryPush, moved into it's own function so quantum stuff can happen first
@@ -16,7 +16,7 @@ function createQuantumBlock(coords, color) {
                     //TODO: Flag quantum block for visual feedback on stuck blocks
                     return false; //block can't move. it blocks all other blocks
                 } else {
-                    quantumBrothers.push(blocks[i]) //build a book of quantum blocks that match. so next step wont' ahve to go through all of em again.
+                    quantumBrothers.push(blocks[i]); //build a book of quantum blocks that match. so next step wont' ahve to go through all of em again.
                 }
             }
         }
@@ -25,7 +25,7 @@ function createQuantumBlock(coords, color) {
         for(var i in quantumBrothers){
             quantumBrothers[i].queuePush(x, y);
         }
-        return true
+        return true;
 
     }
 
@@ -43,7 +43,7 @@ function createQuantumBlock(coords, color) {
             //it just returns wheter or not it can be pushed.
             return true;
         } else {
-            return false
+            return false;
         }
     }
 	return block;

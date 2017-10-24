@@ -18,7 +18,7 @@ function createMetalBlock(coords) {
         }
     }
     block.charge = function(groupId){
-        block.group = groupId //groupId is artifact from quantum block. currently not used? 
+        block.group = groupId; //groupId is artifact from quantum block. currently not used? 
         block.charged = true;
         block.blockSprite = blockYellowPic;
     }

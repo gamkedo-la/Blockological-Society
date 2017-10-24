@@ -3,7 +3,6 @@ const BOARD_GAP = 2;
 const BOARD_COLS = 12;
 const BOARD_ROWS = 12;
 const TILE_SIZE = 34;
-
 const BOARD_COLOR = '#2980b9';
 const TILE_COLOR = '#3498db';
 const GOAL_COLOR = '#44db34';
@@ -25,7 +24,10 @@ function loadLevel(level) {
     layout = Array(BOARD_ROWS * BOARD_COLS);
     var levelDataIndex = 0;
     for (var i = 0; i < layout.length; i++) {
-        layout[i] = { ...tile }; // copies tile object data into array index
+        // copy tile object data into array index
+        // BUGFIX: spread "..." operator incompatible with old browsers
+        // layout[i] = { ...tile }; // works in Chrome but not Edge
+        layout[i] = { active:tile.active, block:tile.block }; 
         var location = calculateCoordAtTileIndex(i);
         layout[i].active = true; //defaults to true, switched if TILE_OFF
         switch (level[levelDataIndex]) {

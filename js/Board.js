@@ -81,7 +81,31 @@ function loadLevel(level)
                 layout[i].active = true;
                 blocks.push(layout[i].block);
                 break;
-            default:
+            case BLOCK_A:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createLetterBlock(location, "A");
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
+            case BLOCK_R:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createLetterBlock(location, "R");
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
+            case BLOCK_S:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createLetterBlock(location, "S");
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
+            case BLOCK_T:
+                var location = calculateCoordAtTileIndex(i);
+                layout[i].block = createLetterBlock(location, "T");
+                layout[i].active = true;
+                blocks.push(layout[i].block);
+                break;
+                default:
                 i--;
                 break;
         }

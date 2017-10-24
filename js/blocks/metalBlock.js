@@ -2,8 +2,8 @@ function createMetalBlock(coords) {
 	var block = createBlockObject(coords.x, coords.y, '#f1c40f', blockMetalPic);
     block.type = BLOCK_METAL;
     block.charged = false;
-    block.groupId = Math.random() * 1000000000 //basically quantum color
-    block.group = block.groupId
+    block.groupId = Math.random() * 1000000000; //basically quantum color
+    block.group = block.groupId;
 
     block.logic = function(){
         if(block.charged){
@@ -11,32 +11,32 @@ function createMetalBlock(coords) {
             block.exertCharge( 0, TILE_SIZE);
             block.exertCharge( -TILE_SIZE, 0);
             block.exertCharge( TILE_SIZE, 0);
-            block.blockSprite = blockYellowPic
+            block.blockSprite = blockYellowPic;
         } else {
-            block.blockSprite = blockMetalPic
-            block.group = block.groupId
+            block.blockSprite = blockMetalPic;
+            block.group = block.groupId;
         }
     }
     block.charge = function(groupId){
         block.group = groupId //groupId is artifact from quantum block. currently not used? 
-        block.charged = true
-        block.blockSprite = blockYellowPic
+        block.charged = true;
+        block.blockSprite = blockYellowPic;
     }
     block.exertCharge = function(x, y){
         tileIndex = calculateTileIndexAtCoord(block.x + x, block.y + y);
         tile = layout[tileIndex];
         if(tile && tile.block && tile.block.type){
             if(tile.block.type == BLOCK_MAGNET){
-                tile.block.group = block.group //instead of pushing, set that shit to our groupID
+                tile.block.group = block.group; //instead of pushing, set that shit to our groupID
             } else if (tile.block.type == BLOCK_METAL){
-                tile.block.group = block.group
+                tile.block.group = block.group;
             }
         }
     }
 
     block.tryPush = function(x, y, isMagnetPushing){
-        var magnetBros = []
-        var canMove = true
+        var magnetBros = [];
+        var canMove = true;
         if(block.charged && !isMagnetPushing){
             return false;
         }
@@ -49,7 +49,7 @@ function createMetalBlock(coords) {
             block.queuePush(x, y);
             return true; // can move
         } else {
-            return false
+            return false;
         }
         //old magnet behavior 
         /*
@@ -87,7 +87,7 @@ function createMetalBlock(coords) {
         } else if(tile != undefined && tile.active && tile.block && tile.block.group && tile.block.group == block.group){
             return true;
         } else {
-            return false
+            return false;
         }
     }
 	return block;

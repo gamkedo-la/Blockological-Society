@@ -4,7 +4,7 @@ function createIceBlock(coords) {
 	block.queuePush = function(x, y){
         var nextX = block.x + x+ x;
         var nextY = block.y + y+ y;
-        var count = 0
+        var count = 0;
         var tileIndex;
         var tile;
         for(var isDone = false; isDone == false;  count++){

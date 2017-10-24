@@ -18,11 +18,11 @@ var blockFluffyPic  = document.createElement("img");
 var blockYellowPic  = document.createElement("img");
 var cursorPic       = document.createElement("img");
 
-var menuBlockA  = document.createElement("img");
-//var menuBlockE  = document.createElement("img");
-var menuBlockR  = document.createElement("img");
-var menuBlockS  = document.createElement("img");
-var menuBlockT  = document.createElement("img");
+var letterBlockA  = document.createElement("img");
+//var letterBlockE  = document.createElement("img");
+var letterBlockR  = document.createElement("img");
+var letterBlockS  = document.createElement("img");
+var letterBlockT  = document.createElement("img");
 
 //Puzzle Editor
 var editorTileGoalPic = document.createElement("img");
@@ -56,10 +56,10 @@ function loadImages() {
         { varName: blockMetalPic, theFile: "img/cube_metal.png"},
         { varName: blockFluffyPic, theFile: "img/cube_fluffy.png"},
         { varName: blockYellowPic, theFile: "img/cube_yellow.png"},
-        { varName: menuBlockA, theFile: "img/letterCubes/cube_A.png"},
-        { varName: menuBlockR, theFile: "img/letterCubes/cube_R.png"},
-        { varName: menuBlockS, theFile: "img/letterCubes/cube_S.png"},
-        { varName: menuBlockT, theFile: "img/letterCubes/cube_T.png"},
+        { varName: letterBlockA, theFile: "img/letterCubes/cube_A.png"},
+        { varName: letterBlockR, theFile: "img/letterCubes/cube_R.png"},
+        { varName: letterBlockS, theFile: "img/letterCubes/cube_S.png"},
+        { varName: letterBlockT, theFile: "img/letterCubes/cube_T.png"},
         { varName: cursorPic, theFile: "img/cursor.png"},
 
         { varName: editorTileGoalPic, theFile: "img/editor/edit_tile_goal.png"},

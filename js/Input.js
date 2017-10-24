@@ -14,6 +14,7 @@ const KEY_P = 80; // export puzzle string
 const KEY_R = 82; // restart puzzle
 const KEY_Y = 89; // redo command (edit mode only)
 const KEY_Z = 90; // undo command
+const KEY_M = 77; // randoM puzzle generator
 
 const KEY_NUM_0 = 96;
 const KEY_NUM_1 = 97;

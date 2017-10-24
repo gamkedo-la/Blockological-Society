@@ -130,6 +130,9 @@ function editorKeyHandler(evt)
 
 	switch (evt.keyCode)
 	{
+		case KEY_M:
+			randomPuzzle();
+			break;
 		case KEY_P:
 			exportPuzzle();
 			break;
@@ -247,6 +250,112 @@ function setBlockAt(point,blockFunction)
 			blocks.push(tempBlock);
 		}
 	}
+}
+
+function setBlockByIndex(tileIndex,blockFunction)
+{
+	if (!layout[tileIndex])
+	{
+		console.log("warning: setBlockByIndex got an unknown tileindex of " + tileIndex);
+		return;
+	}
+	if (layout[tileIndex].block != undefined)
+	{
+		layout[tileIndex].block.destroy();
+	}
+	var location = calculateCoordAtTileIndex(tileIndex);
+	var tempBlock = blockFunction(location);
+	layout[tileIndex].active = true;
+	layout[tileIndex].block = tempBlock;
+	blocks.push(tempBlock);
+}
+
+function randomCoord() // unused! may be be buggy
+{
+	var newIndex = Math.round(Math.random()*layout.length);
+	var newCoord = calculateCoordAtTileIndex(newIndex);
+	console.log("Random index from layout length " + layout.length + " is " + newIndex + " which is at coord " + newCoord.x+','+newCoord.y);
+	return newCoord;
+}
+
+function randomIndex()
+{
+	return Math.round(Math.random()*layout.length-1);
+}
+
+function erasePuzzle()
+{
+	console.log("Erasing existing puzzle board.");
+	for (var tileIndex=0; tileIndex<layout.length; tileIndex++)
+	{
+		layout[tileIndex].active = true;
+		layout[tileIndex].isGoal = false;
+		if (layout[tileIndex].block != undefined)
+		{
+			layout[tileIndex].block.destroy();
+		}
+	}
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function randomPuzzle()
+{
+	console.log("Generating a random puzzle start...");
+
+	erasePuzzle();
+
+	var loop=0;
+
+	for (loop=0; loop<getRandomInt(2,6); loop++)
+	{
+		setBlockByIndex(randomIndex(),createMetalBlock);
+	}
+	for (loop=0; loop<getRandomInt(0,4); loop++)
+	{
+		setBlockByIndex(randomIndex(),createMagnetBlock);
+	}
+	for (loop=0; loop<getRandomInt(0,4); loop++)
+	{
+		setBlockByIndex(randomIndex(),createIceBlock);
+	}
+	for (loop=0; loop<getRandomInt(0,4); loop++)
+	{
+		setBlockByIndex(randomIndex(),createFireBlock);
+	}
+	for (loop=0; loop<getRandomInt(0,4); loop++)
+	{
+		setBlockByIndex(randomIndex(),createQuantumBlock);
+	}
+	for (loop=0; loop<getRandomInt(2,6); loop++)
+	{
+		setBlockByIndex(randomIndex(),createFluffyBlock);
+	}
+
+	// set a player cursor start location
+	var startIndex = randomIndex();
+	while (layout[startIndex].block != undefined) // find a blank tile
+	{
+		startIndex = randomIndex();
+	}
+	var startCoord = calculateCoordAtTileIndex(startIndex);
+	cursor.init(startCoord.x, startCoord.y);
+	layout[startIndex].active = true;
+
+	// now simulate tons of player moves
+	
+	// find four tiles that have a block
+	// but didn't at the start state
+	// FIXME: TODO
+	for (loop=0; loop<getRandomInt(1,4); loop++)
+	{
+		var goalIndex = randomIndex();
+		layout[goalIndex].active = true;
+		layout[goalIndex].isGoal = true;
+	}
+
 }
 
 function setMetalBlock(point)

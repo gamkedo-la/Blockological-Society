@@ -99,9 +99,16 @@ function createBlockObject(x, y, color, sprite){
 
 
     ctrl.destroy = function(){
-        var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y);
-        var thisTile = layout[thisTileIndex];
-        thisTile.block = undefined;
+        var thisTileIndex = calculateTileIndexAtCoord(ctrl.x, ctrl.y); // x and y can be undefined
+        if (thisTileIndex==undefined)
+        { 
+            console.log("warning: ctrl has an undefined tileIndex. ignoring."); 
+        }
+        else
+        {
+            var thisTile = layout[thisTileIndex];
+            thisTile.block = undefined;
+        }
         var foundHere = blocks.indexOf(ctrl);
         if (foundHere > -1) {
             blocks.splice(foundHere, 1);

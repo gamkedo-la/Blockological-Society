@@ -43,6 +43,8 @@ function createMetalBlock(coords) {
 
         var thisTileIndex = calculateTileIndexAtCoord(block.x, block.y);
         var thisTile = layout[thisTileIndex];
+        var nextX = block.x + x;
+        var nextY = block.y + y;
         var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
         var tile = layout[tileIndex];
         if (tile != undefined && tile.block == undefined && tile.active) {

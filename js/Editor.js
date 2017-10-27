@@ -307,8 +307,8 @@ function randomPuzzle()
 
 	erasePuzzle();
 
-	var loop=0;
-
+	var loop = 0;
+	var playerchaosmoves = 200;
 	var numMetal = getRandomInt(0,4);
 	var numMagnet = getRandomInt(0,4);
 	var numIce = getRandomInt(0,3);
@@ -316,6 +316,7 @@ function randomPuzzle()
 	var numQuant = getRandomInt(0,4);
 	var numFluffy = getRandomInt(2,6);
 	var numGoal = getRandomInt(1,4);
+	var pushcount = 0;
 	
 	console.log("Randomly adding "
 		+numMetal+" metal, "
@@ -363,6 +364,19 @@ function randomPuzzle()
 	layout[startIndex].active = true;
 
 	// now simulate tons of player moves
+	saveBoard();
+	console.log("Moving the player randomly " + playerchaosmoves + " times...");
+	for (loop=0; loop<playerchaosmoves; loop++)
+	{
+		switch (getRandomInt(0,3))
+		{
+			case 0: if (pushBlock(cursor.x, cursor.y, 0, TILE_SIZE)) pushcount++; break;
+			case 1: if (pushBlock(cursor.x, cursor.y, 0, -TILE_SIZE)) pushcount++; break;
+			case 2: if (pushBlock(cursor.x, cursor.y, TILE_SIZE, 0)) pushcount++; break;
+			case 3: if (pushBlock(cursor.x, cursor.y, -TILE_SIZE, 0)) pushcount++; break;
+		}
+	}
+	console.log("Done! Pushed " + pushcount + " blocks!");
 	
 	// find four tiles that have a block right now
 	// but didn't at the start state
@@ -374,6 +388,13 @@ function randomPuzzle()
 		layout[goalIndex].isGoal = true;
 	}
 
+	// now unwrap all moves to initial state
+	console.log("Rewinding all random player moves to puzzle start state.");
+	for (loop=0; loop<playerchaosmoves; loop++)
+	{
+		undoMove();
+	}
+	
 }
 
 function setMetalBlock(point)

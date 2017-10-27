@@ -309,27 +309,45 @@ function randomPuzzle()
 
 	var loop=0;
 
-	for (loop=0; loop<getRandomInt(2,6); loop++)
+	var numMetal = getRandomInt(0,4);
+	var numMagnet = getRandomInt(0,4);
+	var numIce = getRandomInt(0,3);
+	var numFire = getRandomInt(0,1);
+	var numQuant = getRandomInt(0,4);
+	var numFluffy = getRandomInt(2,6);
+	var numGoal = getRandomInt(1,4);
+	
+	console.log("Randomly adding "
+		+numMetal+" metal, "
+		+numMagnet+" magnet, "
+		+numIce+" ice, "
+		+numFire+" fire, "
+		+numQuant+" quantum, "
+		+numFluffy+" fluffy, with "
+		+numGoal+" goals."
+	);
+		
+	for (loop=0; loop<numMetal; loop++)
 	{
 		setBlockByIndex(randomIndex(),createMetalBlock);
 	}
-	for (loop=0; loop<getRandomInt(0,4); loop++)
+	for (loop=0; loop<numMagnet; loop++)
 	{
 		setBlockByIndex(randomIndex(),createMagnetBlock);
 	}
-	for (loop=0; loop<getRandomInt(0,4); loop++)
+	for (loop=0; loop<numIce; loop++)
 	{
 		setBlockByIndex(randomIndex(),createIceBlock);
 	}
-	for (loop=0; loop<getRandomInt(0,4); loop++)
+	for (loop=0; loop<numFire; loop++)
 	{
 		setBlockByIndex(randomIndex(),createFireBlock);
 	}
-	for (loop=0; loop<getRandomInt(0,4); loop++)
+	for (loop=0; loop<numQuant; loop++)
 	{
 		setBlockByIndex(randomIndex(),createQuantumBlock);
 	}
-	for (loop=0; loop<getRandomInt(2,6); loop++)
+	for (loop=0; loop<numFluffy; loop++)
 	{
 		setBlockByIndex(randomIndex(),createFluffyBlock);
 	}
@@ -346,10 +364,10 @@ function randomPuzzle()
 
 	// now simulate tons of player moves
 	
-	// find four tiles that have a block
+	// find four tiles that have a block right now
 	// but didn't at the start state
 	// FIXME: TODO
-	for (loop=0; loop<getRandomInt(1,4); loop++)
+	for (loop=0; loop<numGoal; loop++)
 	{
 		var goalIndex = randomIndex();
 		layout[goalIndex].active = true;

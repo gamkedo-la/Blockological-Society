@@ -16,6 +16,7 @@ var blockQuantumPic = document.createElement("img");
 var blockMetalPic   = document.createElement("img");
 var blockFluffyPic  = document.createElement("img");
 var blockYellowPic  = document.createElement("img");
+var blockGhostPic   = document.createElement("img");
 var cursorPic       = document.createElement("img");
 
 var letterBlockA  = document.createElement("img");
@@ -36,6 +37,7 @@ var editorBlockMetalPic = document.createElement("img");
 var editorBlockFluffyPic = document.createElement("img");
 var editorBlockYellowPic = document.createElement("img");
 var editorCursorPic = document.createElement("img");
+var editorBlockGhostPic = document.createElement("img");
 
 
 var picsToLoad = 0; //set automatically in loadImages()
@@ -56,6 +58,7 @@ function loadImages() {
         { varName: blockMetalPic, theFile: "img/cube_metal.png"},
         { varName: blockFluffyPic, theFile: "img/cube_fluffy.png"},
         { varName: blockYellowPic, theFile: "img/cube_yellow.png"},
+        { varName: blockGhostPic, theFile: "img/cube_ghost.png"},
         { varName: letterBlockA, theFile: "img/letterCubes/cube_A.png"},
         { varName: letterBlockR, theFile: "img/letterCubes/cube_R.png"},
         { varName: letterBlockS, theFile: "img/letterCubes/cube_S.png"},
@@ -71,6 +74,7 @@ function loadImages() {
         { varName: editorBlockQuantumPic, theFile: "img/editor/edit_cube_quantum.png"},
         { varName: editorBlockMetalPic, theFile: "img/editor/edit_cube_metal.png"},
         { varName: editorBlockFluffyPic, theFile: "img/editor/edit_cube_fluffy.png"},
+        { varName: editorBlockGhostPic, theFile: "img/editor/edit_cube_ghost.png"},
         { varName: editorCursorPic, theFile: "img/editor/edit_cursor.png"}
     ]
     picsToLoad = imageList.length; //This method avoids a race condition

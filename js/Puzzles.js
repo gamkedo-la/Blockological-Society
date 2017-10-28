@@ -8,6 +8,7 @@ const BLOCK_FIRE = "r";
 const BLOCK_METAL = "t";
 const BLOCK_QUANTUM = "q";
 const BLOCK_FLUFFY = "f";
+const BLOCK_GHOST = "o";
 
 const BLOCK_A = "A";
 const BLOCK_R = "R";

@@ -63,6 +63,9 @@ function loadLevel(level) {
             case BLOCK_FLUFFY:
                 layout[i].block = createFluffyBlock(location);
                 break;
+            case BLOCK_GHOST:
+                layout[i].block = createGhostBlock(location);
+                break;
             case BLOCK_A:
                 layout[i].block = createLetterBlock(location, "A");
                 break;

@@ -16,6 +16,7 @@ puzzleEditor = {
 		{ image: editorBlockFirePic, preview: blockFirePic, command: setFireBlock },
 		{ image: editorBlockQuantumPic, preview: blockQuantumPic, command: setQuantumBlock },
 		{ image: editorBlockFluffyPic, preview: blockFluffyPic, command: setFluffyBlock },
+		{ image: editorBlockGhostPic, preview: blockGhostPic, command: setGhostBlock}
 	],
 
 	selected: undefined,
@@ -316,6 +317,7 @@ function randomPuzzle()
 	var numQuant = getRandomInt(0,4);
 	var numFluffy = getRandomInt(2,6);
 	var numGoal = getRandomInt(1,4);
+	var numGhost = getRandomInt(0,2);
 	var pushcount = 0;
 	
 	console.log("Randomly adding "
@@ -351,6 +353,10 @@ function randomPuzzle()
 	for (loop=0; loop<numFluffy; loop++)
 	{
 		setBlockByIndex(randomIndex(),createFluffyBlock);
+	}
+	for (loop=0; loop<numFluffy; loop++)
+	{
+		setBlockByIndex(randomIndex(),createGhostBlock);
 	}
 
 	// set a player cursor start location
@@ -425,4 +431,9 @@ function setQuantumBlock(point)
 function setFluffyBlock(point)
 {
 	setBlockAt(point, createFluffyBlock);
+}
+
+function setGhostBlock(point)
+{
+	setBlockAt(point, createGhostBlock);
 }

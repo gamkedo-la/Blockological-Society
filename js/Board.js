@@ -55,6 +55,10 @@ function loadLevel(level) {
                 layout[i].isLoad = true;
                 menuTiles.push(i);
                 break;
+            case TILE_MENU_EDITOR:
+                layout[i].isEditor = true;
+                menuTiles.push(i);
+                break;
             case CURSOR:
                 cursor.init(location.x, location.y);
                 blocks.push(cursor);

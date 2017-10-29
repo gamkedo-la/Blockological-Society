@@ -292,8 +292,10 @@ function erasePuzzle()
 	{
 		layout[tileIndex].active = true;
 		layout[tileIndex].isGoal = false;
+		//generates an error if the player moves before generating the puzzle 
 		if (layout[tileIndex].block != undefined)
 		{
+			console.log(layout[tileIndex].block);
 			layout[tileIndex].block.destroy();
 		}
 	}

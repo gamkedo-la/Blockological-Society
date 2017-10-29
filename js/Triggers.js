@@ -33,22 +33,24 @@ function checkForGoal() {
 
 function checkMenuTiles() {
     var menuTilesCovered = true;
+    var tile;
 
     if (menuTiles.length == 0) {
-        menuTilesCovered = false; //safety
+        return; //safety
     }
 
     for (var i = 0; i < menuTiles.length; i++) {
         index = menuTiles[i]; //it really is a ref to the index of the tile in the layout 
+        tile = layout[index];
 
-        if (layout[index].isStart &&
-            (layout[index].block != undefined && layout[index].block != cursor)) {
+        if (tile.isStart &&
+            (tile.block != undefined && tile.block != cursor)) {
             inMenu = false;
             loadLevel(magnetTestLevel);
             startGame();
         }
-        else if (layout[index].isLoad &&
-            (layout[index].block != undefined && layout[index].block != cursor)) {
+        else if (tile.isLoad &&
+            (tile.block != undefined && tile.block != cursor)) {
             var toLoad = getUserPuzzle(); //returns NULL (not undefined) if the user clicks Cancel at the prompt
             if (toLoad == null) {
                 resetKeyboardInputs();
@@ -66,6 +68,10 @@ function checkMenuTiles() {
                     startGame();
                 }
             }
+        }
+        else if (tile.isEditor&&
+            (tile.block != undefined && tile.block != cursor)){
+            startEditor();
         }
     }
 }

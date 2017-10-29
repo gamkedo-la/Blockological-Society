@@ -13,10 +13,13 @@ var boardHistory = [];
 var currentIndex = -1;
 
 var goalTiles = []; //stored to not iterate over whole grid in checkGoal
+var menuTiles = [];
+
 function loadLevel(level) {
     isGoalMet = false;
     blocks = [];
-
+    goalTiles = [];
+    menuTiles = [];
     var tile = {
         active: false,
         block: undefined
@@ -40,6 +43,14 @@ function loadLevel(level) {
             case TILE_GOAL:
                 layout[i].isGoal = true;
                 goalTiles.push(i);
+                break;
+            case TILE_MENU_START:
+                layout[i].isStart = true;
+                menuTiles.push(i);
+                break;
+            case TILE_MENU_LOAD:
+                layout[i].isLoad = true;
+                menuTiles.push(i);
                 break;
             case CURSOR:
                 cursor.init(location.x, location.y);
@@ -82,7 +93,7 @@ function loadLevel(level) {
                 i--;
                 break;
         }
-        if (i>0 && typeof layout[i].block != "undefined") {
+        if (i>=0 && typeof layout[i].block != "undefined") {
             blocks.push(layout[i].block);
         }
         levelDataIndex++;

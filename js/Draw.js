@@ -1,5 +1,6 @@
 
 //Main UI elements: buttons, slider, all that good stuff
+
 function drawMenu()
 {
 	drawText("Blockological Society", canvas.width*0.25, canvas.height*0.15, '36px Consolas', 'yellow');
@@ -39,10 +40,11 @@ function drawBoard()
         for (var col = 0; col < BOARD_COLS; col++)
         {
             var tileIndex = rowColToArrayIndex(col, row);
-            if (layout[tileIndex].active)
+			var tile = layout[tileIndex];
+			if (tile.active)
             {
                 var iso = twoDToIso(x, y);
-                var currentColor = layout[tileIndex].isGoal ? GOAL_COLOR : TILE_COLOR;
+                var currentColor = tile.isGoal||tile.isStart || tile.isLoad ? GOAL_COLOR : TILE_COLOR;
 
 				drawIsoRhombusFilled(currentColor, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
             }

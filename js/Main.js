@@ -33,11 +33,14 @@ function imageLoadingDoneSoStartGame(){
 
 function update()
 {
+	//Old button-based menu functionalities
+	/*
 	if (inMenu)
 	{
 		updateMenu();
 	}
-	else
+	else*/
+
 	{
 		if (_EDIT_MODE)
 		{
@@ -56,11 +59,13 @@ function update()
 function draw()
 {
 	drawBackground();
-	if (inMenu)
+
+	//Old button-based menu functionality
+	/*if (inMenu)
 	{
 		drawMenu();
 	}
-	else
+	else*/
 	{
 		drawBoard();
 		drawSortedObjects();

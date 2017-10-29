@@ -2,6 +2,8 @@ const CURSOR = "p";
 const TILE_OFF = "#";
 const TILE_EMPTY = ".";
 const TILE_GOAL = "g";
+const TILE_MENU_START = "s";
+const TILE_MENU_LOAD = "l";
 const BLOCK_MAGNET = "m";
 const BLOCK_ICE = "i";
 const BLOCK_FIRE = "r";
@@ -16,18 +18,18 @@ const BLOCK_S = "S";
 const BLOCK_T = "T"; 
 
 var menuLevel = `
-tttt.ttttttt
+ffff.fffffff
 ............
-..g.....g...
+..l.....s...
 ............
 ............
 ............
-....tgt.....
-START.tttttt
+....f.f.....
+START.ffffff
 ............
-..g..f..g...
+..s..f..l...
 ............
-...........p
+.....p......
 `;
 
 var goalTest =
@@ -148,6 +150,10 @@ function exportPuzzle()
     var levelData = convertBoardToArray();
 	var exportString = convertLevelDataToString(levelData);
     window.prompt("Copy to clipboard and paste into Puzzles.js", exportString);
+}
+function getUserPuzzle(){
+	var levelString = window.prompt("Paste the level you want to play here!");
+	return levelString;
 }
 
 function convertLevelDataToString(levelData)

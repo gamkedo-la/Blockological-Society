@@ -151,6 +151,7 @@ function editorKeyHandler(evt)
 	}
 }
 
+//To refactor
 function setActiveTile(point)
 {
 	var cart = isoTotwoD(point.x - TILE_SIZE, point.y);

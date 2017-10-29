@@ -36,11 +36,12 @@ var downKeyHeld = false;
 
 function keyPressed(evt)
 {
+	/*
 	if (inMenu)
 	{
 		//menuEventHandler(evt)
 	}
-	else
+	else*/
 	{
 		keyEventHandler(evt.keyCode, true);
 		

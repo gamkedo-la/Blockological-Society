@@ -15,8 +15,11 @@ var currentIndex = -1;
 var goalTiles = []; //stored to not iterate over whole grid in checkGoal
 var menuTiles = [];
 
+var invalidLevel = false; //best practice would have been to have been a return value of a checkIfValid function, but that would mean iterating over the board twice (unless I'm dumb?)
+
 function loadLevel(level) {
     isGoalMet = false;
+    invalidLevel = false;
     blocks = [];
     goalTiles = [];
     menuTiles = [];
@@ -31,7 +34,7 @@ function loadLevel(level) {
         // copy tile object data into array index
         // BUGFIX: spread "..." operator incompatible with old browsers
         // layout[i] = { ...tile }; // works in Chrome but not Edge
-        layout[i] = { active:tile.active, block:tile.block }; 
+        layout[i] = { active: tile.active, block: tile.block };
         var location = calculateCoordAtTileIndex(i);
         layout[i].active = true; //defaults to true, switched if TILE_OFF
         switch (level[levelDataIndex]) {
@@ -89,14 +92,26 @@ function loadLevel(level) {
             case BLOCK_T:
                 layout[i].block = createLetterBlock(location, "T");
                 break;
-            default:
+            case "\n":
                 i--;
                 break;
+            case " ":
+                i--;
+                break;
+            //If we reach here, there is an incorrect character in the level string; abort mission!
+            default:
+                invalidLevel = true; //drats!
+                break;
         }
-        if (i>=0 && typeof layout[i].block != "undefined") {
+        if (i >= 0 && typeof layout[i].block != "undefined") {
             blocks.push(layout[i].block);
         }
         levelDataIndex++;
+    }
+    if (invalidLevel) {
+        console.log("Incorrect character in the level input. Reverting board...");
+        undoMove();
+        throw "Invalid level entered";
     }
 }
 
@@ -142,6 +157,12 @@ function convertBoardToArray() {
         if (layout[i].active) {
             if (layout[i].isGoal) {
                 levelArray[i] = TILE_GOAL;
+            }
+            else if (layout[i].isStart) {
+                levelArray[i] = TILE_MENU_START;
+            }
+            else if (layout[i].isLoad) {
+                levelArray[i] = TILE_MENU_LOAD;
             }
             else {
                 levelArray[i] = TILE_EMPTY;

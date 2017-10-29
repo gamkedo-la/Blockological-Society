@@ -145,3 +145,12 @@ function calculateMousePos(evt)
 	y: mouseY * screenToCanvasRatio
   };
 }
+
+//Useful for certain async situations. Might be a good idea to put in undoMove();
+//For example in the level loader, if you clicked Cancel but kept pressing the key to push the block, your keyUp never registered and you got a looping window prompt.
+function resetKeyboardInputs(){
+		leftKeyHeld = false;
+		rightKeyHeld = false;
+		upKeyHeld = false;
+		downKeyHeld = false;
+	}

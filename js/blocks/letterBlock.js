@@ -4,6 +4,7 @@ function createLetterBlock(coords, letter){
     var block = createMetalBlock(coords);
     letter = letter.toString().toUpperCase();
     block.sprite = letterAtlas[letter];
+    block.type = letter.toString().toUpperCase();
 
     return block;
 }

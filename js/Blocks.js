@@ -1,6 +1,7 @@
 var blocks = [];
 const Xoffset = 26; //this is the number that get returns from (ctrl.x % TILE_SIZE) when the block is stationary
 const Yoffset = 0;
+
 function createBlockObject(x, y, color, sprite){
     var ctrl = {
         type: BLOCK_MAGNET,

@@ -153,7 +153,9 @@ function exportPuzzle()
 }
 function getUserPuzzle(){
 	var levelString = window.prompt("Paste the level you want to play here!");
+	//levelString = levelString.replace(/\s/g, "!"); //replaces whitespaces with other whitespaces that work
 	return levelString;
+	
 }
 
 function convertLevelDataToString(levelData)

@@ -2,7 +2,7 @@
 
 function ArrayWithOnes(length) { //Lol this took too much time to find
     array = [];
-    console.log("Array with length: ", length);
+    
     for (i = 0; i < length; i++) {
         array.push(1);
     }

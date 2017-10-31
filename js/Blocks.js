@@ -160,25 +160,19 @@ function blocksMoving() {
 
 
 var tick = 0;
-var blocksRemaining = [];
+//var blocksRemaining = [];
 function updateBlocks() {
 
-    //console.log(blocksRemaining);
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].move();
-        //Still wondering whether or not it would be worth it to make a state machine for this.
-        //Prob. will eventually so keeping this rough.
-        //console.log(blocks);
         if (inLeaveTransition || inEnterTransition) {
             //console.log(inLeaveTransition, inEnterTransition);
-            if (inLeaveTransition || (inEnterTransition && blocksRemaining[i] !=0)){blocks[i].z += blocks[i].velocityZ;}
+            blocks[i].z += blocks[i].velocityZ;
             if ((blocks[i].z <= blocks[i].targetZ && inLeaveTransition) ||
                 (blocks[i].z >= blocks[i].targetZ && inEnterTransition)) {
                 if (inLeaveTransition){blocks.splice(i, 1);}
-                else if (inEnterTransition && blocksRemaining[i] !=0){
-                    blocksRemaining[i] = 0;
+                else if (inEnterTransition){
                     blocks[i].z = 0;
-                    console.log(blocksRemaining);
                 }
                 //console.log("Length after: ", blocks.length);
                 //console.log(blocks);

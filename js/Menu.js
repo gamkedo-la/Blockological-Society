@@ -45,49 +45,61 @@ function startEditor() {
     musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
 }
 
+var timer = 0; //frames
 //////////////////////                 Floaty transition                  ///////////////////
 function startLeaveTransition(to) {
     //The game is frozen between the beginning and end of this transition
     destinationBoard = to;
     remaining = blocks.length; //ticks down in updateTransition
     inLeaveTransition = true;
+    var durations = [];
     boardHistory = [];
-    for (var i = 0; i < blocks.length; i++) {
-        blocks[i].inTransit = true;
-    }
-    for (var i = 0; i < blocks.length; i++) {
-        console.log(blocks[i].inTransit);
-    }
 
-    console.log(remaining);
+    for (var i = 0; i < blocks.length; i++) {
+        blocks[i].velocityZ = (Math.random() + 0.2) * -15; //randomized z speeds
+        var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?
+        durations.push(thisDuration);
+    }
+    durations = QuickSort(durations);
+    timer = Math.ceil(durations[durations.length - 1]); //get longest
+    //when timer reaches 0, we change to next phase!
+    //it ain't 100% frame perfect, but it simplifies the phase detection a great deal
 
 }
 function startEnterTransition() {
+
+    console.log(timer);
+    var durations = [];
     inLeaveTransition = false;
     inEnterTransition = true;
     loadLevel(destinationBoard);
     remaining = blocks.length;
-    blocksRemaining = ArrayWithOnes(blocks.length);
+    //blocksRemaining = ArrayWithOnes(blocks.length);
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].inTransit = true;
-        blocks[i].z = -1000;
+        blocks[i].z = -1500;
         blocks[i].targetZ = 0;
-        blocks[i].velocityZ = (Math.random() + 0.2) * 5;
-        //blocks[i].velocityZ = 0;
+        blocks[i].velocityZ = (Math.random() + 0.2) * 15; //randomized z speeds
+        var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?
+        durations.push(thisDuration);
     }
+    durations = QuickSort(durations);
+    timer = Math.ceil(durations[durations.length - 1]); //get longest
+    console.log(durations);
 }
 
 function updateTransition() {
     //blocks get updated in updateBlocks
-    console.log(ArraySum(blocksRemaining));
-    if (inEnterTransition && ArraySum(blocksRemaining)==0) {
-        console.log("Transition over");
+    timer--;
+    console.log("Remaining frames of transition ", timer);
+    if (inLeaveTransition && timer <= 0) {
+        console.log("Starting enter transition...");
+        startEnterTransition();
+    }
+    if (inEnterTransition && timer <= 0) {
+        console.log("Transition over, let's play!");
         inEnterTransition = false;
     }
-    if (inLeaveTransition && blocks.length == 0) {
-            console.log("Starting enter transition");
-            startEnterTransition();
-    }    
 }
 
 /////////////////////                       Other                         ////////////////////

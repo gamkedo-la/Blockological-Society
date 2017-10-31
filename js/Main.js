@@ -44,7 +44,7 @@ function update()
 	}
 	else*/
 	if (enterKeyHeld && !inLeaveTransition){
-		startLeaveTransition(quantumTunnel);
+		startLeaveTransition(testingPuzzle);
 	}
 	if (inLeaveTransition || inEnterTransition){
 		updateTransition();

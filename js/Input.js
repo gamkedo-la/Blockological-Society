@@ -25,6 +25,7 @@ var mousePos = -1;
 var isoMousePos = -1;
 var mouseButtonHeld = false;
 var mouseButtonWasHeld = false;
+var enterKeyHeld = false;
 var undoKeyHeld = false;
 var redoKeyHeld = false;
 var restartKeyHeld = false;
@@ -87,6 +88,9 @@ function keyEventHandler(key, state)
 			break;
 		case KEY_Y:
 			redoKeyHeld = state;
+			break;
+		case KEY_ENTER:
+			enterKeyHeld = state;
 			break;
 		case KEY_ARROW_LEFT:
 			leftKeyHeld = state;

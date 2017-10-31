@@ -70,7 +70,7 @@ function drawSortedObjects()
 	{
 			var block = blocks[i];
 			var iso = twoDToIso(block.x, block.y);
-			drawBitmapCenteredWithRotation(block.sprite, iso.x+TILE_SIZE-3, iso.y-3, 0);
+			drawBitmapCenteredWithRotation(block.sprite, iso.x+TILE_SIZE-3, iso.y-3 + block.z, 0);
 	}
 
 	drawGoalFrames();
@@ -107,6 +107,7 @@ function yLevelQuickSort(array)
 	}
 	beforeList.push(pivot);
 	result = beforeList.concat(afterList);
+	if (result[0] == undefined) { result = [];}
 	return result;
 }
 

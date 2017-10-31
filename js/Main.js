@@ -1,6 +1,9 @@
 var _DEBUG_MAGNETS = false;
 var canvas, canvasContext;
 var inMenu = true;
+var inLeaveTransition = false;
+var inEnterTransition = false;
+var remaining;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
 
@@ -40,19 +43,22 @@ function update()
 		updateMenu();
 	}
 	else*/
-
-	{
-		if (_EDIT_MODE)
-		{
-			panelUpdate(puzzleEditor);
-			return;
-		}
-
-		updatePlayer();
-		updateBlocks();
-		applyBlockEffects();
-		checkForTriggers();
+	if (enterKeyHeld && !inLeaveTransition){
+		startLeaveTransition(quantumTunnel);
 	}
+	if (inLeaveTransition || inEnterTransition){
+		updateTransition();
+	}
+	if (_EDIT_MODE)
+	{
+		panelUpdate(puzzleEditor);
+		return;
+	}
+
+	updatePlayer();
+	updateBlocks();
+	applyBlockEffects();
+	checkForTriggers();
 
 }
 

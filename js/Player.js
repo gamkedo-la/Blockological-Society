@@ -7,9 +7,12 @@ var moveTimer = 0;
 cursor = {
 	type: CURSOR,
 	x: undefined,
-	y: undefined,
+    y: undefined,
+    z: 0, //used for transition
+    velocityZ:(Math.random()+0.2) * -5,
 	targetX: undefined,
-	targetY: undefined,
+    targetY: undefined,
+    targetZ:-1550,
 	speed: TILE_SIZE/8,
     color: CURSOR_COLOR,
     sprite: cursorPic,

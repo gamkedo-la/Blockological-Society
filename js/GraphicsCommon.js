@@ -13,7 +13,8 @@ function drawText(text, x, y, font, color)
 
 function drawBitmapCenteredWithRotation(useBitmap, atX,atY, withAng) {
 	context.save();
-	context.translate(atX, atY);
+    context.translate(atX, atY);
+    //context.translate(0,-200);
 	context.rotate(withAng);
 	context.drawImage(useBitmap, -useBitmap.width/2, -useBitmap.height/2);
 	context.restore();

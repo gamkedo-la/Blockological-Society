@@ -1,5 +1,9 @@
 //Some common functions missing from the JS library :P Feel free to expand
 
+function getRandomBetween(min, max) {
+    return Math.random() * (max - min) + min; //The maximum is exclusive and the minimum is inclusive
+  }
+
 function ArrayWithOnes(length) { //Lol this took too much time to find
     array = [];
     

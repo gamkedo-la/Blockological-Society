@@ -1,8 +1,4 @@
 
-//s,t,a,r,t,e,d,i,t,c,l
-
-var destinationBoard;
-
 function updateMenu() {
 
 
@@ -45,6 +41,7 @@ function startEditor() {
     musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
 }
 
+var destinationBoard;
 var timer = 0; //frames
 //////////////////////                 Floaty transition                  ///////////////////
 function startLeaveTransition(to) {
@@ -56,7 +53,9 @@ function startLeaveTransition(to) {
     boardHistory = [];
 
     for (var i = 0; i < blocks.length; i++) {
-        blocks[i].velocityZ = (Math.random() + 0.2) * -15; //randomized z speeds
+        blocks[i].velocityZ = getRandomBetween(-9,-6); //randomized z speeds
+        blocks[i].targetZ = -900;
+        console.log(blocks[i].velocityZ);
         var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?
         durations.push(thisDuration);
     }
@@ -68,24 +67,22 @@ function startLeaveTransition(to) {
 }
 function startEnterTransition() {
 
-    console.log(timer);
     var durations = [];
     inLeaveTransition = false;
     inEnterTransition = true;
     loadLevel(destinationBoard);
     remaining = blocks.length;
-    //blocksRemaining = ArrayWithOnes(blocks.length);
+
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].inTransit = true;
-        blocks[i].z = -1500;
+        blocks[i].z = -1200;
         blocks[i].targetZ = 0;
-        blocks[i].velocityZ = (Math.random() + 0.2) * 15; //randomized z speeds
+        blocks[i].velocityZ = getRandomBetween(6,9); //randomized z speeds
         var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?
         durations.push(thisDuration);
     }
     durations = QuickSort(durations);
     timer = Math.ceil(durations[durations.length - 1]); //get longest
-    console.log(durations);
 }
 
 function updateTransition() {

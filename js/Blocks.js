@@ -10,15 +10,14 @@ function createBlockObject(x, y, color, sprite) {
         z: 0, //used for transition effect
         targetX: x,
         targetY: y,
-        targetZ: -1500, //before disappearing after transition
+        targetZ: 0, //for transition
         yLevel: -999999,
         speed: TILE_SIZE / 8,
         size: 32,
         color: color,
         sprite: sprite
     }
-    //ctrl.targetZ = Math.random() * -300;
-    ctrl.velocityZ = (Math.random() + 0.2) * -15; //TODO: Clamp function
+
     ctrl.tryPush = function (x, y) {
         var nextX = ctrl.x + x;
         var nextY = ctrl.y + y;
@@ -158,25 +157,17 @@ function blocksMoving() {
 }
 
 
-
-var tick = 0;
-//var blocksRemaining = [];
 function updateBlocks() {
 
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].move();
         if (inLeaveTransition || inEnterTransition) {
-            //console.log(inLeaveTransition, inEnterTransition);
             blocks[i].z += blocks[i].velocityZ;
-            if ((blocks[i].z <= blocks[i].targetZ && inLeaveTransition) ||
-                (blocks[i].z >= blocks[i].targetZ && inEnterTransition)) {
-                if (inLeaveTransition){blocks.splice(i, 1);}
-                else if (inEnterTransition){
-                    blocks[i].z = 0;
-                }
-                //console.log("Length after: ", blocks.length);
-                //console.log(blocks);
-                //console.log(blocks.length);                             
+            if (blocks[i].z <= blocks[i].targetZ && inLeaveTransition){
+                blocks.splice(i, 1); //we can afford to kill the blocks offscreen
+            }
+            else if (blocks[i].z >= blocks[i].targetZ && inEnterTransition) {
+                blocks[i].z = blocks[i].targetZ;
             }
         }
     }

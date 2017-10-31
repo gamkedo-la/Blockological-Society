@@ -159,23 +159,6 @@ function blocksMoving() {
 
 
 
-function ArrayWithOnes(length) { //Lol this took too much time to find
-    array = [];
-    console.log("Array with length: ", length);
-    for (i = 0; i < length; i++) {
-        array.push(1);
-    }
-    return array;
-}
-function ArraySum(array) {
-    var sum = 0;
-    for (i = 0; i < array.length; i++) {
-        toAdd = array[i];
-        sum += toAdd;
-    }
-    return sum;
-}
-
 var tick = 0;
 var blocksRemaining = [];
 function updateBlocks() {

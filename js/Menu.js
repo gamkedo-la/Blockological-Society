@@ -50,7 +50,6 @@ function startLeaveTransition(to) {
     remaining = blocks.length; //ticks down in updateTransition
     inLeaveTransition = true;
     var durations = [];
-    boardHistory = [];
 
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].velocityZ = getRandomBetween(-9,-6); //randomized z speeds
@@ -71,6 +70,7 @@ function startEnterTransition() {
     inLeaveTransition = false;
     inEnterTransition = true;
     loadLevel(destinationBoard);
+    clearBoard();
     remaining = blocks.length;
 
     for (var i = 0; i < blocks.length; i++) {

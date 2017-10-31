@@ -5,10 +5,9 @@ var inLeaveTransition = false;
 var inEnterTransition = false;
 var remaining;
 const FRAMES_PER_SECOND = 60;
-const TIME_PER_TICK = 1/FRAMES_PER_SECOND;
+const TIME_PER_TICK = 1 / FRAMES_PER_SECOND;
 
-window.onload = function()
-{
+window.onload = function () {
 	canvas = document.getElementById('gameCanvas');
 	context = canvas.getContext('2d');
 
@@ -21,21 +20,19 @@ window.onload = function()
 	loadImages();
 }
 
-function imageLoadingDoneSoStartGame(){
+function imageLoadingDoneSoStartGame() {
 
 	setupMenuButtons();
 	//loadLevel(goalTest);
 	loadLevel(menuLevel);
 
-	setInterval(function()
-	{
+	setInterval(function () {
 		update();
 		draw();
-	}, 1000/FRAMES_PER_SECOND);
+	}, 1000 / FRAMES_PER_SECOND);
 }
 
-function update()
-{
+function update() {
 	//Old button-based menu functionalities
 	/*
 	if (inMenu)
@@ -43,27 +40,25 @@ function update()
 		updateMenu();
 	}
 	else*/
-	if (enterKeyHeld && !inLeaveTransition){
+	if (enterKeyHeld && !inLeaveTransition) {
 		startLeaveTransition(testingPuzzle);
 	}
-	if (inLeaveTransition || inEnterTransition){
+	if (inLeaveTransition || inEnterTransition) {
 		updateTransition();
 	}
-	if (_EDIT_MODE)
-	{
+	if (_EDIT_MODE) {
 		panelUpdate(puzzleEditor);
 		return;
 	}
 
-	updatePlayer();
+	if (!inLeaveTransition && !inEnterTransition) { updatePlayer(); }
 	updateBlocks();
-	applyBlockEffects();
+	if (!inLeaveTransition && !inEnterTransition) {applyBlockEffects();}
 	checkForTriggers();
 
 }
 
-function draw()
-{
+function draw() {
 	drawBackground();
 
 	//Old button-based menu functionality
@@ -75,12 +70,10 @@ function draw()
 	{
 		drawBoard();
 		drawSortedObjects();
-		if (isGoalMet)
-		{
-			drawText("You won!!!", canvas.width*0.43, canvas.height*0.15, '24px Comic Sans MS', 'yellow');
+		if (isGoalMet) {
+			drawText("You won!!!", canvas.width * 0.43, canvas.height * 0.15, '24px Comic Sans MS', 'yellow');
 		}
-		if (_EDIT_MODE)
-		{
+		if (_EDIT_MODE) {
 			drawPanelWithButtons(puzzleEditor);
 		}
 	}

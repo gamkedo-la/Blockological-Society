@@ -185,6 +185,13 @@ function convertBoardToArray() {
     return levelArray;
 }
 
+//used when changing levels
+function clearBoard(){
+    boardHistory = [];
+    currentIndex = -1; //might be better to refactor this to 0?
+    saveBoard();
+}
+
 function saveBoard() {
     boardHistory = boardHistory.slice(0, currentIndex + 1);
 

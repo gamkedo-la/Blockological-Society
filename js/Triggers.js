@@ -46,7 +46,8 @@ function checkMenuTiles() {
         if (tile.isStart &&
             (tile.block != undefined && tile.block != cursor)) {
             inMenu = false;
-            loadLevel(magnetTestLevel);
+            //startLeaveTransition();
+            startLeaveTransition(testingPuzzle);
             startGame();
         }
         else if (tile.isLoad &&
@@ -65,6 +66,7 @@ function checkMenuTiles() {
                 {
                     //All clear!
                     inMenu = false;
+                    startLeaveTransition(toLoad);
                     startGame();
                 }
             }

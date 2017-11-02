@@ -4,19 +4,34 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
 	<style>
-		body { margin:0; color:white; background:#2980b9; 
-		background-image:url(img/background-island.png);
-		background-repeat:no-repeat;
-		background-position:center 64px;
-		}
-		div { text-align:center; margin-top:40px; font-family:arial;  }
+		body { margin:0; color:white; background:#2980b9; width:100%; height:100%; }
 		ul { text-align:left; width:200px; margin:auto; margin-top:40px; }
+		#gameDiv { text-align:center; margin-top:40px; font-family:arial;  }
+		#instructions { text-align:center; font-family:arial; background:none; }
+		#gameBackground {
+			display:block; position:absolute;
+			top:0px; left:0px; width:100%; height:1000px;
+			background-image:url(img/background-island.png);
+			background-repeat:no-repeat;
+			background-position:center 64px;
+			z-index:-1;
+		}
+		#bg_layer1, #bg_layer2 { 
+			position:absolute; top:0px; left:0px; width:100%; height:320px; 
+			background:url(img/background-clouds.png); 
+  			animation:60000s scroll infinite linear;		
+		}
+		#bg_layer2 { top:-180px; animation:60000s scroll_slow infinite linear; }
+		@keyframes scroll { 100% { background-position:-1000000px 0px; } }
+		@keyframes scroll_slow { 100% { background-position:-300000px 0px; } }
 	</style>
 </head>
 
 <body>
 
-<div>
+<div id="gameBackground"><div id='bg_layer1'></div><div id='bg_layer2'></div></div>
+
+<div id="gameDiv">
 	<canvas id="gameCanvas" width="800" height="600"></canvas>
 </div>
 
@@ -48,7 +63,7 @@
 <script src="js/Main.js"></script>
 <script src="js/Editor.js"></script>
 
-<div>
+<div id='instructions'>
 How to play
 <ul>
 	<li>Arrow keys to move</li>

@@ -4,17 +4,20 @@
 	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
 	<meta content="utf-8" http-equiv="encoding">
 	<style>
-		body { margin:0; color:white; background:#2980b9; width:100%; height:100%; }
+		body { margin:0; color:white; background:#2980b9; width:100%; height:100%; overflow:hidden; }
 		ul { text-align:left; width:200px; margin:auto; margin-top:40px; }
 		#gameDiv { text-align:center; margin-top:40px; font-family:arial;  }
-		#instructions { text-align:center; font-family:arial; background:none; }
+		#instructions { position:absolute; bottom:20px; left:20px; text-align:center; font-family:arial; background:none; }
 		#gameBackground {
 			display:block; position:absolute;
-			top:0px; left:0px; width:100%; height:1000px;
+			top:0px; left:0px; width:100%; height:100%;
+			z-index:-1;
+		}
+		#bg_layer0 { 
+			position:absolute; top:0px; left:0px; width:100%; height:100%;
 			background-image:url(img/background-island.png);
 			background-repeat:no-repeat;
 			background-position:center 64px;
-			z-index:-1;
 		}
 		#bg_layer1 { 
 			position:absolute; top:0px; left:0px; width:100%; height:320px; 
@@ -31,15 +34,23 @@
 			background:url(img/background-birds.png); 
 			animation:60000s scroll_birds infinite linear; 
 		}
+		#bg_sun { 
+			position:absolute; top:45%; left:50%; width:800px; height:800px;  
+			margin-top:-400px; margin-left:-400px;
+			background:url(img/background-sunshine.png); 
+			animation:120s sun_spin infinite linear; 
+		}
 		@keyframes scroll { 100% { background-position:-1000000px 0px; } }
 		@keyframes scroll_slow { 100% { background-position:-300000px 0px; } }
 		@keyframes scroll_birds { 100% { background-position:300000px 0px; } }
+		@keyframes sun_spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
 	</style>
 </head>
 
 <body>
 
-<div id="gameBackground"><div id='bg_layer1'></div><div id='bg_layer2'></div><div id='bg_layer3'></div></div>
+<div id="gameBackground"><div id='bg_sun'></div><div id='bg_layer0'></div><div id='bg_layer1'></div><div id='bg_layer2'></div><div id='bg_layer3'></div></div>
 
 <div id="gameDiv">
 	<canvas id="gameCanvas" width="800" height="600"></canvas>

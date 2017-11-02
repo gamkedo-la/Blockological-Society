@@ -29,7 +29,11 @@ function drawMenuButtons() {
 //Ingame elements
 function drawBackground()
 {
-    colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
+	// fill with a solid color
+	//colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
+	
+	// allow for transparent canvas with backgrounds underneath
+	context.clearRect(0,0,canvas.width,canvas.height);
 }
 
 function drawBoard()

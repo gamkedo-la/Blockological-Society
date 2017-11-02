@@ -31,6 +31,7 @@ function drawBackground()
 {
     colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
 }
+
 function drawBoard()
 {
     var x = BOARD_X;

@@ -16,20 +16,30 @@
 			background-position:center 64px;
 			z-index:-1;
 		}
-		#bg_layer1, #bg_layer2 { 
+		#bg_layer1 { 
 			position:absolute; top:0px; left:0px; width:100%; height:320px; 
 			background:url(img/background-clouds.png); 
   			animation:60000s scroll infinite linear;		
 		}
-		#bg_layer2 { top:-180px; animation:60000s scroll_slow infinite linear; }
+		#bg_layer2 { 
+			position:absolute; top:-180px; left:0px; width:100%; height:320px; 
+			background:url(img/background-clouds.png); 
+			animation:60000s scroll_slow infinite linear; 
+		}
+		#bg_layer3 { 
+			position:absolute; top:200px; left:0px; width:100%; height:40px; 
+			background:url(img/background-birds.png); 
+			animation:60000s scroll_birds infinite linear; 
+		}
 		@keyframes scroll { 100% { background-position:-1000000px 0px; } }
 		@keyframes scroll_slow { 100% { background-position:-300000px 0px; } }
+		@keyframes scroll_birds { 100% { background-position:300000px 0px; } }
 	</style>
 </head>
 
 <body>
 
-<div id="gameBackground"><div id='bg_layer1'></div><div id='bg_layer2'></div></div>
+<div id="gameBackground"><div id='bg_layer1'></div><div id='bg_layer2'></div><div id='bg_layer3'></div></div>
 
 <div id="gameDiv">
 	<canvas id="gameCanvas" width="800" height="600"></canvas>

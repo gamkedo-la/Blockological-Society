@@ -138,13 +138,13 @@ function editorKeyHandler(evt)
 			exportPuzzle();
 			break;
 		case KEY_NUM_1:
-			loadLevel(testLevel);
+			startLeaveTransition(testingPuzzle);
 			break;
 		case KEY_NUM_2:
-			loadLevel(emptyLevel);
+			startLeaveTransition(emptyLevel);
 			break;
 		case KEY_NUM_2:
-			loadLevel(magnetTestLevel);
+			startLeaveTransition(magnetTestLevel);
 			break;
 		default:
 			break;

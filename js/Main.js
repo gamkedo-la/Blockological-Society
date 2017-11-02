@@ -48,7 +48,7 @@ function update() {
 	}
 	if (_EDIT_MODE) {
 		panelUpdate(puzzleEditor);
-		return;
+		//return;
 	}
 
 	if (!inLeaveTransition && !inEnterTransition) { updatePlayer(); }

@@ -36,7 +36,7 @@ function startGame() {
 function startEditor() {
     inMenu = false;
     _EDIT_MODE = true;
-    loadLevel(emptyLevel);
+    startLeaveTransition(emptyLevel);
 
     musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
 }
@@ -59,6 +59,9 @@ function startLeaveTransition(to) {
         durations.push(thisDuration);
     }
     durations = QuickSort(durations);
+    if (durations.length == 0){
+        durations = [0];
+    }
     timer = Math.ceil(durations[durations.length - 1]); //get longest
     //when timer reaches 0, we change to next phase!
     //it ain't 100% frame perfect, but it simplifies the phase detection a great deal
@@ -82,6 +85,9 @@ function startEnterTransition() {
         durations.push(thisDuration);
     }
     durations = QuickSort(durations);
+    if (durations.length == 0){
+        durations = [0];
+    }
     timer = Math.ceil(durations[durations.length - 1]); //get longest
 }
 

@@ -49,7 +49,7 @@ function drawBoard()
 			if (tile.active)
             {
                 var iso = twoDToIso(x, y);
-                var currentColor = tile.isGoal||tile.isStart || tile.isLoad || tile.isEditor ? GOAL_COLOR : TILE_COLOR;
+                var currentColor = tile.isGoal||tile.isStart ||tile.isLevel || tile.isLoad || tile.isEditor ? GOAL_COLOR : TILE_COLOR;
 
 				drawIsoRhombusFilled(currentColor, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
             }

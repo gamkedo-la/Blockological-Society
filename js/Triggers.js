@@ -45,10 +45,10 @@ function checkMenuTiles() {
 
         if (tile.isStart &&
             (tile.block != undefined && tile.block != cursor)) {
-            inMenu = false;
+            //inMenu = false;
             //startLeaveTransition();
-            startLeaveTransition(testingPuzzle);
-            startGame();
+            startLeaveTransition(levelSelect);
+            //startGame();
         }
         else if (tile.isLoad &&
             (tile.block != undefined && tile.block != cursor)) {
@@ -74,6 +74,12 @@ function checkMenuTiles() {
         else if (tile.isEditor&&
             (tile.block != undefined && tile.block != cursor)){
             startEditor();
+        }
+        else if (tile.isLevel&&
+            (tile.block != undefined && tile.block != cursor)){
+            inMenu = false;
+            startLeaveTransition(levelOrder[tile.levelNumber]);
+            startGame();
         }
     }
 }

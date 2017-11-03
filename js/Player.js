@@ -12,7 +12,7 @@ cursor = {
     velocityZ:(Math.random()+0.2) * -5,
 	targetX: undefined,
     targetY: undefined,
-    targetZ:-1550,
+    targetZ:-1000,
 	speed: TILE_SIZE/8,
     color: CURSOR_COLOR,
     sprite: cursorPic,

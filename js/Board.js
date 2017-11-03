@@ -23,6 +23,7 @@ function loadLevel(level) {
     blocks = [];
     goalTiles = [];
     menuTiles = [];
+    var currentLvlTile = 1; //start at level 1 and incremented with every "@" tile
     var tile = {
         active: false,
         block: undefined
@@ -53,6 +54,13 @@ function loadLevel(level) {
                 break;
             case TILE_MENU_LOAD:
                 layout[i].isLoad = true;
+                menuTiles.push(i);
+                break;
+            case TILE_MENU_LEVELSTART:
+                layout[i].isLevel = true;
+                layout[i].levelNumber = currentLvlTile;
+                console.log("Made lvl tile, index: ", currentLvlTile);
+                currentLvlTile++;
                 menuTiles.push(i);
                 break;
             case TILE_MENU_EDITOR:

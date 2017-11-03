@@ -54,7 +54,6 @@ function startLeaveTransition(to) {
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].velocityZ = getRandomBetween(-9,-6); //randomized z speeds
         blocks[i].targetZ = -900;
-        console.log(blocks[i].velocityZ);
         var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?
         durations.push(thisDuration);
     }
@@ -78,7 +77,7 @@ function startEnterTransition() {
 
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].inTransit = true;
-        blocks[i].z = -1200;
+        blocks[i].z = -1000;
         blocks[i].targetZ = 0;
         blocks[i].velocityZ = getRandomBetween(6,9); //randomized z speeds
         var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?

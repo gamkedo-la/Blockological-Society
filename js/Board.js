@@ -95,6 +95,24 @@ function loadLevel(level) {
             case BLOCK_A:
                 layout[i].block = createLetterBlock(location, "A");
                 break;
+            case BLOCK_C:
+                layout[i].block = createLetterBlock(location, "C");
+                break;
+            case BLOCK_D:
+                layout[i].block = createLetterBlock(location, "D");
+                break;
+            case BLOCK_E:
+                layout[i].block = createLetterBlock(location, "E");
+                break;
+            case BLOCK_I:
+                layout[i].block = createLetterBlock(location, "I");
+                break;
+            case BLOCK_L:
+                layout[i].block = createLetterBlock(location, "L");
+                break;
+            case BLOCK_O:
+                layout[i].block = createLetterBlock(location, "O");
+                break;
             case BLOCK_R:
                 layout[i].block = createLetterBlock(location, "R");
                 break;

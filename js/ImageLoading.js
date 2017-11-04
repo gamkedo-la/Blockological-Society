@@ -20,7 +20,12 @@ var blockGhostPic   = document.createElement("img");
 var cursorPic       = document.createElement("img");
 
 var letterBlockA  = document.createElement("img");
-//var letterBlockE  = document.createElement("img");
+var letterBlockC  = document.createElement("img");
+var letterBlockD  = document.createElement("img");
+var letterBlockE  = document.createElement("img");
+var letterBlockI  = document.createElement("img");
+var letterBlockL  = document.createElement("img");
+var letterBlockO  = document.createElement("img");
 var letterBlockR  = document.createElement("img");
 var letterBlockS  = document.createElement("img");
 var letterBlockT  = document.createElement("img");
@@ -60,6 +65,12 @@ function loadImages() {
         { varName: blockYellowPic, theFile: "img/cube_yellow.png"},
         { varName: blockGhostPic, theFile: "img/cube_ghost.png"},
         { varName: letterBlockA, theFile: "img/letterCubes/cube_A.png"},
+        { varName: letterBlockC, theFile: "img/letterCubes/cube_C.png"},
+        { varName: letterBlockD, theFile: "img/letterCubes/cube_D.png"},
+        { varName: letterBlockE, theFile: "img/letterCubes/cube_E.png"},
+        { varName: letterBlockI, theFile: "img/letterCubes/cube_I.png"},
+        { varName: letterBlockL, theFile: "img/letterCubes/cube_L.png"},
+        { varName: letterBlockO, theFile: "img/letterCubes/cube_O.png"},
         { varName: letterBlockR, theFile: "img/letterCubes/cube_R.png"},
         { varName: letterBlockS, theFile: "img/letterCubes/cube_S.png"},
         { varName: letterBlockT, theFile: "img/letterCubes/cube_T.png"},

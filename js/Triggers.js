@@ -66,6 +66,7 @@ function checkMenuTiles() {
                 {
                     //All clear!
                     inMenu = false;
+                    undoMove();
                     startLeaveTransition(toLoad);
                     startGame();
                 }

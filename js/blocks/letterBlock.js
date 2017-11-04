@@ -1,7 +1,7 @@
 
 //Make a metal block with a modified pic
 function createLetterBlock(coords, letter){
-    var block = createMetalBlock(coords);
+    var block = createFluffyBlock(coords);
     letter = letter.toString().toUpperCase();
     block.sprite = letterAtlas[letter];
     block.type = letter.toString().toUpperCase();
@@ -11,6 +11,12 @@ function createLetterBlock(coords, letter){
 
 letterAtlas = {
     "A" : letterBlockA,
+    "C" : letterBlockC,
+    "D" : letterBlockD,
+    "E" : letterBlockE,
+    "I" : letterBlockI,
+    "L" : letterBlockL,
+    "O" : letterBlockO,
     "R" : letterBlockR,
     "S" : letterBlockS,
     "T" : letterBlockT

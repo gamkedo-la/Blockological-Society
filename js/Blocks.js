@@ -175,7 +175,7 @@ function updateBlocks() {
 function applyBlockEffects() {
     for (var i = 0; i < blocks.length; i++) {
         if (typeof blocks[i].logic === "function") {
-            blocks[i].logic()
+            blocks[i].logic();
         }
     }
 }

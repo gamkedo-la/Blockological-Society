@@ -23,7 +23,7 @@ function loadLevel(level) {
     blocks = [];
     goalTiles = [];
     menuTiles = [];
-    var currentLvlTile = 1; //start at level 1 and incremented with every "@" tile
+    var currentLvlTile = 0; //start at level "0" and incremented with every "@" tile
     var tile = {
         active: false,
         block: undefined

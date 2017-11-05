@@ -88,6 +88,21 @@ var emptyLevel =
 ............
 `;
 
+var icyManeuvers = `
+ii....ii.r..
+..i......rt.
+.........tt.
+rrr.........
+tttttm.....r
+p..rt......r
+.i.rtt.i...r
+..r.m....tt.
+.itt...tttt.
+....m..ttg..
+............
+rrrrtt...m..
+`;
+
 var magnetTestLevel =
 `
 ############
@@ -169,7 +184,7 @@ r.q.....iq..
 .........m.#
 `;
 
-var levelOrder = [quantumTunnel, quantumHard,quantumHard,quantumHard,quantumHard,quantumHard,quantumHard];
+var levelOrder = [quantumTunnel, quantumHard, icyManeuvers,quantumHard,quantumHard,quantumHard,quantumHard];
 
 // hotkey is F5
 function exportPuzzle()

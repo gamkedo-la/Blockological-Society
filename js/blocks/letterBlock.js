@@ -1,5 +1,5 @@
 
-//Make a metal block with a modified pic
+//Make a fluffy block with a modified pic
 function createLetterBlock(coords, letter){
     var block = createFluffyBlock(coords);
     letter = letter.toString().toUpperCase();

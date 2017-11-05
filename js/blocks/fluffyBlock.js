@@ -22,10 +22,9 @@ function createFluffyBlock(coords) {
                  tile.block.type == BLOCK_FLUFFY &&
                  nextTile != undefined &&
                  nextTile.active == true &&
-                 (nextTile.block == undefined || tile.block.type == BLOCK_FLUFFY))
+                 nextTile.block == undefined)
         {
-            console.log("Fluffy!");
-            tile.block.tryPush(nextX, nextY);
+            tile.block.queuePush(x, y);
             block.queuePush(x, y);
             return true; // can move
         }

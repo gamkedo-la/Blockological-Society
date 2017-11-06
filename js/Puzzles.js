@@ -103,6 +103,21 @@ p..rt......r
 rrrrtt...m..
 `;
 
+var strongStrongMagnets = `
+############
+############
+############
+###g...m.###
+###m..t..###
+###f.tm..###
+###......###
+###..m.m.###
+###...m..###
+###...p..###
+############
+############
+`;
+
 var magnetTestLevel =
 `
 ############
@@ -184,7 +199,7 @@ r.q.....iq..
 .........m.#
 `;
 
-var levelOrder = [quantumTunnel, quantumHard, icyManeuvers,quantumHard,quantumHard,quantumHard,quantumHard];
+var levelOrder = [bedSpread, strongStrongMagnets, quantumTunnel, quantumHard, icyManeuvers];
 
 // hotkey is F5
 function exportPuzzle()

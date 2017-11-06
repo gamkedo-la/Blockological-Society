@@ -117,6 +117,20 @@ var strongStrongMagnets = `
 ############
 ############
 `;
+var justPickOne = `
+.m.m.m.m.m.g
+m...#######m
+......m.....
+m...m..m...m
+...m.m..m.m.
+m....#######
+.m.m.m......
+###.m.m.m.m.
+.m.m.m.....m
+.#t##.....m.
+p.#t###..m..
+..m.m.m.m...
+`;
 
 var magnetTestLevel =
 `

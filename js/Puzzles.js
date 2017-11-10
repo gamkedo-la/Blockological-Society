@@ -51,8 +51,8 @@ var levelSelect = `
 .f.f.f.f.f..
 .@.@.@.@.@..
 ............
-............
-............
+.f.f...f....
+.@.@...@....
 .....p......
 `;
 
@@ -213,7 +213,52 @@ r.q.....iq..
 .........m.#
 `;
 
-var levelOrder = [bedSpread, strongStrongMagnets, quantumTunnel, quantumHard, icyManeuvers];
+var easyIntro = `
+ffffffffffff
+ffffffffffff
+ff#######fff
+ff#....##fff
+ff#.f..##fff
+ff#.g.p##fff
+ff#....##fff
+ff#######fff
+ff#######fff
+ffffffffffff
+ffffffffffff
+ffffffffffff
+`;
+var step2Intro = `
+ffffffffffff
+f...fff...ff
+f...f.....ff
+f..ff#....ff
+fffff#...fff
+ff.###...fff
+ff....g..fff
+f......p.fff
+f........fff
+f...ffffffff
+ffffffffffff
+ffffffffffff
+`;
+var step3Intro = `
+ffffffffffff
+ffffffffffff
+fff......fff
+ff........ff
+ff..#f#...ff
+ff..#f#...ff
+ff..g.p...ff
+ff........ff
+ff........ff
+fff......fff
+ffffffffffff
+ffffffffffff
+`;
+
+
+var levelOrder = [bedSpread, strongStrongMagnets, quantumTunnel, quantumHard, icyManeuvers,
+					easyIntro,step2Intro,step3Intro];
 
 // hotkey is F5
 function exportPuzzle()

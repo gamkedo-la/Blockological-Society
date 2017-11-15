@@ -25,7 +25,6 @@ const BLOCK_R = "R";
 const BLOCK_S = "S";
 const BLOCK_T = "T"; 
 
-
 var menuLevel = `
 LOAD.CREDITS
 ............
@@ -42,7 +41,7 @@ START.EDITOR
 `;
 
 var levelSelect = `
-............
+.....p......
 ............
 .f.f.f.f.f..
 .@.@.@.@.@..
@@ -52,7 +51,7 @@ var levelSelect = `
 ............
 .f.f.f.f.f..
 .@.@.@.@.@..
-.....p......
+............
 ............
 `;
 
@@ -256,12 +255,13 @@ ffffffffffff
 ffffffffffff
 `;
 
-
-var levelOrder = [bedSpread, strongStrongMagnets, quantumTunnel, quantumHard, icyManeuvers,
-					easyIntro,step2Intro,step3Intro,
+var allUnlocked = false;
+var levelOrder = [easyIntro, step2Intro, step3Intro, strongStrongMagnets,
+					quantumTunnel, quantumHard, icyManeuvers,bedSpread,
 					magnetLevels.intro,magnetLevels.stuckMagnet,
 					magnetLevels.stuckMagnet2,magnetLevels.stuckMagnet3,
 					magnetLevels.stuckMagnet4];
+levelOrder[0].isUnlocked = true; //the beginning of all that is!
 
 // hotkey is F5
 function exportPuzzle()

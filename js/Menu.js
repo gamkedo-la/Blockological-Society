@@ -13,18 +13,6 @@ function updateMenu() {
         else menuButtons[i].hasFocus = false;
     }
 }
-/*
-function menuEventHandler(evt) {
-    //disabled atm, now in startGame()!
-    if (false) {
-        inMenu = false;
-
-        musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
-    }
-}
-*/
-
-
 
 //////////////////////                  Button callbacks                  ////////////////////
 function startGame() {
@@ -47,7 +35,6 @@ var timer = 0; //frames
 function startLeaveTransition(to) {
     //The game is frozen between the beginning and end of this transition
     destinationBoard = to;
-    remaining = blocks.length; //ticks down in updateTransition
     inLeaveTransition = true;
     var durations = [];
 
@@ -73,7 +60,6 @@ function startEnterTransition() {
     inEnterTransition = true;
     loadLevel(destinationBoard);
     clearBoard();
-    remaining = blocks.length;
 
     for (var i = 0; i < blocks.length; i++) {
         blocks[i].inTransit = true;
@@ -93,7 +79,6 @@ function startEnterTransition() {
 function updateTransition() {
     //blocks get updated in updateBlocks
     timer--;
-    // console.log("Remaining frames of transition ", timer);
     if (inLeaveTransition && timer <= 0) {
         console.log("Starting enter transition...");
         startEnterTransition();

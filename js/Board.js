@@ -58,6 +58,9 @@ function loadLevel(level) {
                 break;
             case TILE_MENU_LEVELSTART:
                 layout[i].isLevel = true;
+                if (currentLvlTile <= currentLevel){
+                    layout[i].isUnlocked = true;
+                }
                 layout[i].levelNumber = currentLvlTile;
                 currentLvlTile++;
                 menuTiles.push(i);

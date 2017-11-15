@@ -27,6 +27,9 @@ function checkForGoal() {
 
     if (goalTilesCovered) {
         isGoalMet = true;
+        inMenu = true;
+        if (currentLevel<levelOrder.length){ currentLevel++; }
+        startLeaveTransition(levelSelect);
         goalTriggerSound.play();
     }
 }
@@ -48,10 +51,7 @@ function checkMenuTiles() {
 
         if (tile.isStart &&
             (tile.block != undefined && tile.block != cursor)) {
-            //inMenu = false;
-            //startLeaveTransition();
             startLeaveTransition(levelSelect);
-            //startGame();
         }
         else if (tile.isLoad &&
             (tile.block != undefined && tile.block != cursor)) {
@@ -79,10 +79,11 @@ function checkMenuTiles() {
             (tile.block != undefined && tile.block != cursor)){
             startEditor();
         }
-        else if (tile.isLevel&&
+        else if (tile.isLevel&&(tile.isUnlocked||allUnlocked)&&
             (tile.block != undefined && tile.block != cursor)){
             inMenu = false;
             startLeaveTransition(levelOrder[tile.levelNumber]);
+            currentLevel = tile.levelNumber; //so that we can unlock the next level
             startGame();
         }
     }

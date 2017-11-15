@@ -3,7 +3,7 @@ var canvas, canvasContext;
 var inMenu = true;
 var inLeaveTransition = false;
 var inEnterTransition = false;
-var remaining;
+var currentLevel = 0;
 const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1 / FRAMES_PER_SECOND;
 
@@ -23,7 +23,6 @@ window.onload = function () {
 function imageLoadingDoneSoStartGame() {
 
 	setupMenuButtons();
-	//loadLevel(goalTest);
 	loadLevel(menuLevel);
 
 	setInterval(function () {
@@ -33,13 +32,6 @@ function imageLoadingDoneSoStartGame() {
 }
 
 function update() {
-	//Old button-based menu functionalities
-	/*
-	if (inMenu)
-	{
-		updateMenu();
-	}
-	else*/
 	if (enterKeyHeld && !inLeaveTransition) {
 		startLeaveTransition(testingPuzzle);
 	}
@@ -60,13 +52,6 @@ function update() {
 
 function draw() {
 	drawBackground();
-
-	//Old button-based menu functionality
-	/*if (inMenu)
-	{
-		drawMenu();
-	}
-	else*/
 	{
 		drawBoard();
 		drawSortedObjects();

@@ -93,7 +93,7 @@ function startEnterTransition() {
 function updateTransition() {
     //blocks get updated in updateBlocks
     timer--;
-    console.log("Remaining frames of transition ", timer);
+    // console.log("Remaining frames of transition ", timer);
     if (inLeaveTransition && timer <= 0) {
         console.log("Starting enter transition...");
         startEnterTransition();

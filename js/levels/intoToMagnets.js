@@ -1,4 +1,4 @@
-magnetLevels = {}
+var magnetLevels = {};
 
 magnetLevels.intro = `
 ############
@@ -45,7 +45,7 @@ t...#t######
 ############
 `;
 
-magnetsLevels.stuckMagnet3 = `
+magnetLevels.stuckMagnet3 = `
 ############
 ############
 .........###
@@ -60,7 +60,7 @@ g...#m..####
 ############
 `;
 
-magnetsLevels.stuckMagnet3 = `
+magnetLevels.stuckMagnet4 = `
 ############
 ############
 .m.......###

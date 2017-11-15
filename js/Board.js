@@ -59,7 +59,6 @@ function loadLevel(level) {
             case TILE_MENU_LEVELSTART:
                 layout[i].isLevel = true;
                 layout[i].levelNumber = currentLvlTile;
-                console.log("Made lvl tile, index: ", currentLvlTile);
                 currentLvlTile++;
                 menuTiles.push(i);
                 break;

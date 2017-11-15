@@ -52,7 +52,7 @@ function startLeaveTransition(to) {
     var durations = [];
 
     for (var i = 0; i < blocks.length; i++) {
-        blocks[i].velocityZ = getRandomBetween(-9,-6); //randomized z speeds
+        blocks[i].velocityZ = getRandomBetween(-11,-6); //randomized z speeds
         blocks[i].targetZ = -900;
         var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?
         durations.push(thisDuration);
@@ -79,7 +79,7 @@ function startEnterTransition() {
         blocks[i].inTransit = true;
         blocks[i].z = -1000;
         blocks[i].targetZ = 0;
-        blocks[i].velocityZ = getRandomBetween(6,9); //randomized z speeds
+        blocks[i].velocityZ = getRandomBetween(6,11); //randomized z speeds
         var thisDuration = Math.abs((blocks[i].targetZ-blocks[i].z) / blocks[i].velocityZ);  //how long for this block?
         durations.push(thisDuration);
     }

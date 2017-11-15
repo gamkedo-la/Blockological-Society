@@ -35,6 +35,9 @@ function checkMenuTiles() {
     var menuTilesCovered = true;
     var tile;
 
+    if (inLeaveTransition||inEnterTransition){
+        return;
+    }
     if (menuTiles.length == 0) {
         return; //safety
     }

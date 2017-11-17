@@ -35,8 +35,17 @@ var upKeyHeld = false;
 var rightKeyHeld = false;
 var downKeyHeld = false;
 
+const MUSIC_STARTS_ON_FIRST_KEYPRESS = true;
+var music_already_playing = false;
+
 function keyPressed(evt)
 {
+	if (MUSIC_STARTS_ON_FIRST_KEYPRESS && !music_already_playing)
+	{
+		music_already_playing = true;
+		musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
+	}
+	
 	/*
 	if (inMenu)
 	{

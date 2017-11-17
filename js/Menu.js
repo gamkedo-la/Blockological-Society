@@ -18,7 +18,8 @@ function updateMenu() {
 function startGame() {
     inMenu = false;
 
-    musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
+    if (!music_already_playing) // see Input.js - music waits until the 1st keypress
+        musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
 }
 
 function startEditor() {

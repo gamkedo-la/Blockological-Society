@@ -40,24 +40,34 @@
 			background:url(img/background-sunshine.png); 
 			animation:120s sun_spin infinite linear; 
 		}
+		
 		@keyframes scroll { 100% { background-position:-1000000px 0px; } }
 		@keyframes scroll_slow { 100% { background-position:-300000px 0px; } }
 		@keyframes scroll_birds { 100% { background-position:300000px 0px; } }
 		@keyframes sun_spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+		#logo {
+			position:absolute; top:16px; left:50%; width:800px; height:128px;  
+			margin-top:0px; margin-left:-400px;
+			background:url(img/logo.png); 
+			animation:8s fade_out linear; 
+			animation-iteration-count: 1;
+		}
+		@keyframes fade_out { from { opacity:1; } to { opacity:0; } }
 
 	</style>
 </head>
 
 <body>
 
-<div id="gameBackground"><div id='bg_sun'></div><div id='bg_layer0'></div><div id='bg_layer1'></div><div id='bg_layer2'></div><div id='bg_layer3'></div></div>
+<div id="gameBackground"><div id='bg_sun'></div><div id='bg_layer0'></div><div id='bg_layer1'></div><div id='bg_layer2'></div><div id='bg_layer3'></div><div id='logo'></div></div>
 
 <div id="gameDiv">
 	<canvas id="gameCanvas" width="800" height="600"></canvas>
 </div>
 
 <!--
-<audio id='music' loop="loop"><source src="sound/rooftops_by_mcfunkypants_lofi.mp3" type="audio/mpeg"></audio>
+<audio id='music' loop="loop"><source src="music/rooftops_by_mcfunkypants_lofi.mp3" type="audio/mpeg"></audio>
 -->
 
 <script src="js/levels/intoToMagnets.js"></script>

@@ -95,34 +95,46 @@ function loadLevel(level) {
                 layout[i].block = createGhostBlock(location);
                 break;
             case BLOCK_A:
-                layout[i].block = createLetterBlock(location, "A");
+                layout[i].block = createMarkedBlock(location, "A");
                 break;
             case BLOCK_C:
-                layout[i].block = createLetterBlock(location, "C");
+                layout[i].block = createMarkedBlock(location, "C");
                 break;
             case BLOCK_D:
-                layout[i].block = createLetterBlock(location, "D");
+                layout[i].block = createMarkedBlock(location, "D");
                 break;
             case BLOCK_E:
-                layout[i].block = createLetterBlock(location, "E");
+                layout[i].block = createMarkedBlock(location, "E");
                 break;
             case BLOCK_I:
-                layout[i].block = createLetterBlock(location, "I");
+                layout[i].block = createMarkedBlock(location, "I");
                 break;
             case BLOCK_L:
-                layout[i].block = createLetterBlock(location, "L");
+                layout[i].block = createMarkedBlock(location, "L");
                 break;
             case BLOCK_O:
-                layout[i].block = createLetterBlock(location, "O");
+                layout[i].block = createMarkedBlock(location, "O");
                 break;
             case BLOCK_R:
-                layout[i].block = createLetterBlock(location, "R");
+                layout[i].block = createMarkedBlock(location, "R");
                 break;
             case BLOCK_S:
-                layout[i].block = createLetterBlock(location, "S");
+                layout[i].block = createMarkedBlock(location, "S");
                 break;
             case BLOCK_T:
-                layout[i].block = createLetterBlock(location, "T");
+                layout[i].block = createMarkedBlock(location, "T");
+                break;
+            case BLOCK_1:
+            console.log("Made number block 1");
+                layout[i].block = createMarkedBlock(location, "1");
+                break;
+            case BLOCK_2:
+            console.log("Made number block 2");
+                layout[i].block = createMarkedBlock(location, "2");
+                break;
+            case BLOCK_3:
+            console.log("Made number block 3");
+                layout[i].block = createMarkedBlock(location, "3");
                 break;
             case "\n":
                 i--;

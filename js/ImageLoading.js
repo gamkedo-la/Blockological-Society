@@ -30,6 +30,10 @@ var letterBlockR  = document.createElement("img");
 var letterBlockS  = document.createElement("img");
 var letterBlockT  = document.createElement("img");
 
+var numberBlock1  = document.createElement("img");
+var numberBlock2  = document.createElement("img");
+var numberBlock3  = document.createElement("img");
+
 //Puzzle Editor
 var editorTileGoalPic = document.createElement("img");
 var editorTileOffPic = document.createElement("img");
@@ -74,6 +78,9 @@ function loadImages() {
         { varName: letterBlockR, theFile: "img/letterCubes/cube_R.png"},
         { varName: letterBlockS, theFile: "img/letterCubes/cube_S.png"},
         { varName: letterBlockT, theFile: "img/letterCubes/cube_T.png"},
+        { varName: numberBlock1, theFile: "img/numberCubes/cube_1.png"},
+        { varName: numberBlock2, theFile: "img/numberCubes/cube_2.png"},
+        { varName: numberBlock3, theFile: "img/numberCubes/cube_3.png"},
         { varName: cursorPic, theFile: "img/cursor.png"},
 
         { varName: editorTileGoalPic, theFile: "img/editor/edit_tile_goal.png"},

@@ -1,15 +1,16 @@
 
 //Make a fluffy block with a modified pic
-function createLetterBlock(coords, letter){
+function createMarkedBlock(coords, letter){
     var block = createFluffyBlock(coords);
     letter = letter.toString().toUpperCase();
-    block.sprite = letterAtlas[letter];
+    console.log(letter);
+    block.sprite = markAtlas[letter];
     block.type = letter.toString().toUpperCase();
 
     return block;
 }
 
-letterAtlas = {
+markAtlas = {
     "A" : letterBlockA,
     "C" : letterBlockC,
     "D" : letterBlockD,
@@ -19,5 +20,8 @@ letterAtlas = {
     "O" : letterBlockO,
     "R" : letterBlockR,
     "S" : letterBlockS,
-    "T" : letterBlockT
+    "T" : letterBlockT,
+    "1" : numberBlock1,
+    "2" : numberBlock2,
+    "3" : numberBlock3
 }

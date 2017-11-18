@@ -25,6 +25,10 @@ const BLOCK_R = "R";
 const BLOCK_S = "S";
 const BLOCK_T = "T"; 
 
+const BLOCK_1 = "1";
+const BLOCK_2 = "2";
+const BLOCK_3 = "3";
+
 var menuLevel = `
 LOAD.CREDITS
 ............
@@ -43,13 +47,13 @@ START.EDITOR
 var levelSelect = `
 .....p......
 ............
-.f.f.f.f.f..
+.1.1.1.1.1..
 .@.@.@.@.@..
 ............
-.f.f...f....
+.2.2...2....
 .@.@...@....
 ............
-.f.f.f.f.f..
+.3.3.3.3.3..
 .@.@.@.@.@..
 ............
 ............
@@ -255,7 +259,7 @@ ffffffffffff
 ffffffffffff
 `;
 
-var allUnlocked = false;
+var allUnlocked = true;
 var levelOrder = [easyIntro, step2Intro, step3Intro, strongStrongMagnets,
 					quantumTunnel, quantumHard, icyManeuvers,bedSpread,
 					magnetLevels.intro,magnetLevels.stuckMagnet,

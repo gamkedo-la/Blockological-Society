@@ -113,6 +113,12 @@ function keyEventHandler(key, state)
 		case KEY_ARROW_DOWN:
 			downKeyHeld = state;
 			break;
+
+		case KEY_ESCAPE:
+			setupMenuButtons();
+			loadLevel(menuLevel);
+			inMenu = true
+			break;
 		default:
 			break;
 	}

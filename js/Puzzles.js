@@ -261,7 +261,7 @@ ffffffffffff
 `;
 
 var allUnlocked = true;
-var levelOrder = [easyIntro, step2Intro, step3Intro, magnetLevels.intro,magnetLevels.introquantumTunnel,
+var levelOrder = [easyIntro, step2Intro, step3Intro, magnetLevels.intro, quantumTunnel,
 				magnetLevels.stuckMagnet, quantumHard, magnetLevels.stuckMagnet2, justPickOne,
 				magnetLevels.stuckMagnet3, bedSpread, magnetLevels.stuckMagnet4,strongStrongMagnets, icyManeuvers];
 levelOrder[0].isUnlocked = true; //the beginning of all that is!

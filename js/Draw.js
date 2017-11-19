@@ -164,7 +164,7 @@ function drawCredits()
     var x = 250;
     var y = 270;
     var credits = [
-                   "-Christer Kaitila-",
+                   "-Christer \"McFunkypants\" Kaitila-",
                    "Background Animations",
                    "Random Puzzle Generator",
                    "Particle Effects",
@@ -181,7 +181,7 @@ function drawCredits()
 				   "-Chris Deleon-",
                    "Introductory Puzzles",
 				   "",
-				   "-Zaksays-",
+				   "-Zak Ali-",
 				   "Ghost Block Logic & Art",
                    ];
 
@@ -200,12 +200,10 @@ function drawCredits()
                    "Menu Work",
 				   "Quantum Hard Puzzle",
 				   "",
-				   "-Sdonai-",
+				   "-Marc Silva-",
 				   "Gameplay Programming",
-				   "Metal Block Logic & Art",
-				   "Fire Block Logic & Art",
-				   "Ice Block Logic & Art",
-				   "",
+				   "Various Block Logic & Art",
+				   "Magnet Puzzles",
                   ];
 
     drawBackground();

@@ -48,6 +48,8 @@ function update() {
 	if (!inLeaveTransition && !inEnterTransition) {applyBlockEffects();}
 	checkForTriggers();
 
+	updateParticles();
+
 }
 
 function draw() {
@@ -55,6 +57,7 @@ function draw() {
 	{
 		drawBoard();
 		drawSortedObjects();
+		drawParticles();
 		if (isGoalMet) {
 			drawText("You won!!!", canvas.width * 0.43, canvas.height * 0.15, '24px Comic Sans MS', 'yellow');
 		}

@@ -78,6 +78,18 @@ cursor = {
 
 }
 
+const PLR_PARTICLE_SX = 0.5;
+const PLR_PARTICLE_SY = 0.25;
+const PLR_PARTICLE_LIFE = 1.0;
+const PLR_PARTICLE_GRAV = 0.005;
+const PLR_PARTICLE_VEL_RAND = 0.2;
+const PLR_PARTICLE_XY_RAND = 8;
+
+function playerMoveParticle(x,y,sx,sy)
+{
+    particleFXiso(x,y-16,32,'rgba(255,255,10,0.25)', -sx, -sy, PLR_PARTICLE_LIFE, PLR_PARTICLE_GRAV, PLR_PARTICLE_VEL_RAND, PLR_PARTICLE_XY_RAND);
+}
+
 function updatePlayer()
 {
     moveTimer -= TIME_PER_TICK;
@@ -90,7 +102,8 @@ function updatePlayer()
 			{
 				setMoveTarget(cursor, cursor.x - TILE_SIZE, cursor.y);
 				moveTimer = MOVE_DELAY;
-				cursorMoveSound.play();
+                cursorMoveSound.play();
+                playerMoveParticle(cursor.x,cursor.y,-PLR_PARTICLE_SX,-PLR_PARTICLE_SY);
 			}
         }
         else if (rightKeyHeld)
@@ -101,6 +114,7 @@ function updatePlayer()
 				setMoveTarget(cursor, cursor.x + TILE_SIZE, cursor.y);
 				moveTimer = MOVE_DELAY;
 				cursorMoveSound.play();
+                playerMoveParticle(cursor.x,cursor.y,PLR_PARTICLE_SX,PLR_PARTICLE_SY);
 			}
         }
         else if (upKeyHeld)
@@ -111,6 +125,7 @@ function updatePlayer()
 				setMoveTarget(cursor, cursor.x, cursor.y - TILE_SIZE);
 				moveTimer = MOVE_DELAY;
 				cursorMoveSound.play();
+                playerMoveParticle(cursor.x,cursor.y,PLR_PARTICLE_SX,-PLR_PARTICLE_SY);
 			}
         }
         else if (downKeyHeld)
@@ -121,6 +136,7 @@ function updatePlayer()
 				setMoveTarget(cursor, cursor.x, cursor.y + TILE_SIZE);
 				moveTimer = MOVE_DELAY;
 				cursorMoveSound.play();
+                playerMoveParticle(cursor.x,cursor.y,-PLR_PARTICLE_SX,PLR_PARTICLE_SY);
 			}
         }
 		else if (undoKeyHeld)

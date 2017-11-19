@@ -163,6 +163,9 @@ function updateBlocks() {
         blocks[i].move();
         if (inLeaveTransition || inEnterTransition) {
             blocks[i].z += blocks[i].velocityZ;
+
+            particleFXiso(blocks[i].x+blocks[i].z,blocks[i].y+blocks[i].z-16,1,'rgba(255,255,255,0.3)',0.01,0.01,1.0,0.02,0.5,16);
+
             if (blocks[i].z <= blocks[i].targetZ && inLeaveTransition){
                 blocks.splice(i, 1); //we can afford to kill the blocks offscreen
             }

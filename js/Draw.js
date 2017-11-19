@@ -52,7 +52,15 @@ function drawBoard()
                 var currentColor = tile.isGoal||tile.isStart ||(tile.isLevel&&(tile.isUnlocked ||allUnlocked)) || tile.isLoad || tile.isEditor ? GOAL_COLOR : TILE_COLOR;
 
 				drawIsoRhombusFilled(currentColor, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
-            }
+
+				// make start doors sparkle
+				if (currentColor == GOAL_COLOR)
+				{
+					if (Math.random()>0.75) // not every frame
+						particleFX(iso.x+TILE_SIZE,iso.y-8,1,'rgba(10,255,10,0.5)', 0, 0, 4, -0.001, 0.1, TILE_SIZE*2-16);
+				}
+
+			}
             x += TILE_SIZE;
         }
         x = BOARD_X;
@@ -133,10 +141,12 @@ function drawGoalFrames()
 					if (layout[tileIndex].block == undefined) // not covered by a block
 					{
 						drawIsoRhombusWire("rgba(0,0,0,0)",GOAL_COLOR_UNSOLVED, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
+						//particleFX(iso.x,iso.y,1,'rgba(10,255,10,0.25)', 0.1, 0.1, 3, -0.002, 0.1, 16);
 					}
 					else // has a block: success
 					{
 						drawIsoRhombusWire("rgba(0,0,0,0)",GOAL_COLOR, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
+						//particleFX(iso.x,iso.y,1,'rgba(255,255,255,0.25)', 0, 0, 3, -0.002, 0, 16);
 					}
 				}
 				

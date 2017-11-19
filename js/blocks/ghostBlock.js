@@ -1,22 +1,38 @@
 function createGhostBlock(coords) {
 	var block = createBlockObject(coords.x, coords.y, '#f1c40f', blockGhostPic);
     block.type = BLOCK_GHOST;
-    block.logic = function(){
-        block.destroyIfIce(0, -TILE_SIZE);
-        block.destroyIfIce(0, TILE_SIZE);
-        block.destroyIfIce(-TILE_SIZE, 0);
-        block.destroyIfIce(TILE_SIZE, 0);
-    }
-
-    block.destroyIfIce = function(x, y){
-        tileIndex = calculateTileIndexAtCoord(block.x + x, block.y + y);
-        tile = layout[tileIndex];
-        if(tile && tile.block && tile.block.type){
-            if(tile.block.type == BLOCK_ICE){
-                tile.block.destroy();
-            }
+    block.tryPush = function(x, y){
+        var nextX = block.x + x;
+        var nextY = block.y + y;
+    
+        // var thisTileIndex = calculateTileIndexAtCoord(block.x, block.y);
+        // var thisTile = layout[thisTileIndex];
+        var tileIndex = calculateTileIndexAtCoord(nextX, nextY);
+        var tile = layout[tileIndex];
+        var nextTileIndex = calculateTileIndexAtCoord(nextX+x, nextY+y);
+        var nextTile = layout[nextTileIndex];
+        if (tile != undefined && tile.active && tile.block == undefined) {
+    
+            block.queuePush(x, y);
+            return true; // can move
         }
-
+        else if (tile != undefined && tile.active &&
+                 tile.block != undefined &&
+                 tile.block.type == BLOCK_FLUFFY &&
+                 nextTile != undefined &&
+                 nextTile.active == true &&
+                 nextTile.block == undefined)
+        {
+            tile.block.queuePush(x, y);
+            block.queuePush(x, y);
+            return true; // can move
+        }
+        else
+        {
+            return false;
+        }
     }
-	return block;
+    return block;
 }
+
+

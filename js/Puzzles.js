@@ -50,11 +50,11 @@ var levelSelect = `
 .1.1.1.1.1..
 .@.@.@.@.@..
 ............
-.2.2...2....
-.@.@...@....
-............
-.3.3.3.3.3..
+.2.2.2.2.2..
 .@.@.@.@.@..
+............
+.3.3.3.3....
+.@.@.@.@....
 ............
 ............
 `;
@@ -260,11 +260,9 @@ ffffffffffff
 `;
 
 var allUnlocked = true;
-var levelOrder = [easyIntro, step2Intro, step3Intro, strongStrongMagnets,
-					quantumTunnel, quantumHard, icyManeuvers,bedSpread,
-					magnetLevels.intro,magnetLevels.stuckMagnet,
-					magnetLevels.stuckMagnet2,magnetLevels.stuckMagnet3,
-					magnetLevels.stuckMagnet4];
+var levelOrder = [easyIntro, step2Intro, step3Intro, magnetLevels.intro,magnetLevels.introquantumTunnel,
+				magnetLevels.stuckMagnet, quantumHard, magnetLevels.stuckMagnet2, justPickOne,
+				magnetLevels.stuckMagnet3, bedSpread, magnetLevels.stuckMagnet4,strongStrongMagnets, icyManeuvers];
 levelOrder[0].isUnlocked = true; //the beginning of all that is!
 
 // hotkey is F5

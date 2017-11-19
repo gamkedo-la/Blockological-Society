@@ -164,7 +164,7 @@ function drawCredits()
     var x = 250;
     var y = 270;
     var credits = [
-                   "-Christer \"McFunkypants\" Kaitila-",
+                   "-\"McFunkypants\"-",
                    "Background Animations",
                    "Random Puzzle Generator",
                    "Particle Effects",

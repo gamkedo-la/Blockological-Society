@@ -198,7 +198,7 @@ function drawCredits()
                    "Goal Tile Logic",
                    "Wireframes",
                    "Menu Work",
-				   "Quantum Hard Puzzle",
+				   "Quantum Hard / Ghostbusters Puzzles",
 				   "",
 				   "-Marc Silva-",
 				   "Gameplay Programming",

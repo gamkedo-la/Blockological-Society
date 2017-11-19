@@ -49,6 +49,10 @@ function update() {
 	if (!inLeaveTransition && !inEnterTransition) {applyBlockEffects();}
 	checkForTriggers();
 
+	// constant waterfall splashes
+	if (Math.random()>0.9) // rarely
+		particleFX(800,386,1,"rgba(100,200,255,1.0)",-0.02,-0.1,8.0,0.002,0.1,8.0);
+
 	updateParticles();
 
 }

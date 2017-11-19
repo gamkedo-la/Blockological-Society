@@ -186,7 +186,7 @@ function drawCredits()
                    ];
 
    var credits2 = [
-                   "-Omega Larmor-",
+                   "-Rémy Lapointe-",
                    "Main Menu",
                    "Level Selector",
                    "Transition Effects",

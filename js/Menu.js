@@ -1,4 +1,3 @@
-
 function updateMenu() {
 
 
@@ -20,6 +19,10 @@ function startGame() {
 
     if (!music_already_playing) // see Input.js - music waits until the 1st keypress
         musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
+}
+
+function startCredits() {
+    _CREDITS_MODE = true;
 }
 
 function startEditor() {
@@ -118,5 +121,6 @@ function setupMenuButtons() {
     startButton = createButton("StartButton", 400, 230, startButtonPic, startGame);
     editorButton = createButton("EditorButton", 400, 380, editorButtonPic, startEditor);
     optionsButton = createButton("OptionsButton", 400, 530, optionsButtonPic, startEditor);
+    // creditsButton = createButton("OptionsButton", 400, 530, optionsButtonPic, startCredits);
     menuButtons = [startButton, editorButton, optionsButton]; //soon in a state machine
 }

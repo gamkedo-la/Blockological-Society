@@ -5,6 +5,7 @@ const TILE_GOAL = "g";
 const TILE_MENU_START = "s";
 const TILE_MENU_LOAD = "l";
 const TILE_MENU_EDITOR = "e";
+const TILE_MENU_CREDITS = "c";
 const TILE_MENU_LEVELSTART = "@"; //give this to all "level start" tiles
 const BLOCK_MAGNET = "m";
 const BLOCK_ICE = "i";
@@ -20,10 +21,10 @@ const BLOCK_D = "D";
 const BLOCK_E = "E";
 const BLOCK_I = "I";
 const BLOCK_L = "L";
-const BLOCK_O = "O"; 
+const BLOCK_O = "O";
 const BLOCK_R = "R";
 const BLOCK_S = "S";
-const BLOCK_T = "T"; 
+const BLOCK_T = "T";
 
 const BLOCK_1 = "1";
 const BLOCK_2 = "2";
@@ -32,7 +33,7 @@ const BLOCK_3 = "3";
 var menuLevel = `
 LOAD.CREDITS
 ............
-..l.....s...
+..l.....c...
 ............
 ............
 ............
@@ -276,7 +277,7 @@ function getUserPuzzle(){
 	var levelString = window.prompt("Paste the level you want to play here!");
 	//levelString = levelString.replace(/\s/g, "!"); //replaces whitespaces with other whitespaces that work
 	return levelString;
-	
+
 }
 
 function convertLevelDataToString(levelData)

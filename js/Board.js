@@ -52,6 +52,10 @@ function loadLevel(level) {
                 layout[i].isStart = true;
                 menuTiles.push(i);
                 break;
+            case TILE_MENU_CREDITS:
+                layout[i].isCredits = true;
+                menuTiles.push(i);
+                break;
             case TILE_MENU_LOAD:
                 layout[i].isLoad = true;
                 menuTiles.push(i);

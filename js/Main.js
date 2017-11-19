@@ -1,4 +1,5 @@
 var _DEBUG_MAGNETS = false;
+var _CREDITS_MODE = false;
 var canvas, canvasContext;
 var inMenu = true;
 var inLeaveTransition = false;
@@ -65,5 +66,8 @@ function draw() {
 			drawPanelWithButtons(puzzleEditor);
 		}
 	}
-
+	if (_CREDITS_MODE)
+	{
+		drawCredits();
+	}
 }

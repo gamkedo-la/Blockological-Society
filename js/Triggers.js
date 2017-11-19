@@ -46,12 +46,17 @@ function checkMenuTiles() {
     }
 
     for (var i = 0; i < menuTiles.length; i++) {
-        index = menuTiles[i]; //it really is a ref to the index of the tile in the layout 
+        index = menuTiles[i]; //it really is a ref to the index of the tile in the layout
         tile = layout[index];
 
         if (tile.isStart &&
             (tile.block != undefined && tile.block != cursor)) {
             startLeaveTransition(levelSelect);
+        }
+        else if (tile.isCredits &&
+            (tile.block != undefined && tile.block != cursor)) {
+            startCredits();
+            undoMove();
         }
         else if (tile.isLoad &&
             (tile.block != undefined && tile.block != cursor)) {

@@ -40,12 +40,18 @@ var music_already_playing = false;
 
 function keyPressed(evt)
 {
+	if (_CREDITS_MODE && evt.keyCode == KEY_ESCAPE)
+	{
+		_CREDITS_MODE = false;
+		return;
+	}
+
 	if (MUSIC_STARTS_ON_FIRST_KEYPRESS && !music_already_playing)
 	{
 		music_already_playing = true;
 		musicTrack.loopSong("music/rooftops_by_mcfunkypants_lofi");
 	}
-	
+
 	/*
 	if (inMenu)
 	{
@@ -54,7 +60,7 @@ function keyPressed(evt)
 	else*/
 	{
 		keyEventHandler(evt.keyCode, true);
-		
+
 			switch(evt.keyCode)
 			{
 				case KEY_O:
@@ -67,17 +73,16 @@ function keyPressed(evt)
 
 			var gameKeys = [KEY_ARROW_LEFT, KEY_ARROW_UP, KEY_ARROW_RIGHT, KEY_ARROW_DOWN,
 							KEY_BACKSPACE, KEY_ENTER, KEY_ESCAPE, KEY_SPACEBAR, KEY_TILDE,
-							KEY_O, KEY_P, KEY_R, KEY_Y, KEY_Z, 
+							KEY_O, KEY_P, KEY_R, KEY_Y, KEY_Z,
 							KEY_NUM_0, KEY_NUM_1, KEY_NUM_2, KEY_NUM_3];
-			
+
 			//Only prevent browser behaviour if the game uses the key code
 			if (gameKeys.indexOf(evt.keyCode) > -1)
 			{
 				evt.preventDefault();
 			}
-				
-	}
 
+	}
 }
 
 function keyReleased(evt)

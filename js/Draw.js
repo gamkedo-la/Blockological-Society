@@ -25,13 +25,12 @@ function drawMenuButtons() {
     }
 }
 
-
 //Ingame elements
 function drawBackground()
 {
 	// fill with a solid color
 	//colorRect(0, 0, canvas.width, canvas.height, BOARD_COLOR);
-	
+
 	// allow for transparent canvas with backgrounds underneath
 	context.clearRect(0,0,canvas.width,canvas.height);
 }
@@ -49,7 +48,7 @@ function drawBoard()
 			if (tile.active)
             {
                 var iso = twoDToIso(x, y);
-                var currentColor = tile.isGoal||tile.isStart ||(tile.isLevel&&(tile.isUnlocked ||allUnlocked)) || tile.isLoad || tile.isEditor ? GOAL_COLOR : TILE_COLOR;
+                var currentColor = tile.isCredits||tile.isGoal||tile.isStart ||(tile.isLevel&&(tile.isUnlocked ||allUnlocked)) || tile.isLoad || tile.isEditor ? GOAL_COLOR : TILE_COLOR;
 
 				drawIsoRhombusFilled(currentColor, iso.x, iso.y, TILE_SIZE-BOARD_GAP);
 
@@ -149,11 +148,82 @@ function drawGoalFrames()
 						//particleFX(iso.x,iso.y,1,'rgba(255,255,255,0.25)', 0, 0, 3, -0.002, 0, 16);
 					}
 				}
-				
+
             }
             x += TILE_SIZE;
         }
         x = BOARD_X;
         y += TILE_SIZE;
     }
+}
+
+function drawCredits()
+{
+    var font = "15px Times New Roman";
+    var color = "gold";
+    var x = 250;
+    var y = 270;
+    var credits = [
+                   "-Christer Kaitila-",
+                   "Background Animations",
+                   "Random Puzzle Generator",
+                   "Particle Effects",
+                   "\"Rooftops\" Song",
+                   "Game Logo",
+				   "",
+                   "-Christopher McLaughlin-",
+                   "Original Prototype",
+                   "Tile Editor and Exporter",
+                   "Bedspread Puzzle",
+                   "Quantum Tunnel Puzzle",
+				   "Magnet Block Logic & Art",
+                   "",
+				   "-Chris Deleon-",
+                   "Introductory Puzzles",
+				   "",
+				   "-Zaksays-",
+				   "Ghost Block Logic & Art",
+                   ];
+
+   var credits2 = [
+                   "-Omega Larmor-",
+                   "Main Menu",
+                   "Level Selector",
+                   "Transition Effects",
+                   "Icy Maneuvers Puzzle",
+                   "Just Pick One Puzzle",
+				   "Strong Strong Magnets Puzzle",
+				   "",
+                   "-Eugene Meidinger-",
+                   "Goal Tile Logic",
+                   "Wireframes",
+                   "Menu Work",
+				   "Quantum Hard Puzzle",
+				   "",
+				   "-Sdonai-",
+				   "Gameplay Programming",
+				   "Metal Block Logic & Art",
+				   "Fire Block Logic & Art",
+				   "Ice Block Logic & Art",
+				   "",
+                  ];
+
+    drawBackground();
+
+    for(var i = 0; i < credits.length; i++)
+    {
+        drawText(credits[i], x, y, font, color);
+        y += 15;
+    }
+
+    x = 450;
+    y = 270;
+    for(var i = 0; i < credits2.length; i++)
+    {
+        drawText(credits2[i], x, y, font, color);
+        y += 15;
+    }
+
+	drawText("Gamkedo Club Credits", 340, 250, font, color);
+	drawText("Press Escape Key To Return...", 320, 572, font, color);
 }

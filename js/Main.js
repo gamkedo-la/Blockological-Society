@@ -9,6 +9,8 @@ const FRAMES_PER_SECOND = 60;
 const TIME_PER_TICK = 1 / FRAMES_PER_SECOND;
 
 window.onload = function () {
+	// set focus for itch.io in browser playing
+	window.focus();
 	canvas = document.getElementById('gameCanvas');
 	context = canvas.getContext('2d');
 
